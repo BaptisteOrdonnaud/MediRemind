@@ -8,10 +8,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { updateNickname } from '../reducers/user';
 
-export default function HomeScreen({ navigation }) {
+
+export default function LoginScreen({ navigation }) {
   const dispatch = useDispatch();
 
   const [nickname, setNickname] = useState('');
@@ -23,7 +22,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <Image style={styles.image} source={require('../assets/home-image.jpg')} />
+      <Image style={styles.image} source={require('')} />
       <Text style={styles.title}>Welcome to Locapic</Text>
 
       <TextInput placeholder="Nickname" onChangeText={(value) => setNickname(value)} value={nickname} style={styles.input} />
