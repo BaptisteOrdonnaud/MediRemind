@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function ListScreen() {
   return (
     <View style={styles.container}>
-      <Text>CECI EST LA PAGE DE LOGIN</Text>
+      <Text>List</Text>
       <StatusBar style="auto" />
     </View>
   );

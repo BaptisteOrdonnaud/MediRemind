@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function SignInScreen() {
+export default function MapScreen() {
   return (
     <View style={styles.container}>
-      <Text>CECI EST LA PAGE DE LOGIN</Text>
+      <Text>MAP</Text>
       <StatusBar style="auto" />
     </View>
   );
