@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text>CECI EST LA PAGE DE LOGIN</Text>
+      <Image source={require('../assets/TemplateImage.png')}/>
+      <Text>MediRemind</Text>
+      
       <StatusBar style="auto" />
     </View>
   );
@@ -13,8 +15,7 @@ export default function LoginScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F0EFFF',
     alignItems: 'center',
-    justifyContent: 'center',
   },
 });
