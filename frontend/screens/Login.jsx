@@ -4,8 +4,6 @@ export default function LoginScreen({ navigation }) {
   const windowWidth = useWindowDimensions().width;
   const windowHeight = useWindowDimensions().height;
 
-
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.container, {

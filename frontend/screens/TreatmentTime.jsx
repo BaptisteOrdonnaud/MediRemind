@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 
-export default function FrequenceScreen({navigation}) {
+export default function TreatmentTimeScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
-    <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
-      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TabNavigator')}>
+     <Text>Temps du traitement</Text>
+      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('OptionTreatment')}>
         <Text style={styles.textButton}>Suivant</Text>
       </TouchableOpacity>
     </SafeAreaView>

@@ -4,7 +4,7 @@ import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image } from 'react-n
 export default function FrequenceScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
-    <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
+     <Text>Frequence</Text>
       <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('DoseHours')}>
         <Text style={styles.textButton}>Suivant</Text>
       </TouchableOpacity>

@@ -4,9 +4,18 @@ import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image } from 'react-n
 export default function OPtionTreatmentScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
-    <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
+     <Text>Option de traitement</Text>
+      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TreatmentTime')}>
+        <Text style={styles.textButton}>Durée du traitement</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('MedicamentStock')}>
+        <Text style={styles.textButton}>Rappel de renouvellement</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TakingInstruction')}>
+        <Text style={styles.textButton}>Ajouter des instructions ?</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TabNavigator')}>
-        <Text style={styles.textButton}>Suivant</Text>
+        <Text style={styles.textButton}>Enregistrer</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
