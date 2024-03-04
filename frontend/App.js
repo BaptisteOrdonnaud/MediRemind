@@ -7,7 +7,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/Home.jsx';
 import LoginScreen from './screens/Login.jsx';
-
+import SignInScreen from './screens/SignIn.jsx';
+import SignUpScreen from './screens/SignUp.jsx';
+import SignUpBisScreen from './screens/SignUpBis.jsx'
+import TreatmentScreen from './screens/Treatment.jsx';
+import ListScreen from './screens/List.jsx';
 
 
 const Stack = createNativeStackNavigator();
@@ -20,10 +24,13 @@ const TabNavigator = () => {
       let iconName = '';
 
       if (route.name === 'home') {
-        iconName = 'location-arrow';
-      } else if (route.name === 'traitement') {
-        iconName = 'map-pin';
+        iconName = 'home';
+      } else if (route.name === 'treatment') {
+        iconName = 'pills';
+      } else if (route.name === 'list') {
+        iconName ='list'
       }
+      
 
       return <FontAwesome name={iconName} size={size} color={color} />;
     },
@@ -33,7 +40,9 @@ const TabNavigator = () => {
   })}>
     <Tab.Screen name="Home" component={HomeScreen} />
 
-     <Tab.Screen name="Places" component={PlacesScreen} />
+     <Tab.Screen name="Treatment" component={TreatmentScreen} />
+     <Tab.Screen name="List" component={ListScreen} />
+     
   </Tab.Navigator>
 );
 }
@@ -44,6 +53,9 @@ export default function App() {
      <Stack.Navigator screenOptions={{ headerShown: false }}>
        <Stack.Screen name="Login" component={LoginScreen} />
        <Stack.Screen name="TabNavigator" component={TabNavigator} />
+       <Tab.Screen name="SignIn" component={SignInScreen} />
+     <Tab.Screen name="SignUp" component={SignUpScreen} />
+     <Tab.Screen name="SignUpBis" component={SignUpBisScreen} />
      </Stack.Navigator>
    </NavigationContainer>
  );
