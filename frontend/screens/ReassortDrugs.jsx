@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 
-export default function DoseHoursScreen({navigation}) {
+export default function ReassortDrugsScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
-     <Text>Definir l'heure et la dose</Text>
+     <Text>A quel moment je doit faire le Reassort</Text>
       <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('OptionTreatment')}>
         <Text style={styles.textButton}>Suivant</Text>
       </TouchableOpacity>

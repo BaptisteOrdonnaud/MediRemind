@@ -16,6 +16,14 @@ import MapScreen from './screens/Map.jsx';
 import AddDrugsScreen from './screens/AddDrugs-part1.jsx';
 import AddDrugsRestScreen from './screens/AddDrugs-part2.jsx';
 import FrequenceScreen from './screens/frequence.jsx'
+import DoseHoursScreen from './screens/DoseHours.jsx';
+import OPtionTreatmentScreen from './screens/OptionTreatment.jsx';
+import TreatmentTimeScreen from './screens/TreatmentTime.jsx';
+import MedicamentStockScreen from './screens/MedicamentStock.jsx';
+import ReassortDrugsScreen from './screens/ReassortDrugs.jsx';
+import TakingInstructionScreen from './screens/TakingInstruction.jsx';
+
+
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -58,12 +66,18 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
-        <Tab.Screen name="SignIn" component={SignInScreen} />
-        <Tab.Screen name="SignUp" component={SignUpScreen} />
-        <Tab.Screen name="SignUpBis" component={SignUpBisScreen} />
-        <Tab.Screen name="AddDrugs-part1" component={AddDrugsScreen} />
-        <Tab.Screen name="AddDrugs-part2" component={AddDrugsRestScreen} />
-        <Tab.Screen name="Frequence" component={FrequenceScreen} />
+        <Stack.Screen name="SignIn" component={SignInScreen} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} />
+        <Stack.Screen name="SignUpBis" component={SignUpBisScreen} />
+        <Stack.Screen name="AddDrugs-part1" component={AddDrugsScreen} />
+        <Stack.Screen name="AddDrugs-part2" component={AddDrugsRestScreen} />
+        <Stack.Screen name="Frequence" component={FrequenceScreen} />
+        <Stack.Screen name="DoseHours" component={DoseHoursScreen} />
+        <Stack.Screen name="OptionTreatment" component={OPtionTreatmentScreen} />
+        <Stack.Screen name="TreatmentTime" component={TreatmentTimeScreen} />
+        <Stack.Screen name="MedicamentStock" component={MedicamentStockScreen} />
+        <Stack.Screen name="ReassortDrugs" component={ReassortDrugsScreen} />
+        <Stack.Screen name="TakingInstruction" component={TakingInstructionScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
