@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function ListScreen() {
+export default function MapScreen() {
   return (
     <View style={styles.container}>
-      <Text>List</Text>
+      <Text>MAP</Text>
       <StatusBar style="auto" />
     </View>
   );
