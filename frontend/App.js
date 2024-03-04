@@ -24,10 +24,13 @@ const TabNavigator = () => {
       let iconName = '';
 
       if (route.name === 'home') {
-        iconName = 'location-arrow';
-      } else if (route.name === 'traitement') {
-        iconName = 'map-pin';
+        iconName = 'home';
+      } else if (route.name === 'treatment') {
+        iconName = 'pills';
+      } else if (route.name === 'list') {
+        iconName ='list'
       }
+      
 
       return <FontAwesome name={iconName} size={size} color={color} />;
     },
@@ -39,7 +42,7 @@ const TabNavigator = () => {
 
      <Tab.Screen name="Treatment" component={TreatmentScreen} />
      <Tab.Screen name="List" component={ListScreen} />
-     <Tab.Screen name="SignUpBis" component={SignUpBisScreen} />
+     
   </Tab.Navigator>
 );
 }
