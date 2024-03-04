@@ -13,7 +13,9 @@ import SignUpBisScreen from './screens/SignUpBis.jsx'
 import TreatmentScreen from './screens/Treatment.jsx';
 import ListScreen from './screens/List.jsx';
 import MapScreen from './screens/Map.jsx';
-
+import AddDrugsScreen from './screens/AddDrugs-part1.jsx';
+import AddDrugsRestScreen from './screens/AddDrugs-part2.jsx';
+import FrequenceScreen from './screens/frequence.jsx'
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -59,6 +61,9 @@ export default function App() {
         <Tab.Screen name="SignIn" component={SignInScreen} />
         <Tab.Screen name="SignUp" component={SignUpScreen} />
         <Tab.Screen name="SignUpBis" component={SignUpBisScreen} />
+        <Tab.Screen name="AddDrugs-part1" component={AddDrugsScreen} />
+        <Tab.Screen name="AddDrugs-part2" component={AddDrugsRestScreen} />
+        <Tab.Screen name="Frequence" component={FrequenceScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

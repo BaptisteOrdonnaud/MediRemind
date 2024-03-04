@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView, Platform} from 'react-native';
 
 export default function SignInScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView>
+      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
       <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TabNavigator')}>
         <Text style={styles.textButton}>Connexion</Text>
@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
   buttonSignIn: {
     alignItems: 'center',
     paddingTop: 8,
-    width: '80%',
+    height: 45,
+    width: 286,
     marginTop: 30,
     backgroundColor: '#A69AFC',
     borderRadius: 10,
