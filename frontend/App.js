@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/Home.jsx';
 import LoginScreen from './screens/Login.jsx';
 import SignInScreen from './screens/SignIn.jsx';
-import SignUpScreen from './screens/Signup.jsx';
+import SignUpScreen from './screens/SignUp.jsx';
 import SignUpBisScreen from './screens/SignUpBis.jsx'
 import TreatmentScreen from './screens/Treatment.jsx';
 import ListScreen from './screens/List.jsx';
