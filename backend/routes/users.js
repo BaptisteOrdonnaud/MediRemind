@@ -9,6 +9,8 @@ const { checkDate } = require('../modules/checkDate');
 const uid2 = require('uid2');
 const bcrypt = require('bcrypt');
 
+
+// Sign Up
 router.post('/signup', (req, res) => {
   if (!checkBody(req.body, ['nom', 'prenom', 'dateDeNaissance', 'genre', 'email', 'telephone', 'password', 'confirmation'])) {
     res.json({ result: false, error: 'Missing or empty fields' });
@@ -39,12 +41,12 @@ router.post('/signup', (req, res) => {
         res.json({ result: true, newDoc });
       });
     } else {
-      // User already exists in database
       res.json({ result: false, error: 'User already exists' });
     }
   });
 });
 
+// Sign In
 router.post('/signin', (req, res) => {
   if (!checkBody(req.body, ['nom', 'password'])) {
     res.json({ result: false, error: 'Missing or empty fields' });
@@ -59,6 +61,17 @@ router.post('/signin', (req, res) => {
     }
   });
 });
+
+//Retourne l’utilisateur correspondant au token
+router.get('/:token', (req, res) => {
+  User.findOne({
+    nom: req.body.nom
+  }).then(user => {
+    res.json({ result: true, user: user });
+  });
+});
+
+
 
 
 module.exports = router;
