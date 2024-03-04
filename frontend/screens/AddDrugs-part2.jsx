@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 
-export default function SignInScreen({navigation}) {
+export default function AddDrugsRestScreen({navigation}) {
   return (
     <SafeAreaView style={styles.container}>
     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
-      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('Frequence')}>
-        <Text style={styles.textButton}>Connexion</Text>
+      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('frequence')}>
+        <Text style={styles.textButton}>Ajouter</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
