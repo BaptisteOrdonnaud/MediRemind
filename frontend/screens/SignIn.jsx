@@ -18,7 +18,6 @@ export default function SignInScreen({navigation}) {
             autoCapitalize="none"
             keyboardType="email-address"
             textContentType="emailAddress"
-            autoComplete="off"
             onChangeText={(value) => setEmail(value)}
             value={email}
             style={styles.inputEmail}
@@ -29,8 +28,6 @@ export default function SignInScreen({navigation}) {
     <TextInput
             placeholder="Mot de passe"
             autoCapitalize="none"
-            textContentType="password"
-            autoComplete="off"
             onChangeText={(value) => setPassword(value)}
             value={password}
             style={styles.inputPassword}
