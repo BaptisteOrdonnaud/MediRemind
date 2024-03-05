@@ -12,6 +12,10 @@ const regexPassword = /^(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
 
 export default function SignUpScreen({ navigation }) {
   // const dispatch = useDispatch();
+  const [nom, setNom] = useState('');
+  const [prenom, setPrenom] = useState('');
+  const [dateDeNaissance, setDateDeNaissance] = useState('');
+  const [genre, setGenre] = useState('');
 
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -25,7 +29,9 @@ export default function SignUpScreen({ navigation }) {
   const [confirmationPassword, setConfirmationPassword] = useState('');
   const [confirmationPasswordError, setConfirmationPasswordError] = useState('');
 
+  const handleRegister = () => {
 
+  };
 
 
   const handleSubmit = () => {
@@ -60,7 +66,25 @@ export default function SignUpScreen({ navigation }) {
     }
 
     if (!hasError) {
-      navigation.navigate('AddDrugs-part1');
+      fetch('http://10.9.1.92:3000/users/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nom: nom, prenom: prenom, dateDeNaissance: dateDeNaissance, genre: genre, email: email, telephone: telephone, password: password, confirmation: confirmationPassword }),
+      }).then(response => response.json())
+        .then(data => {
+          if (data.result) {
+            // dispatch(login({ firstname: signUpFirstName, username: signUpUsername, token: data.token }));
+            setNom('');
+            setPrenom('');
+            setDateDeNaissance('');
+            setGenre('');
+            setEmail('');
+            setTelephone('');
+            setPassword('');
+            setConfirmationPassword('');
+            navigation.navigate('AddDrugs-part1');
+          }
+        });
     }
   };
 
