@@ -1,95 +1,55 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, } from 'react-native';
 // import { useDispatch } from 'react-redux';
+import { Picker } from '@react-native-picker/picker';
 
-
-const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-const regexTelephone = /^(?:0|\+33|0033)[1-9](?:(?:(?:[0-9]{2}){4})|(?:([0-9]{2})){4})$/;
-const regexPassword = /^(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
-
-
+const regexFecha = /^\d{4}\/\d{2}\/\d{2}$/
 
 export default function SignUpScreen({ navigation }) {
   // const dispatch = useDispatch();
   const [nom, setNom] = useState('');
+  const [nomError, setNomError] = useState('');
+
   const [prenom, setPrenom] = useState('');
+  const [prenomError, setPrenomError] = useState('');
+
   const [dateDeNaissance, setDateDeNaissance] = useState('');
+  const [dateDeNaissanceError, setDateDeNaissanceError] = useState('');
+
   const [genre, setGenre] = useState('');
+  const [genreError, setGenreError] = useState('');
 
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
-
-  const [telephone, setTelephone] = useState('');
-  const [telephoneError, setTelephoneError] = useState('');
-
-  const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
-  const [confirmationPassword, setConfirmationPassword] = useState('');
-  const [confirmationPasswordError, setConfirmationPasswordError] = useState('');
-
-  const handleRegister = () => {
-
-  };
-
+  const [selectedOption, setSelectedOption] = useState('');
 
   const handleSubmit = () => {
     let hasError = false;
 
-    if (!email || !EMAIL_REGEX.test(email)) {
-      setEmailError('Le email est invalide');
+    if (!nom) {
+      setNomError('Le nom est invalide');
       hasError = true;
     } else {
-      setEmailError('');
+      setNomError('');
     }
 
-    if (!telephone || !regexTelephone.test(telephone)) {
-      setTelephoneError('Le numéro de téléphone est invalide');
+    if (!prenom) {
+      setPrenomError('Le prenom est invalide');
       hasError = true;
     } else {
-      setTelephoneError('');
+      setPrenomError('');
     }
 
-    if (!password || !regexPassword.test(password)) {
-      setPasswordError('Mot de passe invalide, le mot de passe doit avoir minimum 6 caractères et 1 chiffre');
+    if (!dateDeNaissance || !regexFecha.test(dateDeNaissance)) {
+      setDateDeNaissanceError('Le format est invalide (AAAA/MM/JJ)');
       hasError = true;
     } else {
-      setPasswordError('');
+      setDateDeNaissanceError('');
     }
-
-    if (!confirmationPassword || password !== confirmationPassword) {
-      setConfirmationPasswordError('Les mots de passe ne correspondent pas');
-      hasError = true;
-    } else {
-      setConfirmationPasswordError('');
-    }
-
     if (!hasError) {
-      fetch('http://10.9.1.92:3000/users/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nom: nom, prenom: prenom, dateDeNaissance: dateDeNaissance, genre: genre, email: email, telephone: telephone, password: password, confirmation: confirmationPassword }),
-      }).then(response => response.json())
-        .then(data => {
-          if (data.result) {
-            // dispatch(login({ firstname: signUpFirstName, username: signUpUsername, token: data.token }));
-            setNom('');
-            setPrenom('');
-            setDateDeNaissance('');
-            setGenre('');
-            setEmail('');
-            setTelephone('');
-            setPassword('');
-            setConfirmationPassword('');
-            navigation.navigate('AddDrugs-part1');
-          }
-        });
+      navigation.navigate('SignUpBis');
     }
+
   };
-
-
-
 
 
 
@@ -99,33 +59,31 @@ export default function SignUpScreen({ navigation }) {
         <Text style={styles.title}>Création de compte</Text>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.titre}>Email</Text>
+          <Text style={styles.titre}>Nom</Text>
           <TextInput
-            placeholder="Email"
-            autoCapitalize="none" // https://reactnative.dev/docs/textinput#autocapitalize
-            keyboardType="email-address" // https://reactnative.dev/docs/textinput#keyboardtype
-            textContentType="emailAddress" // https://reactnative.dev/docs/textinput#textcontenttype-ios
-            autoComplete="email" // https://reactnative.dev/docs/textinput#autocomplete-android
-            onChangeText={(value) => setEmail(value)}
-            value={email}
+            placeholder="Nom"
+            onChangeText={(value) => setNom(value)}
+            value={nom}
             style={styles.input}
           />
-          {emailError && <Text style={styles.error}>Le email est invalide</Text>}
+          {nomError && <Text style={styles.error}>Le nom est invalide</Text>}
 
-          <Text style={styles.titre}>Téléphone</Text>
-          <TextInput placeholder="Téléphone" keyboardType='numeric' onChangeText={(value) => setTelephone(value)} value={telephone} style={styles.input} />
-          {telephoneError && <Text style={styles.error}>Le numéro de téléphone est invalide</Text>}
 
-          <Text style={styles.titre}>Mot de passe</Text>
-          <TextInput placeholder="Mode de passe" secureTextEntry={true} autoCapitalize="none" onChangeText={(value) => setPassword(value)} value={password} style={styles.input} textContentType='password' />
-          {passwordError && <Text style={styles.error}>Mot de passe invalide, le mot de passe doit avoir minimum 6 characters et 1 chiffre</Text>}
+          <Text style={styles.titre}>Prenom</Text>
+          <TextInput placeholder="Prenom" onChangeText={(value) => setPrenom(value)} value={prenom} style={styles.input} />
+          {prenomError && <Text style={styles.error}>Le prenom est invalide</Text>}
 
-          <Text style={styles.titre}>Confirmation de mot de passe</Text>
-          <TextInput placeholder="Confirmation de mot de passe" secureTextEntry={true} autoCapitalize="none" onChangeText={(value) => setConfirmationPassword(value)} value={confirmationPassword} style={styles.input} />
-          {confirmationPasswordError && <Text style={styles.error}>Les mots de passe ne correspondent pas</Text>}
+          <Text style={styles.titre}>Date de naissance</Text>
+          <TextInput
+            placeholder="Entrez votre date de naissance (AAAA/MM/JJ)"
+            onChangeText={(value) => setDateDeNaissance(value)} value={dateDeNaissance}
+            style={styles.input}
+            textContentType='birthdate' />
+          {dateDeNaissanceError && <Text style={styles.error}>Le format est invalide (AAAA/MM/JJ)</Text>}
+
 
           <TouchableOpacity onPress={() => handleSubmit()} style={styles.buttonSignUp} activeOpacity={0.8}>
-            <Text style={styles.textButton}>Valider</Text>
+            <Text style={styles.textButton}>Continuer</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
@@ -181,6 +139,16 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: '30',
   },
-
-
+  picker: {
+    width: '100%',
+    height: 40,
+    borderWidth: 1,
+    borderColor: 'gray',
+    marginBottom: 20,
+  },
+  error: {
+    marginTop: 1,
+    color: 'red',
+    marginBottom: '30',
+  },
 });
