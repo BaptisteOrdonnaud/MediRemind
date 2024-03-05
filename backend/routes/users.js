@@ -64,7 +64,7 @@ router.post('/signin', (req, res) => {
 //Retourne l’utilisateur correspondant au token
 router.get('/:token', (req, res) => {
   User.findOne({
-    nom: req.body.nom
+    nom: req.params.nom
   }).then(user => {
     res.json({ result: true, user: user });
   });

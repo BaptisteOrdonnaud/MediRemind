@@ -1,12 +1,22 @@
 const mongoose = require('mongoose');
 
+const frequenceSchema = mongoose.Schema({
+    combienParJour: Number,
+    jourDeLaSemaine: Boolean,
+});
+
+const rappelSchema = mongoose.Schema({
+    heure: Date,
+    Dose: Number,
+});
+
 const traitementsSchema = mongoose.Schema({
     medicaments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'medicaments' }],
-    frequence: String,
-    dose: Number,
-    heure: Date,
+    frequence: [frequenceSchema],
+    // dose: Number,
+    // heure: Date,
     duree: String,
-    rappel: Boolean,
+    rappel: [rappelSchema],
     instruction: Boolean,
     qtDispo: Number,
     qtRappel: Number,
