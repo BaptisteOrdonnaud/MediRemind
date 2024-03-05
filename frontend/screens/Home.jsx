@@ -1,40 +1,43 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity } from 'react-native';
-
+import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function HomeScreen() {
 
+const windowDimensions = Dimensions.get('window');
+const screenDimensions = Dimensions.get('screen');
+
+
+
+export default function HomeScreen() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+  const { prenom, nom } = user;
 
-  const prenom = user.prenom
-  const nom = user.nom
+  
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Image style={styles.image} source={require('../assets/TemplateImage.png')} />
-          <Text style={styles.headerText}>Hello {prenom + ' ' + nom}</Text>
-        </View>
+      <View style={styles.headerContainer}>
+        <Image style={styles.image} source={require('../assets/TemplateImage.png')} />
+        <Text style={styles.headerText}>Hello {prenom + ' ' + nom}</Text>
+      </View>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.todayTreatment}>
           <Text>Traitement à prendre aujourd'hui!</Text>
         </View>
         <View style={styles.treatmentContainer}>
-
-<View style={styles.treatment}>
-  <Text>c'est à la place de ce text que les medicament arrive</Text>
-  <TouchableOpacity style={styles.buttonModif} activeOpacity={0.8}  > 
-        <Text style={styles.textButton}>Confirmer la prise</Text>
-      </TouchableOpacity>
-</View>
-
-
+          {[1, 2, 3, 4, 5].map((item) => (
+            <View key={item} style={styles.treatment}>
+              <Text>Traitement {item}</Text>
+              <TouchableOpacity style={styles.buttonModif} activeOpacity={0.8}>
+                <Text style={styles.textButton}>Confirmer la prise</Text>
+              </TouchableOpacity>
+            </View>
+          ))}
         </View>
-        <StatusBar style="auto" />
-      </View>
+      </ScrollView>
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 }
@@ -48,19 +51,16 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   headerContainer: {
-    backgroundColor: '#F0EFFF',
+    backgroundColor: '#E1DFFF',
     flexDirection: 'row',
     width: '100%',
     height: 90,
     justifyContent: 'center',
     alignItems: 'center',
-    top: 50,
   },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: 'auto',
-    marginRight: 'auto',
   },
   image: {
     width: 50,
@@ -72,44 +72,45 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: 350,
     height: 200,
-    marginTop: 200, // Adjust margin top as needed
+    marginTop: 20,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    
   },
-  treatmentContainer:{
+  treatmentContainer: {
     width: 350,
-    height: '100%',
-    marginTop: 20, // Adjust margin top as needed
+    marginTop: 20,
     borderRadius: 10,
-    
   },
   treatment: {
     backgroundColor: 'white',
     width: 350,
     height: 200,
-    marginTop: 20, // Adjust margin top as needed
+    marginTop: 20,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    
+    position: 'relative', // Ajout de la position relative pour que le positionnement absolu fonctionne
   },
-  buttonModif:{
+  buttonModif: {
+    position: 'absolute', // Position absolue par rapport au parent (traitement)
+    bottom: 10, // Marge depuis le bas
+    right: 10, // Marge depuis la droite
     alignItems: 'center',
-    paddingTop: 12,
-    height: 45,
-    width: 200,
-    marginTop: '10%',
-    backgroundColor: '#7368BF',
+    justifyContent: 'center',
+    height: 35,
+    width: 170, // Largeur du bouton
     borderRadius: 10,
-    
+    borderColor: '#7368BF',
+    borderWidth: 1,
   },
   textButton: {
-    flex: 1,
-    color: '#ffffff',
-    height: 30,
+    color: 'black',
     fontWeight: '600',
     fontSize: 16,
-  }
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    alignItems: 'center',
+  },
 });
