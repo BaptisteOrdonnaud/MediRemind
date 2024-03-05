@@ -14,3 +14,5 @@ const medicamentSchema = mongoose.Schema({
 });
 
 const Medicament = mongoose.model('medicaments', medicamentSchema);
+
+module.exports = Medicament;
