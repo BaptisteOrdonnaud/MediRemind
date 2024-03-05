@@ -2,10 +2,28 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView, Platform, View, TextInput} from 'react-native';
 import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
 
+
 export default function SignInScreen({navigation}) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+//   const handleConnection = () => {
+
+//     fetch('http://localhost:3000/users/signin', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ username: email, password: password }),
+//     }).then(response => response.json())
+//         .then(data => {
+//             if (data.result) {
+//                 setEmail('');
+//                 setPassword('');
+//                 // router.push('home')
+//                 navigation.navigate('TabNavigator', { screen: 'Home' });
+//             }
+//         });
+// };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,7 +36,6 @@ export default function SignInScreen({navigation}) {
             autoCapitalize="none"
             keyboardType="email-address"
             textContentType="emailAddress"
-            autoComplete="off"
             onChangeText={(value) => setEmail(value)}
             value={email}
             style={styles.inputEmail}
@@ -29,15 +46,13 @@ export default function SignInScreen({navigation}) {
     <TextInput
             placeholder="Mot de passe"
             autoCapitalize="none"
-            textContentType="password"
-            autoComplete="off"
             onChangeText={(value) => setPassword(value)}
             value={password}
             style={styles.inputPassword}
           />
 
     </View>
-      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TabNavigator')}>
+      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TabNavigator')}> 
         <Text style={styles.textButton}>Connexion</Text>
       </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -52,15 +67,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   image: {
-    marginTop: 30,
-    marginBottom: 80,
+    marginTop: '9%',
+    marginBottom: '9%'
   },
   buttonSignIn: {
     alignItems: 'center',
-    paddingTop: 11.5,
+    paddingTop: 12,
     height: 45,
     width: 286,
-    marginTop: 30,
+    marginTop: '10%',
     backgroundColor: '#7368BF',
     borderRadius: 10,
   },
