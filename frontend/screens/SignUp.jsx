@@ -14,16 +14,16 @@ export default function SignUpScreen({ navigation }) {
   // const dispatch = useDispatch();
 
   const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState(false);
+  const [emailError, setEmailError] = useState('');
 
   const [telephone, setTelephone] = useState('');
-  const [telephoneError, setTelephoneError] = useState(false);
+  const [telephoneError, setTelephoneError] = useState('');
 
   const [password, setPassword] = useState('');
-  const [passwordError, setPasswordError] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
 
   const [confirmationPassword, setConfirmationPassword] = useState('');
-  const [confirmationPasswordError, setConfirmationPasswordError] = useState(false);
+  const [confirmationPasswordError, setConfirmationPasswordError] = useState('');
 
 
 
@@ -31,50 +31,43 @@ export default function SignUpScreen({ navigation }) {
   const handleSubmit = () => {
     let hasError = false;
 
-    if (!email) {
-      setEmailError(true);
+    if (!email || !EMAIL_REGEX.test(email)) {
+      setEmailError('Le email est invalide');
       hasError = true;
-    } else if (!EMAIL_REGEX.test(email)) {
-      setEmailError(true);
-      hasError = true;
+    } else {
+      setEmailError('');
     }
 
-    // Vérifier le numéro de téléphone
-    if (!telephone) {
-      setTelephoneError(true);
+    if (!telephone || !regexTelephone.test(telephone)) {
+      setTelephoneError('Le numéro de téléphone est invalide');
       hasError = true;
-    } else if (!regexTelephone.test(telephone)) {
-      setTelephoneError(true);
-      hasError = true;
+    } else {
+      setTelephoneError('');
     }
 
-    // Vérifier le mot de passe
-    if (!password) {
-      setPasswordError(true);
+    if (!password || !regexPassword.test(password)) {
+      setPasswordError('Mot de passe invalide, le mot de passe doit avoir minimum 6 caractères et 1 chiffre');
       hasError = true;
-    } else if (!regexPassword.test(password)) {
-      setPasswordError(true);
-      hasError = true;
+    } else {
+      setPasswordError('');
     }
 
-    // Vérifier la confirmation de mot de passe
-    if (!confirmationPassword) {
-      setConfirmationPasswordError(true);
+    if (!confirmationPassword || password !== confirmationPassword) {
+      setConfirmationPasswordError('Les mots de passe ne correspondent pas');
       hasError = true;
-    } else if (password !== confirmationPassword) {
-      setConfirmationPasswordError(true);
-      hasError = true;
+    } else {
+      setConfirmationPasswordError('');
     }
 
-    // Si une erreur est détectée, arrêter la soumission du formulaire
-    if (hasError) {
-      return;
+    if (!hasError) {
+      navigation.navigate('AddDrugs-part1');
     }
-
-    // Si nous arrivons jusqu'ici, cela signifie que toutes les validations sont passées avec succès
-    // Vous pouvez maintenant naviguer vers la prochaine étape
-    navigation.navigate('AddDrugs-part1');
   };
+
+
+
+
+
 
   return (
     <View style={styles.container}>
@@ -82,6 +75,7 @@ export default function SignUpScreen({ navigation }) {
         <Text style={styles.title}>Création de compte</Text>
 
         <View style={styles.inputContainer}>
+          <Text style={styles.titre}>Email</Text>
           <TextInput
             placeholder="Email"
             autoCapitalize="none" // https://reactnative.dev/docs/textinput#autocapitalize
@@ -93,19 +87,18 @@ export default function SignUpScreen({ navigation }) {
             style={styles.input}
           />
           {emailError && <Text style={styles.error}>Le email est invalide</Text>}
-          {!email && <Text style={styles.error}>Email manquant</Text>}
 
+          <Text style={styles.titre}>Téléphone</Text>
           <TextInput placeholder="Téléphone" keyboardType='numeric' onChangeText={(value) => setTelephone(value)} value={telephone} style={styles.input} />
           {telephoneError && <Text style={styles.error}>Le numéro de téléphone est invalide</Text>}
-          {!telephone && <Text style={styles.error}>Numéro de téléphone manquant</Text>}
 
-          <TextInput placeholder="Mode de passe" onChangeText={(value) => setPassword(value)} value={password} style={styles.input} textContentType='password' />
+          <Text style={styles.titre}>Mot de passe</Text>
+          <TextInput placeholder="Mode de passe" secureTextEntry={true} autoCapitalize="none" onChangeText={(value) => setPassword(value)} value={password} style={styles.input} textContentType='password' />
           {passwordError && <Text style={styles.error}>Mot de passe invalide, le mot de passe doit avoir minimum 6 characters et 1 chiffre</Text>}
-          {!password && <Text style={styles.error}>Mot de passe manquant</Text>}
 
-          <TextInput placeholder="Confirmation de mot de passe" onChangeText={(value) => setConfirmationPassword(value)} value={confirmationPassword} style={styles.input} />
+          <Text style={styles.titre}>Confirmation de mot de passe</Text>
+          <TextInput placeholder="Confirmation de mot de passe" secureTextEntry={true} autoCapitalize="none" onChangeText={(value) => setConfirmationPassword(value)} value={confirmationPassword} style={styles.input} />
           {confirmationPasswordError && <Text style={styles.error}>Les mots de passe ne correspondent pas</Text>}
-          {!confirmationPassword && <Text style={styles.error}>Mot de passe manquant</Text>}
 
           <TouchableOpacity onPress={() => handleSubmit()} style={styles.buttonSignUp} activeOpacity={0.8}>
             <Text style={styles.textButton}>Valider</Text>
@@ -119,16 +112,51 @@ export default function SignUpScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#E1DFFF',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   buttonSignUp: {
     alignItems: 'center',
-    paddingTop: 8,
-    width: '80%',
-    marginTop: 30,
+    paddingTop: 12,
+    height: 45,
+    width: 286,
+    marginTop: '10%',
     backgroundColor: '#7368BF',
     borderRadius: 10,
   },
+
+  input: {
+    backgroundColor: '#fff',
+    height: 45,
+    width: 286,
+    borderRadius: 10,
+    paddingLeft: 20,
+    marginBottom: 3,
+  },
+  title: {
+    fontWeight: '800',
+    fontSize: 30,
+    color: '#36373E',
+    marginBottom: '10%',
+    textAlign: 'center'
+  },
+  textButton: {
+    flex: 1,
+    color: '#ffffff',
+    height: 30,
+    fontWeight: '600',
+    fontSize: 16,
+
+  },
+  titre: {
+    marginBottom: 8,
+  },
+  error: {
+    marginTop: 1,
+    color: 'red',
+    marginBottom: '30',
+  },
+
+
 });
