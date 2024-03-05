@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView, Platform, View, TextInput} from 'react-native';
 import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
+import { useDispatch } from 'react-redux';
+import { login } from '../reducers/user';
 
 
 export default function SignInScreen({navigation}) {
 
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signInError, setSignInError] = useState(false);
@@ -19,7 +22,7 @@ export default function SignInScreen({navigation}) {
         .then(data => {
             if (data.result) {
               console.log(data)
-                // dispatch(login({ firstname: data.user.firstname, username: signInUsername, token: data.user.token, idUser: data.user._id }));
+                dispatch(login({ prenom: data.user.prenom, nom: data.user.nom, token: data.user.token, idUser: data.user._id, traitements : data.user.traitements }));
                 setEmail('');
                 setPassword('');
                 navigation.navigate('TabNavigator')
