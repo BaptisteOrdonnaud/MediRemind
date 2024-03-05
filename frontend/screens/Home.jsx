@@ -2,14 +2,24 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 export default function HomeScreen(props) {
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+
+  const prenom = user.prenom
+  const nom = user.nom
+
+
   return (
    <SafeAreaView style={styles.container}>
    <View style={styles.container}>
 <View style={styles.headerContainer}>
 <Image style={styles.image} source={require('../assets/TemplateImage.png')} />
-<Text style={styles.headerText}>Hello Baptiste</Text>
+<Text style={styles.headerText}>Hello {prenom + ' ' + nom}</Text>
 </View>
       <View style={styles.calendarContainer}>
       <Calendar
