@@ -25,10 +25,16 @@ import MedicamentStockScreen from './screens/MedicamentStock.jsx';
 import ReassortDrugsScreen from './screens/ReassortDrugs.jsx';
 import TakingInstructionScreen from './screens/TakingInstruction.jsx';
 
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import user from './reducers/user.js';
 
-
+const store = configureStore({
+  reducer: { user },
+});
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
 
 const TabNavigator = () => {
   return (
@@ -64,24 +70,26 @@ const TabNavigator = () => {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="TabNavigator" component={TabNavigator} />
-        <Stack.Screen name="SignIn" component={SignInScreen} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="SignUpBis" component={SignUpBisScreen} />
-        <Stack.Screen name="AddDrugs-part1" component={AddDrugsScreen} />
-        <Stack.Screen name="AddDrugs-part2" component={AddDrugsRestScreen} />
-        <Stack.Screen name="Frequence" component={FrequenceScreen} />
-        <Stack.Screen name="DoseHours" component={DoseHoursScreen} />
-        <Stack.Screen name="OptionTreatment" component={OPtionTreatmentScreen} />
-        <Stack.Screen name="TreatmentTime" component={TreatmentTimeScreen} />
-        <Stack.Screen name="MedicamentStock" component={MedicamentStockScreen} />
-        <Stack.Screen name="ReassortDrugs" component={ReassortDrugsScreen} />
-        <Stack.Screen name="TakingInstruction" component={TakingInstructionScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="TabNavigator" component={TabNavigator} />
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="SignUpBis" component={SignUpBisScreen} />
+          <Stack.Screen name="AddDrugs-part1" component={AddDrugsScreen} />
+          <Stack.Screen name="AddDrugs-part2" component={AddDrugsRestScreen} />
+          <Stack.Screen name="Frequence" component={FrequenceScreen} />
+          <Stack.Screen name="DoseHours" component={DoseHoursScreen} />
+          <Stack.Screen name="OptionTreatment" component={OPtionTreatmentScreen} />
+          <Stack.Screen name="TreatmentTime" component={TreatmentTimeScreen} />
+          <Stack.Screen name="MedicamentStock" component={MedicamentStockScreen} />
+          <Stack.Screen name="ReassortDrugs" component={ReassortDrugsScreen} />
+          <Stack.Screen name="TakingInstruction" component={TakingInstructionScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
