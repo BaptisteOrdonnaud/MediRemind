@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, useWindo
 import SvgUri from 'react-native-svg-uri';
 
 
-
 export default function LoginScreen({ navigation }) {
 
   const windowWidth = useWindowDimensions().width;

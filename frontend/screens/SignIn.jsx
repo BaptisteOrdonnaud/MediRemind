@@ -1,29 +1,38 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView, Platform, View, TextInput} from 'react-native';
 import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
+import { useDispatch } from 'react-redux';
+import { login } from '../reducers/user';
 
 
 export default function SignInScreen({navigation}) {
 
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [signInError, setSignInError] = useState(false);
 
-//   const handleConnection = () => {
+  const handleConnection = () => {
 
-//     fetch('http://localhost:3000/users/signin', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ username: email, password: password }),
-//     }).then(response => response.json())
-//         .then(data => {
-//             if (data.result) {
-//                 setEmail('');
-//                 setPassword('');
-//                 // router.push('home')
-//                 navigation.navigate('TabNavigator', { screen: 'Home' });
-//             }
-//         });
-// };
+    fetch('http://10.9.1.94:3000/users/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password }),
+    }).then(response => response.json())
+        .then(data => {
+            if (data.result) {
+              console.log(data)
+                dispatch(login({ prenom: data.user.prenom, nom: data.user.nom, token: data.user.token, idUser: data.user._id, traitements : data.user.traitements }));
+                setEmail('');
+                setPassword('');
+                navigation.navigate('TabNavigator')
+                setSignInError(false)
+            } else {
+              setSignInError(true);
+            }
+        });
+  };
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,13 +55,16 @@ export default function SignInScreen({navigation}) {
     <TextInput
             placeholder="Mot de passe"
             autoCapitalize="none"
+            secureTextEntry={true}
             onChangeText={(value) => setPassword(value)}
             value={password}
             style={styles.inputPassword}
           />
 
+  {signInError && <Text style={styles.error}>Utilisateur introuvable ou mot de passe erroné</Text>}
+
     </View>
-      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TabNavigator')}> 
+      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => handleConnection()}> 
         <Text style={styles.textButton}>Connexion</Text>
       </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -65,6 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E1DFFF',
     alignItems: 'center',
+    width: '100%'
   },
   image: {
     marginTop: '9%',
@@ -104,5 +117,10 @@ const styles = StyleSheet.create({
     height: 30,
     fontWeight: '600',
     fontSize: 16,
+  },
+  error: {
+    marginTop: 1,
+    color: 'red',
+    marginBottom: '30',
   },
 });

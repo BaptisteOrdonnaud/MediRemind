@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
+
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -43,7 +45,7 @@ const TabNavigator = () => {
         if (route.name === 'Home') {
           iconName = 'home';
         } else if (route.name === 'Traitement') {
-          iconName = 'heart';
+          iconName = 'pills';
         } else if (route.name === 'Liste') {
           iconName = 'list'
         } else if (route.name === 'Map') {
@@ -51,10 +53,10 @@ const TabNavigator = () => {
         }
 
 
-        return <FontAwesome name={iconName} size={size} color={color} />;
+        return <FontAwesomeIcon name={iconName} size={size} color={color} />;
       },
       tabBarActiveTintColor: '#7368bf',
-      tabBarInactiveTintColor: '#335561',
+      tabBarInactiveTintColor: '#E1DFFF',
       headerShown: false,
     })}>
       <Tab.Screen name="Home" component={HomeScreen} />
