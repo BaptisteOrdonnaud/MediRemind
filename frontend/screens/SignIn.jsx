@@ -7,23 +7,29 @@ export default function SignInScreen({navigation}) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [signInError, setSignInError] = useState(false);
 
-//   const handleConnection = () => {
+  const handleConnection = () => {
 
-//     fetch('http://localhost:3000/users/signin', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ username: email, password: password }),
-//     }).then(response => response.json())
-//         .then(data => {
-//             if (data.result) {
-//                 setEmail('');
-//                 setPassword('');
-//                 // router.push('home')
-//                 navigation.navigate('TabNavigator', { screen: 'Home' });
-//             }
-//         });
-// };
+    fetch('http://10.9.1.94:3000/users/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, password: password }),
+    }).then(response => response.json())
+        .then(data => {
+            if (data.result) {
+              console.log(data)
+                // dispatch(login({ firstname: data.user.firstname, username: signInUsername, token: data.user.token, idUser: data.user._id }));
+                setEmail('');
+                setPassword('');
+                navigation.navigate('TabNavigator')
+                setSignInError(false)
+            } else {
+              setSignInError(true);
+            }
+        });
+  };
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,8 +58,10 @@ export default function SignInScreen({navigation}) {
             style={styles.inputPassword}
           />
 
+  {signInError && <Text style={styles.error}>Utilisateur introuvable ou mot de passe erroné</Text>}
+
     </View>
-      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TabNavigator')}> 
+      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => handleConnection()}> 
         <Text style={styles.textButton}>Connexion</Text>
       </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -106,5 +114,10 @@ const styles = StyleSheet.create({
     height: 30,
     fontWeight: '600',
     fontSize: 16,
+  },
+  error: {
+    marginTop: 1,
+    color: 'red',
+    marginBottom: '30',
   },
 });
