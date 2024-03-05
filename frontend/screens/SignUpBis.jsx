@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, } from 'react-native';
-// import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../reducers/user';
 
 
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -11,11 +12,15 @@ const regexPassword = /^(?=.*[0-9])[a-zA-Z0-9]{6,}$/;
 
 
 export default function SignUpScreen({ navigation }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+  const nomUser = user.nom
+  const prenomUser = user.prenom
+  const dateUser = user.dateDeNaissance
+
   const [nom, setNom] = useState('');
   const [prenom, setPrenom] = useState('');
   const [dateDeNaissance, setDateDeNaissance] = useState('');
-  const [genre, setGenre] = useState('');
 
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -29,6 +34,11 @@ export default function SignUpScreen({ navigation }) {
   const [confirmationPassword, setConfirmationPassword] = useState('');
   const [confirmationPasswordError, setConfirmationPasswordError] = useState('');
 
+  useEffect(() => {
+    setNom(nomUser);
+    setPrenom(prenomUser);
+    setDateDeNaissance(dateUser);
+  }, []);
 
   const handleSubmit = () => {
     let hasError = false;
@@ -62,30 +72,27 @@ export default function SignUpScreen({ navigation }) {
     }
 
     if (!hasError) {
+      console.log(nom, prenom, dateDeNaissance, email, telephone, password, confirmationPassword)
       fetch('http://10.9.1.92:3000/users/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nom: nom, prenom: prenom, dateDeNaissance: dateDeNaissance, genre: genre, email: email, telephone: telephone, password: password, confirmation: confirmationPassword }),
+        body: JSON.stringify({ nom: nom, prenom: prenom, dateDeNaissance: dateDeNaissance, email: email, telephone: telephone, password: password, confirmation: confirmationPassword }),
       }).then(response => response.json())
         .then(data => {
           if (data.result) {
-            // dispatch(login({ firstname: signUpFirstName, username: signUpUsername, token: data.token }));
+            dispatch(login({ prenom: data.user.prenom, nom: data.user.nom, token: data.user.token, idUser: data.user._id, traitements: data.user.traitements }));
             setNom('');
             setPrenom('');
             setDateDeNaissance('');
-            setGenre('');
             setEmail('');
             setTelephone('');
             setPassword('');
             setConfirmationPassword('');
-            navigation.navigate('AddDrugs-part1');
           }
+          navigation.navigate('AddDrugs-part1');
         });
     }
   };
-
-
-
 
 
 
@@ -95,7 +102,7 @@ export default function SignUpScreen({ navigation }) {
         <Text style={styles.title}>Information complémentaire</Text>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.titre}>Email</Text>
+          <Text style={styles.titre}>Email {nomUser}</Text>
           <TextInput
             placeholder="Email"
             autoCapitalize="none" // https://reactnative.dev/docs/textinput#autocapitalize

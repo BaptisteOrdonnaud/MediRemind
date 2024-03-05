@@ -1,13 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, } from 'react-native';
-// import { useDispatch } from 'react-redux';
-import { Picker } from '@react-native-picker/picker';
+import { useDispatch } from 'react-redux';
+import { login } from '../reducers/user';
 
 const regexFecha = /^\d{4}\/\d{2}\/\d{2}$/
 
 export default function SignUpScreen({ navigation }) {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [nom, setNom] = useState('');
   const [nomError, setNomError] = useState('');
 
@@ -17,10 +17,6 @@ export default function SignUpScreen({ navigation }) {
   const [dateDeNaissance, setDateDeNaissance] = useState('');
   const [dateDeNaissanceError, setDateDeNaissanceError] = useState('');
 
-  const [genre, setGenre] = useState('');
-  const [genreError, setGenreError] = useState('');
-
-  const [selectedOption, setSelectedOption] = useState('');
 
   const handleSubmit = () => {
     let hasError = false;
@@ -46,6 +42,7 @@ export default function SignUpScreen({ navigation }) {
       setDateDeNaissanceError('');
     }
     if (!hasError) {
+      dispatch(login({ prenom: prenom, nom: nom, dateDeNaissance: dateDeNaissance }));
       navigation.navigate('SignUpBis');
     }
 
