@@ -1,4 +1,8 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, useWindowDimensions } from 'react-native';
+import SvgUri from 'react-native-svg-uri';
+
+
+
 export default function LoginScreen({ navigation }) {
 
   const windowWidth = useWindowDimensions().width;
@@ -10,7 +14,12 @@ export default function LoginScreen({ navigation }) {
       width : windowWidth > 500 ? "70%" : "90%",
       height : windowHeight > 600 ? "60%" : "90",
     }]}>
-      <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
+       <SvgUri
+       style={styles.image}
+        width="250"
+        height="250"
+        source={require('../assets/reminder.svg')}
+      />
       <Text style={styles.title}>MediRemind</Text>
       <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('SignIn')}>
         <Text style={styles.textButton}>Connexion</Text>
@@ -32,7 +41,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   image: {
-    marginTop: '10%',
+    marginTop: '20%',
     marginBottom: '20%',
   },
   title: {
@@ -43,7 +52,7 @@ const styles = StyleSheet.create({
   },
   buttonSignIn: {
     alignItems: 'center',
-    paddingTop: "3.6%",
+    paddingTop: 12,
     height: '6%',
     width: '80%',
     marginTop: '10%',
@@ -52,7 +61,7 @@ const styles = StyleSheet.create({
   },
   buttonSignUp: {
     alignItems: 'center',
-    paddingTop: "3.6%",
+    paddingTop: 12,
     height: '6%',
     width: '80%',
     marginTop: '10%',
