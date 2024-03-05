@@ -3,3 +3,6 @@ var router = express.Router();
 
 require('../models/connection');
 const Medicament = require('../models/medicaments');
+
+module.exports = router;
+
