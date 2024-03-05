@@ -46,6 +46,7 @@ export default function SignInScreen({navigation}) {
     <TextInput
             placeholder="Mot de passe"
             autoCapitalize="none"
+            secureTextEntry={true}
             onChangeText={(value) => setPassword(value)}
             value={password}
             style={styles.inputPassword}
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E1DFFF',
     alignItems: 'center',
+    width: '100%'
   },
   image: {
     marginTop: '9%',
