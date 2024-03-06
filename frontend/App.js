@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions,useWindowDimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
@@ -40,7 +40,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator screenOptions={({ route }) => ({
+    <Tab.Navigator style={{height:useWindowDimensions('window').height, width:useWindowDimensions('window').width}} screenOptions={({ route }) => ({
       tabBarIcon: ({ color, size }) => {
         let iconName = '';
 
@@ -74,7 +74,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer >
-        <Stack.Navigator  screenOptions={{ headerShown: false }}>
+        <Stack.Navigator style={{height:useWindowDimensions('window').height, width:useWindowDimensions('window').width}}  screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
           <Stack.Screen name="SignIn" component={SignInScreen} />

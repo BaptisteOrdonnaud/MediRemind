@@ -7,9 +7,13 @@ const Medicament = require('../models/medicaments');
 
 // Créer un nouveau traitement
 router.post('/', (req, res) => {
-    const { userId, frequence, duree, rappel, instruction, qtDispo, qtRappel } = req.body;
+    const { userId, medicamentId, frequence, duree, rappel, instruction, qtDispo, qtRappel } = req.body;
 
     User.findById(userId)
+        .populate({
+            path: 'traitements.medicaments', // Chemin à peupler
+            model: Medicament // Nom du modèle à utiliser pour le peuplement
+        })
         .then(user => {
             console.log('user:', user.nom)
             if (!user) {
@@ -17,12 +21,14 @@ router.post('/', (req, res) => {
             }
 
             const newTreatment = {
+                medicaments: [medicamentId],
                 frequence: JSON.parse(frequence),
                 duree: JSON.parse(duree),
                 rappel: JSON.parse(rappel),
                 instruction: JSON.parse(instruction),
                 qtDispo: qtDispo,
-                qtRappel: qtRappel
+                qtRappel: qtRappel,
+                isTook: false
             }
 
             console.log('newTreatment:', newTreatment)
@@ -39,6 +45,17 @@ router.post('/', (req, res) => {
 })
 
 
+//Rappel de prise de médicament
+router.get('/alert', (req, res) => {
+    const alertMessage = "Ceci est un message d'alerte!";
+
+    const response = {
+        alert: alertMessage
+    };
+
+    // Envoyer la réponse JSON
+    res.json(response);
+});
 
 // router.post('/', (req, res) => {
 //     const { userId, medicamentId, frequence, dose, heure, duree, rappel, instruction, qtDispo, qtRappel } = req.body;
@@ -93,10 +110,25 @@ router.post('/', (req, res) => {
 
 
 // Retourner tous les traitements du user
-router.get('/', (req, res) => {
-    User.find({ traitements: req.body.traitements }).populate('medicaments')
-        .then(traitement => {
-            res.json({ traitements: traitement });
+router.get('/:token', (req, res) => {
+
+    const token = req.params.token;
+    User.findOne({ token })
+        .populate({
+            path: 'traitements.medicaments', // Chemin à peupler
+            model: Medicament // Nom du modèle à utiliser pour le peuplement
+        })
+        .then(user => {
+            console.log('test', user)
+            if (!user) {
+                return res.status(404).json({ message: "Utilisateur non trouvé." });
+            }
+
+            res.json({ traitements: user.traitements });
+        })
+        .catch(err => {
+            console.error("Erreur lors de la recherche de l'utilisateur:", err);
+            res.status(500).json({ message: "Erreur lors de la recherche de l'utilisateur." });
         });
 });
 
