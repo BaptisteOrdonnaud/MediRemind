@@ -102,7 +102,7 @@ export default function SignUpScreen({ navigation }) {
         <Text style={styles.title}>Information complémentaire</Text>
 
         <View style={styles.inputContainer}>
-          <Text style={styles.titre}>Email {nomUser}</Text>
+          <Text style={styles.titre}>Email</Text>
           <TextInput
             placeholder="Email"
             autoCapitalize="none" // https://reactnative.dev/docs/textinput#autocapitalize
