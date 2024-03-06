@@ -28,8 +28,11 @@ export default function TreatmentScreen() {
           {[1, 2, 3, 4, 5].map((item) => (
             <View key={item} style={styles.buttonModifContainer}>
               <TouchableOpacity style={styles.buttonModif} activeOpacity={0.8}>
-                <Text style={styles.textButton}>Medicament</Text>
-                <Text>Description</Text>
+              <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
+              <View style={styles.textDescriptionContainer}>
+    <Text style={styles.textButton}>Médicament</Text>
+    <Text style={styles.descriptionText}>Description</Text>
+  </View>
               </TouchableOpacity>
             </View>
           ))}
@@ -47,8 +50,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    // height:Dimensions.get('window').height,
-  
+    height:Dimensions.get('screen').height,
+    width:Dimensions.get('screen').width
   },
   headerContainer: {
     backgroundColor: '#E1DFFF',
@@ -98,29 +101,46 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginLeft: 10,
     marginRight: 10,
+   
   },
-  textButton: {
-    color: 'black',
-    fontWeight: '600',
-    fontSize: 16,
-  },
+ 
   treatmentContainer: {
     width: 350,
     alignItems: 'center',
-    width:Dimensions.get('screen').width
+    
   },
   buttonModifContainer: {
     marginTop: 10,
   },
   buttonModif: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 70,
+    flexDirection: 'row', // Permet d'aligner les éléments horizontalement
+    alignItems: 'center', // Alignement vertical au centre
+    height: 100, // Ajustez la hauteur en conséquence
     width: 400,
     borderRadius: 10,
     borderColor: '#7368BF',
     borderWidth: 1,
     backgroundColor: 'white',
     marginTop: 20,
+    paddingHorizontal: 10, // Ajout de rembourrage horizontal
   },
+  image: {
+    width: 50,
+    height: 50,
+    marginRight: 10, // Ajout d'une marge à droite de l'image
+    borderRadius: 9999,
+  },
+  textDescriptionContainer: {
+    flexDirection: 'column', // Affiche les éléments en colonne
+  },
+  textButton: {
+    color: 'black',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  descriptionText: {
+    fontSize: 14,
+    color: '#333', // Couleur du texte de la description
+  },
+  
 });
