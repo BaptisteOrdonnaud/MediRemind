@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-export default function TreatmentScreen() {
+export default function TreatmentScreen({navigation}) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const { prenom, nom } = user;
@@ -17,7 +17,7 @@ export default function TreatmentScreen() {
       <View style={styles.contentContainer}>
         <Text style={styles.mainText}>Traitement</Text>
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+          <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => {navigation.navigate('AddDrugs-part1')}}>
             <Text style={styles.textButton}>Ajouter</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} activeOpacity={0.8}>
