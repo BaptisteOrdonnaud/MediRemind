@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-require('../models/connection');
 const User = require('../models/users');
 const { checkBody } = require('../modules/checkBody');
 const { checkDate } = require('../modules/checkDate');
@@ -12,7 +11,7 @@ const bcrypt = require('bcrypt');
 
 // Sign Up
 router.post('/signup', (req, res) => {
-  if (!checkBody(req.body, ['nom', 'prenom', 'dateDeNaissance', 'email', 'telephone', 'password', 'confirmationPassword'])) {
+  if (!checkBody(req.body, ['nom', 'prenom', 'dateDeNaissance', 'email', 'telephone', 'password'])) {
     res.json({ result: false, error: 'Missing or empty fields' });
     return;
   }
@@ -22,27 +21,29 @@ router.post('/signup', (req, res) => {
     return;
   }
 
-  User.findOne({ email: req.body.email }).then(data => {
-    if (data === null) {
-      const hash = bcrypt.hashSync(req.body.password, 10);
-
-      const newUser = new User({
-        nom: req.body.nom,
-        prenom: req.body.prenom,
-        dateDeNaissance: req.body.dateDeNaissance,
-        email: req.body.email,
-        telephone: req.body.telephone,
-        password: hash,
-        token: uid2(32),
-      });
-
-      newUser.save().then(newDoc => {
-        res.json({ result: true, newDoc });
-      });
-    } else {
-      res.json({ result: false, error: 'User already exists' });
-    }
-  });
+  User.findOne({ email: req.body.email })
+    .then(data => {
+      console.log('find', data)
+      if (!data) {
+        const hash = bcrypt.hashSync(req.body.password, 10);
+        const newUser = new User({
+          nom: req.body.nom,
+          prenom: req.body.prenom,
+          dateDeNaissance: req.body.dateDeNaissance,
+          email: req.body.email,
+          telephone: req.body.telephone,
+          password: hash,
+          token: uid2(32),
+        });
+        console.log('user', newUser)
+        newUser.save().then(newDoc => {
+          console.log('test ', newDoc)
+          res.json({ result: true, newDoc });
+        });
+      } else {
+        res.json({ result: false, error: 'User already exists' });
+      }
+    });
 });
 
 // Sign In

@@ -10,22 +10,22 @@ export default function LoginScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.container, {
-      width : windowWidth > 500 ? "70%" : "90%",
-      height : windowHeight > 600 ? "60%" : "90",
-    }]}>
-       <SvgUri
-       style={styles.image}
-        width="250"
-        height="250"
-        source={require('../assets/reminder.svg')}
-      />
-      <Text style={styles.title}>MediRemind</Text>
-      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('TabNavigator')}>
-        <Text style={styles.textButton}>Connexion</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonSignUp} activeOpacity={0.8} onPress={() => navigation.navigate('SignUp')}>
-        <Text style={styles.textButton}>Inscription</Text>
-      </TouchableOpacity>
+        width: windowWidth > 500 ? "70%" : "90%",
+        height: windowHeight > 600 ? "60%" : "90",
+      }]}>
+        <SvgUri
+          style={styles.image}
+          width="250"
+          height="250"
+          source={require('../assets/reminder.svg')}
+        />
+        <Text style={styles.title}>MediRemind</Text>
+        <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8} onPress={() => navigation.navigate('SignIn')}>
+          <Text style={styles.textButton}>Connexion</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonSignUp} activeOpacity={0.8} onPress={() => navigation.navigate('SignUp')}>
+          <Text style={styles.textButton}>Inscription</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

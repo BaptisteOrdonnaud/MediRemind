@@ -14,7 +14,7 @@ const frequenceSchema = mongoose.Schema({
 const rappelSchema = mongoose.Schema({
     alert: Boolean,
     heure: Date,
-    Dose: Number,
+    dose: Number,
 });
 
 const dureeSchema = mongoose.Schema({
@@ -31,19 +31,19 @@ const instructionSchema = mongoose.Schema({
 });
 const traitementsSchema = mongoose.Schema({
     medicaments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'medicaments' }],
-    frequence: [frequenceSchema],
-    duree: [dureeSchema],
-    rappel: [rappelSchema],
-    instruction: [instructionSchema],
+    frequence: frequenceSchema,
+    duree: dureeSchema,
+    rappel: rappelSchema,
+    instruction: instructionSchema,
     qtDispo: Number,
     qtRappel: Number,
+    isTook: Boolean,
 });
 
 const userSchema = mongoose.Schema({
     nom: String,
     prenom: String,
     dateDeNaissance: Date,
-    genre: String,
     email: String,
     password: String,
     telephone: Number,
