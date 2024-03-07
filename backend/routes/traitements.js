@@ -7,7 +7,7 @@ const Medicament = require('../models/medicaments');
 
 // Créer un nouveau traitement
 router.post('/', (req, res) => {
-    const { userId, medicamentId, frequence, duree, rappel, instruction, qtDispo, qtRappel } = req.body;
+    const { userId, medicamentId, frequence, duree, rappel, instruction, qtDispo, qtRappel, areTaken } = req.body;
 
     User.findById(userId)
         .populate({
@@ -20,18 +20,37 @@ router.post('/', (req, res) => {
                 return res.status(404).json({ message: "Utilisateur non trouvé" });
             }
 
+            const parsedFrequence = JSON.parse(frequence);
+            const parsedDuree = JSON.parse(duree);
+            const parsedRappel = JSON.parse(rappel);
+            const parsedInstruction = JSON.parse(instruction);
+            let parseTaken = JSON.parse([areTaken])
+
+            const startDate = new Date(parsedDuree.dateDebut);
+            const endDate = new Date(parsedDuree.dateFin);
+            const daysDifference = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1;
+
+
             const newTreatment = {
-                medicaments: [medicamentId],
-                frequence: JSON.parse(frequence),
-                duree: JSON.parse(duree),
-                rappel: JSON.parse(rappel),
-                instruction: JSON.parse(instruction),
+                medicaments: ([medicamentId]),
+                frequence: parsedFrequence,
+                duree: parsedDuree,
+                rappel: parsedRappel,
+                instruction: parsedInstruction,
                 qtDispo: qtDispo,
                 qtRappel: qtRappel,
-                isTook: false
+                areTaken: [],
             }
 
-            console.log('newTreatment:', newTreatment)
+            for (let i = 0; i < daysDifference; i++) {
+                const currentDate = new Date(startDate);
+                currentDate.setDate(startDate.getDate() + i);
+
+                const priseTime = new Date(parsedRappel.heure);
+                currentDate.setHours(priseTime.getHours(), priseTime.getMinutes(), priseTime.getSeconds());
+
+                newTreatment.areTaken.push({ prise: currentDate, istaken: false });
+            }
 
             user.traitements.push(newTreatment);
             user.save().then(newDoc => {
