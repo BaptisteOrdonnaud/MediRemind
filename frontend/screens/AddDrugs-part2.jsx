@@ -1,12 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, TextInput, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, TextInput, View, ScrollView } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import SearchResult from '../components/SearchResult';
 
 export default function AddDrugsRestScreen({ navigation }) {
   const [drug, setDrug] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-  // onPress={() => navigation.navigate('Frequence')}
+  const [allDrugs, setAllDrugs] = useState([]);
+  const [drugs, setDrugs] = useState([]);
 
   const handleSearch = (value) => {
     fetch(`http://10.9.1.94:3000/medicaments/${value}`, {
@@ -14,9 +16,17 @@ export default function AddDrugsRestScreen({ navigation }) {
       headers: { 'Content-Type': 'application/json' },
     }).then(response => response.json())
       .then(data => {
-        // console.log(data)
+        setAllDrugs(data);
       })
   }
+
+  useEffect(() => {
+    if (allDrugs && Array.isArray(allDrugs)) {
+      setDrugs(allDrugs.map((dataDrug, i) => (
+        <SearchResult key={i} drugName={dataDrug.product_name} />
+      )));
+    }
+  }, [allDrugs]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -28,7 +38,7 @@ export default function AddDrugsRestScreen({ navigation }) {
         <TextInput
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
-          placeholder="Nom "
+          placeholder="Nom du médicament "
           onChangeText={(value) => {
             setDrug(value)
             handleSearch(value)
@@ -37,7 +47,10 @@ export default function AddDrugsRestScreen({ navigation }) {
           style={styles.input}
         />
       </View>
+      <ScrollView>
+        {drugs}
 
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -46,18 +59,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E1DFFF',
+    // backgroundColor: 'yellow',
   },
   inputContainer: {
-    flex: 1,
-    alignItems: 'center'
+    display: 'flex',
+    alignItems: 'center',
+    height: '10%',
+    // backgroundColor: 'green',
+  },
+  titleContainer: {
+    display: 'flex',
+    // backgroundColor: 'red',
   },
   title: {
     fontSize: 17,
     fontWeight: '700',
     color: '#36373E',
-    display: 'flex',
-    width: '70%',
-    marginLeft: '7%',
+    textAlign: 'center',
     marginBottom: '6%'
 
   },
@@ -78,7 +96,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#fff',
-    height: '8%',
+    height: '60%',
     width: '90%',
     borderRadius: 10,
     paddingLeft: 20,
