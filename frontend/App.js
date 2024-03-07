@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Dimensions,useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, useWindowDimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 
@@ -40,7 +40,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   return (
-    <Tab.Navigator style={{height:useWindowDimensions('window').height, width:useWindowDimensions('window').width}} screenOptions={({ route }) => ({
+    <Tab.Navigator style={{ height: useWindowDimensions('window').height, width: useWindowDimensions('window').width }} screenOptions={({ route }) => ({
       tabBarIcon: ({ color, size }) => {
         let iconName = '';
 
@@ -50,7 +50,7 @@ const TabNavigator = () => {
           iconName = 'pills';
         } else if (route.name === 'Liste') {
           iconName = 'list'
-        } else if (route.name === 'Map') {
+        } else if (route.name === 'frequence') {
           iconName = 'map'
         }
 
@@ -65,7 +65,7 @@ const TabNavigator = () => {
 
       <Tab.Screen name="Traitement" component={TreatmentScreen} />
       <Tab.Screen name="Liste" component={ListScreen} />
-      <Tab.Screen name="Map" component={MapScreen} />
+      <Tab.Screen name="frequence" component={FrequenceScreen} />
     </Tab.Navigator>
   );
 }
@@ -74,7 +74,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer >
-        <Stack.Navigator style={{height:useWindowDimensions('window').height, width:useWindowDimensions('window').width}}  screenOptions={{ headerShown: false }}>
+        <Stack.Navigator style={{ height: useWindowDimensions('window').height, width: useWindowDimensions('window').width }} screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="TabNavigator" component={TabNavigator} />
           <Stack.Screen name="SignIn" component={SignInScreen} />

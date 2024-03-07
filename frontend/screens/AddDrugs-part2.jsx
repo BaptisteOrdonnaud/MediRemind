@@ -48,7 +48,7 @@ export default function AddDrugsRestScreen({ navigation }) {
         />
       </View>
       <ScrollView>
-      {drugs}
+        {drugs}
 
       </ScrollView>
     </SafeAreaView>
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
     marginLeft: '7%',
     color: '#36373E',
     marginBottom: '10%'
-},
-input: {
-  backgroundColor: '#fff',
-  height: '60%',
-  width: '90%',
-  borderRadius: 10,
-  paddingLeft: 20,
-  marginBottom: 3,
-},
+  },
+  input: {
+    backgroundColor: '#fff',
+    height: '60%',
+    width: '90%',
+    borderRadius: 10,
+    paddingLeft: 20,
+    marginBottom: 3,
+  },
 });

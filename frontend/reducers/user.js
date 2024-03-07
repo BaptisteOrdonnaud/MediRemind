@@ -15,7 +15,15 @@ export const userSlice = createSlice({
             state.value.idUser = action.payload.idUser;
             state.value.traitements = action.payload.traitements
             state.value.dateDeNaissance = action.payload.dateDeNaissance
-
+        },
+        traitements: (state, action) => {
+            state.value.frequence = action.payload.frequence;
+            state.value.duree = action.payload.duree;
+            state.value.rappel = action.payload.rappel;
+            state.value.instruction = action.payload.instruction;
+            state.value.qtDispo = action.payload.qtDispo;
+            state.value.qtRappel = action.payload.qtRappel;
+            state.value.areTaken = action.payload.areTaken;
         },
         logout: (state) => {
             state.value.token = null;
