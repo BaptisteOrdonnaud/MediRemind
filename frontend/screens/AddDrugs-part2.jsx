@@ -1,13 +1,44 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, TextInput, View } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import SearchResult from '../components/SearchResult';
 
 export default function AddDrugsRestScreen({navigation}) {
+  const [drug, setDrug] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  // onPress={() => navigation.navigate('Frequence')}
+
+  const handleSearch = (value) => {
+    fetch(`http://10.9.1.94:3000/medicaments/${value}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    }).then(response => response.json())
+      .then(data => {
+        // console.log(data)
+      })
+  }
+
   return (
     <SafeAreaView style={styles.container}>
-     <Text>Ajout d'un medicament</Text>
-      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('Frequence')}>
-        <Text style={styles.textButton}>Ajouter</Text>
-      </TouchableOpacity>
+  <FontAwesome name='remove' style={styles.icon}/>
+  <View style={styles.titleContainer}>
+     <Text style={[styles.title, { display: isFocused ? 'none' : 'flex' }]}> Quel médicament souhaitez-vous ajouter?</Text>
+  </View>
+  <View style={styles.inputContainer}>
+     <TextInput
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            placeholder="Nom "
+            onChangeText={(value) => {
+              setDrug(value)
+              handleSearch(value)
+            }}
+            value={drug}
+            style={styles.input}
+          />
+  </View>
+  <SearchResult/>
     </SafeAreaView>
   );
 }
@@ -16,11 +47,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E1DFFF',
-    alignItems: 'center',
   },
-  image: {
-    marginTop: 30,
-    marginBottom: 80,
+  inputContainer: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#36373E',
+    textAlign: 'center',
+    marginBottom: '6%'
+
   },
   buttonSignIn: {
     alignItems: 'center',
@@ -30,4 +68,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#A69AFC',
     borderRadius: 10,
   },
+  icon: {
+    fontSize: 30,
+    marginTop: '3%',
+    marginLeft: '7%',
+    color: '#36373E',
+    marginBottom: '10%'
+},
+input: {
+  backgroundColor: '#fff',
+  height: '8%',
+  width: '90%',
+  borderRadius: 10,
+  paddingLeft: 20,
+  marginBottom: 3,
+},
 });

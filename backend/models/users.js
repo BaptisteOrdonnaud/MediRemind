@@ -30,6 +30,11 @@ const instructionSchema = mongoose.Schema({
     peuImporte: Boolean,
 });
 
+const areTakenSchema = mongoose.Schema({
+    prise: Date,
+    istaken: Boolean,
+});
+
 const traitementsSchema = mongoose.Schema({
     medicaments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'medicaments' }],
     frequence: frequenceSchema,
@@ -38,7 +43,7 @@ const traitementsSchema = mongoose.Schema({
     instruction: instructionSchema,
     qtDispo: Number,
     qtRappel: Number,
-    isTook: Boolean,
+    areTaken: [areTakenSchema],
 });
 
 const userSchema = mongoose.Schema({

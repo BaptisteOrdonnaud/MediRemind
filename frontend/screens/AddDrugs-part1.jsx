@@ -69,4 +69,12 @@
         marginTop: '35%',
         textAlign: 'center'
     },
-    });
+    input: {
+        backgroundColor: '#fff',
+        height: 45,
+        width: 286,
+        borderRadius: 10,
+        paddingLeft: 20,
+        marginBottom: 3,
+      },
+});
