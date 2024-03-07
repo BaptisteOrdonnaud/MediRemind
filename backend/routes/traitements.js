@@ -63,69 +63,29 @@ router.post('/', (req, res) => {
         });
 })
 
+// GET traitements/:traitementId/frequence
+router.get('/:userId/frequence/:traitementId', async (req, res) => {
+    try {
+        const { userId, traitementId } = req.params;
+        const user = await User.findById(userId);
 
-//Rappel de prise de médicament
-router.get('/alert', (req, res) => {
-    const alertMessage = "Ceci est un message d'alerte!";
+        if (!user) {
+            return res.status(404).json({ message: "Utilisateur non trouvé" });
+        }
 
-    const response = {
-        alert: alertMessage
-    };
+        const traitement = user.traitements.id(traitementId);
+        if (!traitement) {
+            return res.status(404).json({ message: "Traitement non trouvé" });
+        }
 
-    // Envoyer la réponse JSON
-    res.json(response);
+        res.status(200).json({ frequence: traitement.frequence });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erreur interne du serveur" });
+    }
 });
 
-// router.post('/', (req, res) => {
-//     const { userId, medicamentId, frequence, dose, heure, duree, rappel, instruction, qtDispo, qtRappel } = req.body;
 
-//     User.findById(userId)
-//         .populate({
-//             path: 'traitements.medicaments', // Chemin à peupler
-//             model: Medicament // Nom du modèle à utiliser pour le peuplement
-//         })
-//         .then(user => {
-//             console.log('user:', user.nom)
-//             if (!user) {
-//                 return res.status(404).json({ message: "Utilisateur non trouvé" });
-//             }
-
-//             Medicament.findById(medicamentId)
-//                 .then(medicament => {
-//                     console.log('medicament:', medicament)
-
-//                     if (!medicament) {
-//                         return res.status(404).json({ message: "Médicament non trouvé" });
-//                     }
-
-//                     const newTreatment = {
-//                         medicaments: [medicamentId],
-//                         frequence,
-//                         dose,
-//                         heure,
-//                         duree,
-//                         rappel,
-//                         instruction,
-//                         qtDispo,
-//                         qtRappel
-//                     }
-
-//                     console.log('newTreatment:', newTreatment)
-
-//                     user.traitements.push(newTreatment);
-//                     user.save().then(newDoc => {
-//                         res.status(201).json({ message: "Nouveau traitement ajouté avec succès", newDoc });
-//                     })
-//                         .catch(error => {
-//                             console.error(error);
-//                             res.status(500).json({ message: "Erreur interne du serveur" });
-//                         });
-//                 });
-//         }).catch(error => {
-//             console.error(error);
-//             res.status(500).json({ message: "Erreur interne du serveur" });
-//         });
-// });
 
 
 // Retourner tous les traitements du user

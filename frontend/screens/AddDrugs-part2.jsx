@@ -22,15 +22,15 @@ export default function AddDrugsRestScreen({ navigation }) {
 
   useEffect(() => {
     if (allDrugs && Array.isArray(allDrugs)) {
-      setDrugs(allDrugs.map((dataDrug, i) => (
-        <SearchResult key={i} drugName={dataDrug.product_name} />
+      setDrugs(allDrugs.map((dataDrug, i, _id) => (
+        <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation}/>
       )));
     }
   }, [allDrugs]);
 
   return (
     <SafeAreaView style={styles.container}>
-      <FontAwesome name='remove' style={styles.icon} />
+      <FontAwesome name='remove' style={styles.icon} onPress={() => navigation.navigate('Home')} />
       <View style={styles.titleContainer}>
         <Text style={[styles.title, { display: isFocused ? 'none' : 'flex' }]}> Quel médicament souhaitez-vous ajouter?</Text>
       </View>
@@ -48,7 +48,7 @@ export default function AddDrugsRestScreen({ navigation }) {
         />
       </View>
       <ScrollView>
-      {drugs}
+        {drugs}
 
       </ScrollView>
     </SafeAreaView>
@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
     marginLeft: '7%',
     color: '#36373E',
     marginBottom: '10%'
-},
-input: {
-  backgroundColor: '#fff',
-  height: '60%',
-  width: '90%',
-  borderRadius: 10,
-  paddingLeft: 20,
-  marginBottom: 3,
-},
+  },
+  input: {
+    backgroundColor: '#fff',
+    height: '60%',
+    width: '90%',
+    borderRadius: 10,
+    paddingLeft: 20,
+    marginBottom: 3,
+  },
 });
