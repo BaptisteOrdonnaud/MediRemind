@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, TextInput, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-export default function AddDrugsRestScreen({navigation}) {
+export default function AddDrugsRestScreen({ navigation }) {
   const [drug, setDrug] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   // onPress={() => navigation.navigate('Frequence')}
@@ -20,24 +20,24 @@ export default function AddDrugsRestScreen({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
-  <FontAwesome name='remove' style={styles.icon}/>
-  <View style={styles.titleContainer}>
-     <Text style={[styles.title, { display: isFocused ? 'none' : 'flex' }]}> Quel médicament souhaitez-vous ajouter?</Text>
-  </View>
-  <View style={styles.inputContainer}>
-     <TextInput
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            placeholder="Nom "
-            onChangeText={(value) => {
-              setDrug(value)
-              handleSearch(value)
-            }}
-            value={drug}
-            style={styles.input}
-          />
-  </View>
-     
+      <FontAwesome name='remove' style={styles.icon} />
+      <View style={styles.titleContainer}>
+        <Text style={[styles.title, { display: isFocused ? 'none' : 'flex' }]}> Quel médicament souhaitez-vous ajouter?</Text>
+      </View>
+      <View style={styles.inputContainer}>
+        <TextInput
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder="Nom "
+          onChangeText={(value) => {
+            setDrug(value)
+            handleSearch(value)
+          }}
+          value={drug}
+          style={styles.input}
+        />
+      </View>
+
     </SafeAreaView>
   );
 }
@@ -75,13 +75,13 @@ const styles = StyleSheet.create({
     marginLeft: '7%',
     color: '#36373E',
     marginBottom: '10%'
-},
-input: {
-  backgroundColor: '#fff',
-  height: '8%',
-  width: '90%',
-  borderRadius: 10,
-  paddingLeft: 20,
-  marginBottom: 3,
-},
+  },
+  input: {
+    backgroundColor: '#fff',
+    height: '8%',
+    width: '90%',
+    borderRadius: 10,
+    paddingLeft: 20,
+    marginBottom: 3,
+  },
 });
