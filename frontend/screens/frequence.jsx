@@ -2,8 +2,12 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateTraitements } from '../reducers/user';
 
 export default function FrequenceScreen({ navigation }) {
+  const dispatch = useDispatch();
+
   const [lundi, setLundi] = useState(false);
   const [mardi, setMardi] = useState(false);
   const [mercredi, setMercredi] = useState(false);
@@ -12,12 +16,46 @@ export default function FrequenceScreen({ navigation }) {
   const [samedi, setSamedi] = useState(false)
   const [dimanche, setDimanche] = useState(false);
 
-  const handleDay = () => {
 
-    setLundi(true)
+  const frequence = {
+    lundi,
+    mardi,
+    mercredi,
+    jeudi,
+    vendredi,
+    samedi,
+    dimanche
+  }
+
+  const handleLundi = () => {
+    setLundi((prevState) => !prevState)
     console.log(lundi)
   };
+  const handleMar = () => {
+    setMardi((prevState) => !prevState)
 
+  };
+  const handleMer = () => {
+    setMercredi((prevState) => !prevState)
+  };
+  const handleJeu = () => {
+    setJeudi((prevState) => !prevState)
+  };
+  const handleVen = () => {
+    setVendredi((prevState) => !prevState)
+  };
+  const handleSam = () => {
+    setSamedi((prevState) => !prevState)
+  };
+  const handleDim = () => {
+    setDimanche((prevState) => !prevState)
+  };
+
+  const handleSubmit = () => {
+
+    dispatch(updateTraitements(frequence));
+    navigation.navigate('DoseHours')
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -29,45 +67,50 @@ export default function FrequenceScreen({ navigation }) {
       <View style={styles.inputContainer}>
         <Text style={styles.joursText}>Jours spécifiques de la semaine:</Text>
         <View style={styles.daysContainer}>
-          <TouchableOpacity style={styles.buttonOff} activeOpacity={0.8}
-            onPress={handleDay} >
-            <Text style={styles.textButton}>Lun</Text>
-            <FontAwesome name='check-circle-o' style={styles.icon} />
+          <TouchableOpacity style={[styles.buttonDay, lundi ? styles.buttonOn : styles.buttonOff]} activeOpacity={0.8}
+            onPress={handleLundi} >
+            <Text style={styles.text}>Lun</Text>
+            {lundi && <FontAwesome name='check-circle-o' style={styles.icon} />}
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonOff} activeOpacity={0.8} >
-            <Text style={styles.textButton}>Mar</Text>
-            <FontAwesome name='check-circle-o' style={styles.icon} />
+          <TouchableOpacity style={[styles.buttonDay, mardi ? styles.buttonOn : styles.buttonOff]} activeOpacity={0.8} onPress={handleMar} >
+            <Text style={styles.text}>Mar</Text>
+            {mardi && <FontAwesome name='check-circle-o' style={styles.icon} />}
 
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonOff} activeOpacity={0.8} >
-            <Text style={styles.textButton}>Mer</Text>
-            <FontAwesome name='check-circle-o' style={styles.icon} />
+          <TouchableOpacity style={[styles.buttonDay, mercredi ? styles.buttonOn : styles.buttonOff]} activeOpacity={0.8} onPress={handleMer}>
+            <Text style={styles.text}>Mer</Text>
+            {mercredi && <FontAwesome name='check-circle-o' style={styles.icon} />}
 
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonOff} activeOpacity={0.8} >
-            <Text style={styles.textButton}>Jeu</Text>
-            <FontAwesome name='check-circle-o' style={styles.icon} />
+          <TouchableOpacity style={[styles.buttonDay, jeudi ? styles.buttonOn : styles.buttonOff]} activeOpacity={0.8} onPress={handleJeu} >
+            <Text style={styles.text}>Jeu</Text>
+            {jeudi && <FontAwesome name='check-circle-o' style={styles.icon} />}
 
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonOff} activeOpacity={0.8} >
-            <Text style={styles.textButton}>Ven</Text>
-            <FontAwesome name='check-circle-o' style={styles.icon} />
+          <TouchableOpacity style={[styles.buttonDay, vendredi ? styles.buttonOn : styles.buttonOff]} activeOpacity={0.8} onPress={handleVen}>
+            <Text style={styles.text}>Ven</Text>
+            {vendredi && <FontAwesome name='check-circle-o' style={styles.icon} />}
 
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonOff} activeOpacity={0.8} >
-            <Text style={styles.textButton}>Sam</Text>
-            <FontAwesome name='check-circle-o' style={styles.icon} />
+          <TouchableOpacity style={[styles.buttonDay, samedi ? styles.buttonOn : styles.buttonOff]} activeOpacity={0.8} onPress={handleSam}>
+            <Text style={styles.text}>Sam</Text>
+            {samedi && <FontAwesome name='check-circle-o' style={styles.icon} />}
 
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonOff} activeOpacity={0.8} >
-            <Text style={styles.textButton}>Dim</Text>
-            <FontAwesome name='check-circle-o' style={styles.icon} />
+          <TouchableOpacity style={[styles.buttonDay, dimanche ? styles.buttonOn : styles.buttonOff]} activeOpacity={0.8} onPress={handleDim} >
+            <Text style={styles.text}>Dim</Text>
+            {dimanche && <FontAwesome name='check-circle-o' style={styles.icon} />}
 
           </TouchableOpacity>
+
         </View>
+
       </View>
-    </SafeAreaView>
+      <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => handleSubmit()}>
+        <Text style={styles.textButton}>Valider</Text>
+      </TouchableOpacity>
+    </SafeAreaView >
   );
 }
 
@@ -87,7 +130,7 @@ const styles = StyleSheet.create({
 
   titleContainer: {
     width: '90%',
-    marginTop: '20%'
+    marginTop: '10%'
   },
   title: {
     fontSize: 17,
@@ -102,8 +145,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'white',
     width: '90%',
-    height: 180,
-    margin: 5,
+    height: 200,
+    margin: 15,
     padding: 20,
   },
 
@@ -113,7 +156,7 @@ const styles = StyleSheet.create({
     color: '#737373',
     alignSelf: 'flex-start'
   },
-  buttonOn: {
+  buttonDay: {
     width: '30%',
     height: 40,
     backgroundColor: '#A69AFC',
@@ -122,19 +165,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
   },
+  buttonOn: {
+    backgroundColor: '#A69AFC',
+  },
   buttonOff: {
-    width: '12%',
-    height: 60,
     backgroundColor: 'white',
     borderColor: '#A69AFC',
     borderWidth: 3,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 10,
   },
 
-  textButton: {
+  text: {
     flex: 1,
     color: '#A69AFC',
     fontWeight: '600',
@@ -152,5 +192,21 @@ const styles = StyleSheet.create({
     paddingLeft: '3%',
     fontSize: 20,
     paddingBottom: 10,
-  }
+  },
+  buttonSuivant: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 12,
+    height: '10%',
+    width: '80%',
+    marginTop: '10%',
+    backgroundColor: '#A69AFC',
+    borderRadius: 10,
+  },
+  textButton: {
+    flex: 1,
+    color: '#ffffff',
+    fontWeight: '600',
+    fontSize: 16,
+  },
 });

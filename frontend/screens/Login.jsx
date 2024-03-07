@@ -20,7 +20,7 @@ export default function LoginScreen({ navigation }) {
           source={require('../assets/reminder.svg')}
         />
         <Text style={styles.title}>MediRemind</Text>
-        <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8} onPress={() => navigation.navigate('SignIn')}>
+        <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8} onPress={() => navigation.navigate('Frequence')}>
           <Text style={styles.textButton}>Connexion</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonSignUp} activeOpacity={0.8} onPress={() => navigation.navigate('SignUp')}>

@@ -1,13 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, TextInput, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
 
-export default function DoseHoursScreen({navigation}) {
+export default function DoseHoursScreen({ navigation }) {
+  const [pilule, setPilule] = useState(false);
+
   return (
     <SafeAreaView style={styles.container}>
-     <Text>Definir l'heure et la dose</Text>
-      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('OptionTreatment')}>
-        <Text style={styles.textButton}>Suivant</Text>
-      </TouchableOpacity>
+      <Text style={styles.headerText}>Doliprane</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Définir l'heure et la dose</Text>
+        <Text>Prendre:</Text>
+        <TextInput placeholder="Numéro de pilule" keyboardType='numeric' onChangeText={(value) => setPilule(value)} value={pilule} style={styles.input} />
+
+      </View>
+      <View>
+        <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('OptionTreatment')}>
+          <Text style={styles.textButton}>Suivant</Text>
+        </TouchableOpacity>
+      </View>
+
     </SafeAreaView>
   );
 }
@@ -18,10 +30,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E1DFFF',
     alignItems: 'center',
   },
-  image: {
-    marginTop: 30,
-    marginBottom: 80,
-  },
+
   buttonSignIn: {
     alignItems: 'center',
     paddingTop: 8,
@@ -29,5 +38,48 @@ const styles = StyleSheet.create({
     marginTop: 30,
     backgroundColor: '#A69AFC',
     borderRadius: 10,
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 20,
+    alignSelf: 'center',
+  },
+  titleContainer: {
+    width: '90%',
+    marginTop: '10%'
+  },
+  title: {
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#36373E',
+    display: 'flex',
+    marginLeft: '7%',
+    marginBottom: '6%'
+
+  },
+  buttonSuivant: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 12,
+    height: 40,
+    width: 200,
+    marginTop: '10%',
+    backgroundColor: '#A69AFC',
+    borderRadius: 10,
+  },
+  textButton: {
+    flex: 1,
+    color: '#ffffff',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  input: {
+    backgroundColor: '#fff',
+    height: 45,
+    width: 280,
+    borderRadius: 10,
+    paddingLeft: 20,
+    margin: 5,
   },
 });

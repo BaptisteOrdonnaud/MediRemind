@@ -5,7 +5,7 @@ function SearchResult(props, i, navigation) {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.drugContainer} onPress={() => {
-                console.log(props.id)
+                console.log(`ID : ${props.id}, nom: ${props.drugName}`)
                 props.navigation.navigate('Frequence')
                 }}>
             <Text style={styles.drugTitle}>{props.drugName}</Text>
