@@ -6,21 +6,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function MedicamentTraitement(_id) {
+function MedicamentTraitement() {
 
-    const [medicaments, setMedicaments] = useState([]);
 
-    useEffect(() => {
-        fetch(`http://10.9.1.94:3000/traitements/${_id}`)
-        .then(response => response.json())
-        .then(drug => {
-            setMedicaments(drug.traitements);
-        })
-        .catch(error => {
-            console.error('erreur lors de la reccuperation des données:', error);
-        });
-    },[]);
-E
 
     return (
         <View style={styles.container}>

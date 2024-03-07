@@ -1,4 +1,4 @@
-import React ,{useState,useRef} from 'react';
+import React ,{useState,useRef, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView, Dimensions,TouchableWithoutFeedback,useWindowDimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,9 +16,26 @@ export default function HomeScreen() {
   
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const { prenom, nom } = user;
+  const { prenom, token } = user;
+
 
 const currentDate = moment().format('dddd D MMMM YYYY');
+
+const [medicaments, setMedicaments] = useState([]);
+
+useEffect(() => {
+    fetch(`http://10.9.1.94:3000/traitements/${token}`)
+    .then(response => response.json())
+    .then(drug => {
+        setMedicaments(drug.traitements);
+        console.log(drug.traitements)
+    })
+    .catch(error => {
+        console.error('erreur lors de la reccuperation des données:', error);
+    });
+},[]);
+
+
 
   return (
     <SafeAreaView style={styles.container}>
