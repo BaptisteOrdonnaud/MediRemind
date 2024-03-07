@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, TextInput, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import SearchResult from '../components/SearchResult';
 
 export default function AddDrugsRestScreen({navigation}) {
   const [drug, setDrug] = useState('');
@@ -37,7 +38,7 @@ export default function AddDrugsRestScreen({navigation}) {
             style={styles.input}
           />
   </View>
-     
+  <SearchResult/>
     </SafeAreaView>
   );
 }
@@ -55,9 +56,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '700',
     color: '#36373E',
-    display: 'flex',
-    width: '70%',
-    marginLeft: '7%',
+    textAlign: 'center',
     marginBottom: '6%'
 
   },
