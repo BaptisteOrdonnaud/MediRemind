@@ -1,10 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-function SearchResult(props, i) {
+function SearchResult(props, i, navigation) {
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.drugContainer}>
+            <TouchableOpacity style={styles.drugContainer} onPress={() => {
+                console.log(props.id)
+                props.navigation.navigate('Frequence')
+                }}>
             <Text style={styles.drugTitle}>{props.drugName}</Text>
             <FontAwesome key={i} name='chevron-right' style={styles.icon}/>
 
