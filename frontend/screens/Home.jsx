@@ -3,6 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView, Dimensions,TouchableWithoutFeedback,useWindowDimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import 'moment/locale/fr'; 
+import MedicamentTraitement from '../components/MedicamentTraitement'
+import StockMedicamentHome from '../components/StockMedicamentHome'
 
 moment.locale('fr');
 const windowDimensions = Dimensions.get('window');
@@ -113,23 +115,11 @@ export default function HomeScreen() {
      <View>
       <Text style={styles.mainText}>Vos traitement du jour</Text>
      </View>
-     <View style={styles.medicamentTraitement}>
-     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
-     <Text style={styles.medicament}>Nom du médicament</Text>
-     <Text style={styles.qtPrendre}>Quantité a prendre</Text> 
-     <View style={styles.heureDePriseContainer}>
-      <Text style={styles.heureDePrise}></Text>
-      <TouchableOpacity style={styles.button} activeOpacity={0.8}>
-            <Text style={styles.textButton}>J'ai pris ce médicament</Text>
-          </TouchableOpacity>
-     </View>
-     </View>
+    <MedicamentTraitement/>
      <View>
       <Text style={styles.mainText}>votre inventaire</Text>
      </View>
-     <View style={styles.medicamentInventaire}>
-
-     </View>
+     <StockMedicamentHome/>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -289,45 +279,6 @@ mainText:{
   marginLeft:'7%',
   marginTop:'10%'
 },
-medicamentTraitement: {
-  width: '65%',
-  height:'15%', 
-  alignItems: 'center',
-  backgroundColor:'#FFF',
-  marginTop:'7%',
-  borderRadius:15,
-  marginLeft:'7%'
-},
-medicamentInventaire: {
-  width: '55%',
-  height:'12%', 
-  alignItems: 'center',
-  backgroundColor:'#FFF',
-  marginTop:'7%',
-  borderRadius:15,
-  marginLeft:'7%'
-},
-image:{
-  borderRadius:9999,
-  width:50,
-  height:50,
-},
-medicament:{
 
-},
-qtPrendre:{
 
-},
-heureDePriseContainer:{
-
-},
-heureDePrise:{
-
-},
-button:{
-
-},
-textButton:{
-  
-}
 });
