@@ -1,6 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 function MedicamentTraitement() {
     return (
@@ -36,17 +40,19 @@ const styles = StyleSheet.create({
         marginLeft: '7%',
     },
     content: {
-        padding: 10,
+        padding: '1%',
     },
     leftContent: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginTop: '5%'
     },
     image: {
         borderRadius: 9999,
-        width: 50,
-        height: 50,
-        marginRight: 10,
+        width: '15%',
+        height: '100%',
+        marginRight: '3%',
+        marginLeft:'3%'
     },
     medicament: {
         fontSize: 16,
@@ -54,28 +60,28 @@ const styles = StyleSheet.create({
     },
     qtPrendre: {
         fontSize: 14,
+        paddingTop:'4%'
     },
     bottomContent: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 20,
+        justifyContent: 'space-evenely',
+        padding: '10%',
     },
     heureDePrise: {
-        backgroundColor: '#A69AFC',
-        opacity:80,
+        backgroundColor: 'rgba(166, 154, 252, 0.8)',
         color: '#fff',
-        paddingVertical: 10,
-        paddingHorizontal:15,
+        paddingVertical: '1.5%',
+        paddingHorizontal:'5%',
         borderRadius: 10,
-        marginRight: 10,
-        marginLeft:10,
+        marginRight: '10%',
+        marginLeft:'1%',
     },
     button: {
         backgroundColor: '#fff',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
+        paddingVertical: '1.5%',
+        paddingHorizontal: '2%',
+        borderRadius: '1%',
         borderWidth:1,
         borderColor:'#7368BF'
     },
