@@ -6,7 +6,7 @@ import 'moment/locale/fr';
 
 moment.locale('fr');
 const windowDimensions = Dimensions.get('window');
-const screenDimensions = Dimensions.get('screen');
+
 
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
@@ -104,7 +104,32 @@ export default function HomeScreen() {
             ))}
           </Swiper>
         </View>
-     
+     <View style={styles.nombrePriseMedicament}>
+     <View style={styles.nbrMedocsContainer}>
+      <Text style={styles.nbrMedocsAujourdhui}>4</Text>
+     </View>
+      <Text style={styles.textPriseMedoc}>Médicaments a prendre aujourd'hui</Text>
+     </View>
+     <View>
+      <Text style={styles.mainText}>Vos traitement du jour</Text>
+     </View>
+     <View style={styles.medicamentTraitement}>
+     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
+     <Text style={styles.medicament}>Nom du médicament</Text>
+     <Text style={styles.qtPrendre}>Quantité a prendre</Text> 
+     <View style={styles.heureDePriseContainer}>
+      <Text style={styles.heureDePrise}></Text>
+      <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+            <Text style={styles.textButton}>J'ai pris ce médicament</Text>
+          </TouchableOpacity>
+     </View>
+     </View>
+     <View>
+      <Text style={styles.mainText}>votre inventaire</Text>
+     </View>
+     <View style={styles.medicamentInventaire}>
+
+     </View>
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -114,7 +139,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E1DFFF',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
     flexDirection: 'column',
     width:windowDimensions,
@@ -122,7 +147,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     backgroundColor: '#E1DFFF',
-    flexDirection: 'collumn',
+    flexDirection: 'column',
     width: '100%',
     height: 90,
     justifyContent: 'flex-start',
@@ -188,19 +213,20 @@ const styles = StyleSheet.create({
   },
   picker: {
     flex: 1,
-    maxHeight: 80,
-    paddingVertical: 12,
+    maxHeight: 70,
+    paddingVertical: 10,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor:'white',
-    borderRadius:30
+    borderRadius:30,
+    marginHorizontal:'1.5%'
   },
   item: {
     flex: 1,
     height: 50,
     marginHorizontal: 4,
-    paddingVertical: 6,
-    paddingHorizontal: 4,
+    paddingVertical: 1,
+    paddingHorizontal: 1,
     borderWidth: 1,
     borderRadius: 8,
     borderColor: 'transparent',
@@ -225,4 +251,83 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#111',
   },  
+  nombrePriseMedicament: {
+    width: '85%',
+    height:'20%', 
+    alignItems: 'center',
+    backgroundColor:'#A69AFC',
+    marginTop:'10%',
+    borderRadius:15,
+    marginLeft:'7%'
+  },
+textPriseMedoc: {
+  fontSize:14,
+  fontWeight:'bold',
+  color:'white',
+  justifyContent:'center',
+  flexDirection:'column',
+  alignItems:'center',
+  marginTop:10,
+},
+nbrMedocsContainer:{
+  backgroundColor:'white',
+  width:90,
+  height:90,
+  alignItems:'center',
+  justifyContent:'center',
+  marginTop:35,
+  borderRadius:45,
+},
+nbrMedocsAujourdhui:{
+  color:'#A69AFC',
+  fontSize:40,
+  fontWeight:'bold'
+},
+mainText:{
+  fontSize:24,
+  fontWeight:'bold',
+  marginLeft:'7%',
+  marginTop:'10%'
+},
+medicamentTraitement: {
+  width: '65%',
+  height:'15%', 
+  alignItems: 'center',
+  backgroundColor:'#FFF',
+  marginTop:'7%',
+  borderRadius:15,
+  marginLeft:'7%'
+},
+medicamentInventaire: {
+  width: '55%',
+  height:'12%', 
+  alignItems: 'center',
+  backgroundColor:'#FFF',
+  marginTop:'7%',
+  borderRadius:15,
+  marginLeft:'7%'
+},
+image:{
+  borderRadius:9999,
+  width:50,
+  height:50,
+},
+medicament:{
+
+},
+qtPrendre:{
+
+},
+heureDePriseContainer:{
+
+},
+heureDePrise:{
+
+},
+button:{
+
+},
+textButton:{
+  
+}
 });
