@@ -29,7 +29,7 @@ export default function AddDrugsRestScreen({navigation}) {
      <TextInput
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-            placeholder="Nom "
+            placeholder="Nom du médicament "
             onChangeText={(value) => {
               setDrug(value)
               handleSearch(value)
@@ -38,7 +38,6 @@ export default function AddDrugsRestScreen({navigation}) {
             style={styles.input}
           />
   </View>
-  <SearchResult/>
     </SafeAreaView>
   );
 }
