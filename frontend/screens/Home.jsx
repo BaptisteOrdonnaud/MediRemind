@@ -29,7 +29,9 @@ useEffect(() => {
     .then(response => response.json())
     .then(drug => {
         setMedicaments(drug.traitements);
-        console.log(token)
+        console.log(drug.traitements[0].medicaments[0].product_name)
+        console.log(drug.traitements[0].rappel.dose)
+        console.log(drug.traitements[0].rappel.heure)
     })
     .catch(error => {
         console.error('erreur lors de la reccuperation des données:', error);
@@ -54,11 +56,21 @@ useEffect(() => {
      <View>
       <Text style={styles.mainText}>Vos traitement du jour</Text>
      </View>
-    <MedicamentTraitement/>
      <View>
+     {medicaments.map((traitement, index) => (
+            <MedicamentTraitement
+                key={index}
+                drugName={traitement.medicaments[0].product_name}
+                dosage={traitement.rappel.dose}
+                heure={moment(traitement.rappel.heure).format('HH:mm')}
+            />
+        ))}
+     </View>
+      
+     {/* <View>
       <Text style={styles.mainText}>votre inventaire</Text>
      </View>
-     <StockMedicamentHome/>
+     <StockMedicamentHome/> */}
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -72,7 +84,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'column',
     width:width,
-    height:height
+    height:height,
   },
   headerContainer: {
     backgroundColor: '#E1DFFF',
@@ -111,15 +123,15 @@ textPriseMedoc: {
   justifyContent:'center',
   flexDirection:'column',
   alignItems:'center',
-  marginTop:10,
+  marginTop:'1.5%',
 },
 nbrMedocsContainer:{
   backgroundColor:'white',
-  width:90,
-  height:90,
+  width:'25%',
+  height:'45%',
   alignItems:'center',
   justifyContent:'center',
-  marginTop:35,
+  marginTop:'7%',
   borderRadius:45,
 },
 nbrMedocsAujourdhui:{

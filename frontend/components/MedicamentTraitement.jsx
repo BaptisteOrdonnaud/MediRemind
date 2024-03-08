@@ -17,7 +17,7 @@ function MedicamentTraitement(props) {
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
                     <View>
                         <Text style={styles.medicament}>{props.drugName}</Text>
-                        <Text style={styles.qtPrendre}>{props.dosage}</Text>
+                        <Text style={styles.qtPrendre}>Quantité a prendre: {props.dosage}</Text>
                     </View>
                 </View>
             </View>
@@ -42,9 +42,11 @@ const styles = StyleSheet.create({
         marginTop: '7%',
         borderRadius: 15,
         marginLeft: '7%',
+
     },
     content: {
         padding: '1%',
+        flexDirection:'row'
     },
     leftContent: {
         flexDirection: 'row',
