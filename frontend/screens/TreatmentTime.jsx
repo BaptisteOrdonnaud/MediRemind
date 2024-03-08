@@ -100,9 +100,10 @@ export default function TreatmentTimeScreen({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
+       <Text style={styles.headerText}>NOM DU MEDICAMENT</Text>
      <Text style={styles.title}>Quelle est la durée de ce traitement?</Text>
      <View style={styles.debutContainer}>
-     <Text>Date début du traitement :</Text>
+     <Text style={styles.label}>Date début du traitement :</Text>
             {showPicker && (
               <DateTimePicker locale="fr-FR" mode='date' display='spinner' value={date1} onChange={onChange} style={styles.datePicker} minimumDate={new Date()}/>
             )}
@@ -135,7 +136,7 @@ export default function TreatmentTimeScreen({navigation}) {
      </View>
 
      <View style={styles.finContainer}>
-        <Text>Date de fin du traitement :</Text>
+        <Text style={styles.label}>Date de fin du traitement :</Text>
             {showPicker2 && (
               <DateTimePicker locale="fr-FR" mode='date' display='spinner' value={date1} onChange={onChange2} style={styles.datePicker} minimumDate={new Date()}/>
             )}
@@ -169,7 +170,7 @@ export default function TreatmentTimeScreen({navigation}) {
 
   
      </View>
-      <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8}  onPress={() => navigation.navigate('OptionTreatment')}>
+      <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8}  onPress={() => navigation.navigate('OptionTreatment')}>
         <Text style={styles.textButton}>Suivant</Text>
       </TouchableOpacity>
     </SafeAreaView>
@@ -180,21 +181,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E1DFFF',
+    alignItems: 'center'
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 20,
+    alignSelf: 'center',
+  },
+  label: {
+    textAlign: 'center',
+    marginBottom: '5%'
   },
   debutContainer: {
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
     display: 'flex',
+    width: '80%',
     marginBottom: '10%'
   },
   finContainer: {
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
+    width: '80%',
     display: 'flex'
   },
-  buttonSignIn: {
+  buttonSuivant: {
     alignItems: 'center',
-    paddingTop: 8,
-    width: '80%',
-    marginTop: 30,
+    justifyContent: 'center',
+    paddingTop: 12,
+    height: 40,
+    width: 200,
+    marginTop: '10%',
     backgroundColor: '#A69AFC',
     borderRadius: 10,
   },
@@ -204,7 +220,12 @@ const styles = StyleSheet.create({
     color: '#36373E',
     textAlign: 'center',
     marginBottom: '6%'
-
+  },
+  textButton: {
+    flex: 1,
+    color: '#ffffff',
+    fontWeight: '600',
+    fontSize: 16,
   },
   input: {
     textAlign: 'center',
