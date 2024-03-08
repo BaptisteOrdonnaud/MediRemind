@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, SafeAreaView, useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, useWindowDimensions } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import SvgUri from 'react-native-svg-uri';
 
 

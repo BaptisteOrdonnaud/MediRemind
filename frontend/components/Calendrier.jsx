@@ -111,7 +111,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor:'white',
         borderRadius:30,
-        marginHorizontal:'1.5%'
+        marginHorizontal:'1.5%',
+        
       },
       item: {
         flex: 1,

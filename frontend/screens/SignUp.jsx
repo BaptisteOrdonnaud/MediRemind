@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/user';
 
@@ -51,7 +52,8 @@ export default function SignUpScreen({ navigation }) {
 
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView>
+ <View style={styles.container}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
         <Text style={styles.title}>Création de compte</Text>
 
@@ -85,6 +87,8 @@ export default function SignUpScreen({ navigation }) {
         </View>
       </KeyboardAvoidingView>
     </View>
+    </SafeAreaView>
+
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, KeyboardAvoidingView, Platform, View, TextInput } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Image, KeyboardAvoidingView, Platform, View, TextInput } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/user';

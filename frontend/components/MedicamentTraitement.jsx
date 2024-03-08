@@ -6,7 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function MedicamentTraitement() {
+function MedicamentTraitement(props) {
 
 
 
@@ -16,13 +16,13 @@ function MedicamentTraitement() {
                 <View style={styles.leftContent}>
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
                     <View>
-                        <Text style={styles.medicament}>Nom du médicament</Text>
-                        <Text style={styles.qtPrendre}>Quantité à prendre</Text>
+                        <Text style={styles.medicament}>{props.drugName}</Text>
+                        <Text style={styles.qtPrendre}>{props.dosage}</Text>
                     </View>
                 </View>
             </View>
             <View style={styles.bottomContent}>
-                <Text style={styles.heureDePrise}>9:00</Text>
+                <Text style={styles.heureDePrise}>{props.heure}</Text>
                 <TouchableOpacity style={styles.button} activeOpacity={0.8}>
                     <Text style={styles.textButton}>J'ai pris ce médicament</Text>
                     <FontAwesome name='check-circle-o' style={styles.icon} />

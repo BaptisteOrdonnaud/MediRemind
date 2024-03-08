@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, TextInput, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Image, TextInput, View, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SearchResult from '../components/SearchResult';
 

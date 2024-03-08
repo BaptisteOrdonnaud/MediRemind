@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Image, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';

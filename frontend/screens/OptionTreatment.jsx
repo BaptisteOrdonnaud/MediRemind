@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function OPtionTreatmentScreen({navigation}) {
   return (

@@ -1,7 +1,8 @@
 import React ,{useState,useRef, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView, Dimensions,TouchableWithoutFeedback,useWindowDimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Dimensions,TouchableWithoutFeedback,useWindowDimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import 'moment/locale/fr'; 
 import MedicamentTraitement from '../components/MedicamentTraitement'
 import StockMedicamentHome from '../components/StockMedicamentHome'
@@ -10,7 +11,7 @@ import moment from 'moment';
 
 
 moment.locale('fr');
-const windowDimensions = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 
 export default function HomeScreen() {
   
@@ -28,7 +29,7 @@ useEffect(() => {
     .then(response => response.json())
     .then(drug => {
         setMedicaments(drug.traitements);
-        console.log(drug.traitements)
+        console.log(token)
     })
     .catch(error => {
         console.error('erreur lors de la reccuperation des données:', error);
@@ -70,14 +71,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    width:windowDimensions,
-    height:windowDimensions
+    width:width,
+    height:height
   },
   headerContainer: {
     backgroundColor: '#E1DFFF',
     flexDirection: 'column',
     width: '100%',
-    height: 90,
+    height: '9%',
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingLeft:20,
