@@ -2,25 +2,45 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState } from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 
 export default function DoseHoursScreen({ navigation }) {
-  const [pilule, setPilule] = useState(false);
+  const [dose, setDose] = useState(false);
+  const [heure, setHeure] = useState(new Date());
+
+  const handleDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setDate(currentDate);
+  };
+
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerText}>Doliprane</Text>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Définir l'heure et la dose</Text>
-        <Text>Prendre:</Text>
-        <TextInput placeholder="Numéro de pilule" keyboardType='numeric' onChangeText={(value) => setPilule(value)} value={pilule} style={styles.input} />
+        <Text>Choisi les nombres de pilules a prendre:</Text>
+        <TextInput placeholder="Numéro de pilule" keyboardType='numeric' onChangeText={(value) => setDose(value)} value={dose} style={styles.input} />
 
-      </View>
-      <View>
-        <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('OptionTreatment')}>
-          <Text style={styles.textButton}>Suivant</Text>
-        </TouchableOpacity>
-      </View>
+        <Text>Choisi l'heure:</Text>
 
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={heure}
+          mode="time"
+          is24Hour={true}
+          display="default"
+          onChange={handleDateChange}
+        />
+
+
+        <View>
+          <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('OptionTreatment')}>
+            <Text style={styles.textButton}>Suivant</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
     </SafeAreaView>
   );
 }
