@@ -53,10 +53,15 @@ export default function FrequenceScreen({ navigation }) {
   };
 
   const handleSubmit = () => {
-
-    dispatch(updateTraitements(frequence));
-    navigation.navigate('DoseHours')
+    const joursSelectionnes = Object.values(frequence);
+    if (joursSelectionnes.some(jour => jour)) {
+      dispatch(updateTraitements(frequence));
+      navigation.navigate('DoseHours');
+    } else {
+      alert("Veuillez sélectionner au moins un jour.");
+    }
   };
+
 
   return (
     <SafeAreaView style={styles.container}>
