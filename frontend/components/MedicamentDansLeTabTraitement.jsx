@@ -7,7 +7,8 @@ const windowHeight = Dimensions.get('window').height;
 
 function MedicamentDansLeTabTraitement(props) {
     return (
-        <View style={[styles.container, { width: windowWidth * 0.9,height:windowHeight * 0.16 }]}>
+        <TouchableOpacity style={styles.container} activeOpacity={0.8}>
+       <View style={[styles.container, { width: windowWidth * 0.9,height:windowHeight * 0.16 }]}>
             <View style={styles.content}>
                 <View style={styles.leftContent}>
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
@@ -15,6 +16,7 @@ function MedicamentDansLeTabTraitement(props) {
                         <Text style={styles.medicament}>{props.drugName}</Text>
                         <Text style={styles.qtPrendre}>Quantité à prendre: {props.dosage}</Text>
                     </View>
+                    <FontAwesome name='clock-o' style={styles.iconWait} />
                 <Text style={styles.heureDePrise}>{props.heure}</Text>
                 </View>
             </View>
@@ -23,12 +25,13 @@ function MedicamentDansLeTabTraitement(props) {
                     <Text style={styles.textButton}>J'ai pris ce médicament</Text>
                     <FontAwesome name='check-circle-o' style={styles.icon} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} activeOpacity={0.8}>
-                    <Text style={styles.textButton}>Je ne le prendrais pas</Text>
-                    <FontAwesome name='check-circle-o' style={styles.icon} />
+                <TouchableOpacity style={styles.buttonPrendPas} activeOpacity={0.8}>
+                    <Text style={styles.textButtonPas}>Je ne le prendrai pas</Text>
+                    <FontAwesome name='ban' style={styles.iconPas} />
                 </TouchableOpacity>
             </View>
         </View>
+        </TouchableOpacity>
     );
 }
 
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         marginTop: windowHeight * 0.02,
         borderRadius: 20,
-        marginLeft: windowWidth * 0.07,
+        marginLeft: windowWidth * 0.045,
         marginRight: windowWidth * 0.07,
         
     },
@@ -105,5 +108,29 @@ const styles = StyleSheet.create({
         color:'#7368BF',
         paddingLeft:windowWidth *0.009,
         fontSize:20,
-    }
+    },
+    buttonPrendPas: {
+        backgroundColor: '#fff',
+        paddingVertical: windowHeight *0.002,
+        paddingHorizontal: windowWidth *0.02,
+        borderRadius: 10,
+        borderWidth:1,
+        borderColor:'#E4B3B3',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    textButtonPas: {
+        color: '#E4B3B3',
+        fontWeight: 'bold',
+    },
+    iconPas:{
+        color:'#E4B3B3',
+        paddingLeft:windowWidth *0.009,
+        fontSize:20,
+    },
+    iconWait:{
+        color:'#EDA774',
+        paddingLeft:windowWidth *0.009,
+        fontSize:20,
+    },
 });

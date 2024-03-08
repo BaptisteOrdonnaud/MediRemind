@@ -1,6 +1,6 @@
 import React, {useEffect,useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
@@ -34,6 +34,7 @@ export default function TreatmentScreen({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
+    <ScrollView>
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Traitement du {currentDate}</Text>
       </View>
@@ -51,6 +52,7 @@ export default function TreatmentScreen({navigation}) {
         <View style={styles.treatmentContainer}>
          
             </View>
+ </ScrollView>
        
      
       <StatusBar style="auto" />
