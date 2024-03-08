@@ -12,7 +12,7 @@ const frequenceSchema = mongoose.Schema({
 });
 
 const rappelSchema = mongoose.Schema({
-    alert: Boolean,
+    isAlert: Boolean,
     heure: Date,
     dose: Number,
 });
