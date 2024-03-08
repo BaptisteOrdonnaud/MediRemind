@@ -1,6 +1,5 @@
-
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
 import { updateTraitements } from '../reducers/user';
@@ -10,75 +9,67 @@ import { RadioButton } from 'react-native-paper';
 export default function TakingInstructionScreen({ navigation }) {
   const dispatch = useDispatch();
 
-  const [checked, setChecked] = useState('first');
-
-  const [avantRepas, setAvantRepas] = useState(false);
-  const [pendantRepas, setPendantRepas] = useState(false);
-  const [apresRepas, setApresRepas] = useState(false);
-  const [aJeun, setAJeun] = useState(false);
-  const [peuImporte, setPeuImporte] = useState(false);
-
-  const instruction = {
-    avantRepas,
-    pendantRepas,
-    apresRepas,
-    aJeun,
-    peuImporte,
-  }
-
+  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSubmit = () => {
-    const valueSelectionnes = Object.values(instruction);
-    if (valueSelectionnes.some(value => value)) {
+    if (selectedOption) {
+      const instruction = {
+        avantRepas: selectedOption === 'avantRepas',
+        pendantRepas: selectedOption === 'pendantRepas',
+        apresRepas: selectedOption === 'apresRepas',
+        aJeun: selectedOption === 'aJeun',
+        peuImporte: selectedOption === 'peuImporte',
+      };
       dispatch(updateTraitements(instruction));
       navigation.navigate('OptionTreatment');
     } else {
-      alert("Veuillez remplir tous les champs.");
+      alert("Veuillez sélectionner une option.");
     }
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerText}>Doliprane</Text>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Doit-il être pris avec de la norriture?</Text>
+        <Text style={styles.title}>Doit-il être pris avec de la nourriture?</Text>
         <View>
           <View style={styles.radioContainer}>
             <RadioButton
               value="avantRepas"
-              status={avantRepas ? 'checked' : 'unchecked'}
-              onPress={() => setAvantRepas(!avantRepas)}
+              status={selectedOption === 'avantRepas' ? 'checked' : 'unchecked'}
+              onPress={() => setSelectedOption('avantRepas')}
             />
             <Text style={styles.listText}>Avant le repas</Text>
           </View>
           <View style={styles.radioContainer}>
             <RadioButton
               value="pendantRepas"
-              status={pendantRepas ? 'checked' : 'unchecked'}
-              onPress={() => setPendantRepas(!pendantRepas)}
+              status={selectedOption === 'pendantRepas' ? 'checked' : 'unchecked'}
+              onPress={() => setSelectedOption('pendantRepas')}
             />
             <Text style={styles.listText}>Pendant le repas</Text>
           </View>
           <View style={styles.radioContainer}>
             <RadioButton
               value="apresRepas"
-              status={apresRepas ? 'checked' : 'unchecked'}
-              onPress={() => setApresRepas(!apresRepas)}
+              status={selectedOption === 'apresRepas' ? 'checked' : 'unchecked'}
+              onPress={() => setSelectedOption('apresRepas')}
             />
-            <Text style={styles.listText}>Pendant le repas</Text>
+            <Text style={styles.listText}>Après le repas</Text>
           </View>
           <View style={styles.radioContainer}>
             <RadioButton
               value="aJeun"
-              status={aJeun ? 'checked' : 'unchecked'}
-              onPress={() => setAJeun(!aJeun)}
+              status={selectedOption === 'aJeun' ? 'checked' : 'unchecked'}
+              onPress={() => setSelectedOption('aJeun')}
             />
             <Text style={styles.listText}>À jeun</Text>
           </View>
           <View style={styles.radioContainer}>
             <RadioButton
               value="peuImporte"
-              status={peuImporte ? 'checked' : 'unchecked'}
-              onPress={() => setPeuImporte(!peuImporte)}
+              status={selectedOption === 'peuImporte' ? 'checked' : 'unchecked'}
+              onPress={() => setSelectedOption('peuImporte')}
             />
             <Text style={styles.listText}>Peu importe</Text>
           </View>
@@ -145,6 +136,4 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: 200,
   },
-
-
 });
