@@ -6,7 +6,8 @@ import 'moment/locale/fr';
 
 moment.locale('fr');
 const windowDimensions = Dimensions.get('window');
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 import moment from 'moment';
 import Swiper from 'react-native-swiper';
@@ -37,7 +38,7 @@ function Calendrier() {
 
 
     return (
-        <View style={styles.picker}>
+        <View style={[styles.picker, { width: windowWidth * 0.95, height: windowHeight * 1}]}>
         <Swiper
           index={1}
           ref={swiper}
@@ -105,21 +106,21 @@ const styles = StyleSheet.create({
 
     picker: {
         flex: 1,
-        maxHeight: 70,
-        paddingVertical: 10,
+        maxHeight: windowHeight *0.1,
+        paddingVertical: windowHeight *0.009,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor:'white',
         borderRadius:30,
-        marginHorizontal:'1.5%',
+        marginHorizontal:windowWidth *0.02,
         
       },
       item: {
         flex: 1,
-        height: 50,
-        marginHorizontal: 4,
-        paddingVertical: 1,
-        paddingHorizontal: 1,
+        height: windowHeight *0.059,
+        marginHorizontal: windowWidth *0.009,
+        paddingVertical: windowHeight *0.001,
+        paddingHorizontal: windowWidth *0.005,
         borderWidth: 1,
         borderRadius: 8,
         borderColor: 'transparent',
@@ -131,13 +132,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'flex-start',
         justifyContent: 'space-between',
-        marginHorizontal: -4,
+        marginHorizontal: windowWidth * -0.03,
       },
       itemWeekday: {
         fontSize: 13,
         fontWeight: '500',
         color: '#737373',
-        marginBottom: 4,
+        marginBottom: windowHeight *0.001,
       },
       itemDate: {
         fontSize: 15,
