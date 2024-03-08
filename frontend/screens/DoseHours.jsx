@@ -1,45 +1,57 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState } from 'react';
-import DateTimePicker from '@react-native-community/datetimepicker';
-
+import { Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 export default function DoseHoursScreen({ navigation }) {
-  const [dose, setDose] = useState(false);
+  const [dose, setDose] = useState('');
   const [heure, setHeure] = useState(new Date());
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  const handleDateChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setDate(currentDate);
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
   };
 
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (selectedDate) => {
+    setHeure(selectedDate);
+    hideDatePicker();
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerText}>Doliprane</Text>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Définir l'heure et la dose</Text>
-        <Text>Choisi les nombres de pilules a prendre:</Text>
-        <TextInput placeholder="Numéro de pilule" keyboardType='numeric' onChangeText={(value) => setDose(value)} value={dose} style={styles.input} />
-
-        <Text>Choisi l'heure:</Text>
-
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={heure}
-          mode="time"
-          is24Hour={true}
-          display="default"
-          onChange={handleDateChange}
+        <Text>Choisissez le nombre de pilules à prendre:</Text>
+        <TextInput
+          placeholder="Numéro de pilule"
+          keyboardType='numeric'
+          onChangeText={(value) => setDose(value)}
+          value={dose}
+          style={styles.input}
         />
 
+        <Text>Choisissez l'heure:</Text>
 
-        <View>
-          <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('OptionTreatment')}>
-            <Text style={styles.textButton}>Suivant</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity style={styles.datePickerButton} onPress={showDatePicker}>
+          <Text>{heure.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
+        </TouchableOpacity>
+
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="time"
+          date={heure}
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+        />
+
+        <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('OptionTreatment')}>
+          <Text style={styles.textButton}>Suivant</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -50,15 +62,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E1DFFF',
     alignItems: 'center',
-  },
-
-  buttonSignIn: {
-    alignItems: 'center',
-    paddingTop: 8,
-    width: '80%',
-    marginTop: 30,
-    backgroundColor: '#A69AFC',
-    borderRadius: 10,
   },
   headerText: {
     fontSize: 20,
@@ -77,7 +80,16 @@ const styles = StyleSheet.create({
     display: 'flex',
     marginLeft: '7%',
     marginBottom: '6%'
-
+  },
+  datePickerButton: {
+    backgroundColor: '#fff',
+    height: 45,
+    width: 280,
+    borderRadius: 10,
+    paddingLeft: 20,
+    margin: 5,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   buttonSuivant: {
     alignItems: 'center',

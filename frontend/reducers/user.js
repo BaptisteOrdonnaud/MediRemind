@@ -18,6 +18,7 @@ export const userSlice = createSlice({
         },
         updateTraitements: (state, action) => {
             // state.value.traitements.medicaments = action.payload.medicaments;
+            state.value.idMedoc = action.payload.idMedoc
             state.value.frequence = action.payload.frequence;
             state.value.duree = action.payload.duree;
             state.value.rappel = action.payload.rappel;

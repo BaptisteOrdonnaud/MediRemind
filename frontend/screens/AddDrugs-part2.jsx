@@ -4,8 +4,11 @@ import { StyleSheet, Text, TouchableOpacity, Image, TextInput, View, ScrollView 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SearchResult from '../components/SearchResult';
+import { useDispatch } from 'react-redux';
 
 export default function AddDrugsRestScreen({ navigation }) {
+
+  const dispatch = useDispatch();
   const [drug, setDrug] = useState('');
   const [isFocused, setIsFocused] = useState(false);
   const [allDrugs, setAllDrugs] = useState([]);
