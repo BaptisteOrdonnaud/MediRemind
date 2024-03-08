@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   buttonDay: {
+
     width: '30%',
     height: 40,
     backgroundColor: '#A69AFC',
@@ -185,6 +186,7 @@ const styles = StyleSheet.create({
     color: '#A69AFC',
     fontWeight: '600',
     fontSize: 16,
+    textAlign: 'center',
   },
 
   daysContainer: {
@@ -193,12 +195,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
   },
+
   icon: {
     color: '#7368BF',
     paddingLeft: '3%',
     fontSize: 20,
     paddingBottom: 10,
   },
+
   buttonSuivant: {
     alignItems: 'center',
     justifyContent: 'center',
