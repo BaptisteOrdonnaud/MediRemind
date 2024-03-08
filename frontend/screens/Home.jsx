@@ -122,10 +122,10 @@ const styles = StyleSheet.create({
   },
   nombrePriseMedicament: {
     width: windowWidth * 0.85,
-    height:windowHeight * 0.2, 
+    height:windowHeight * 0.17, 
     alignItems: 'center',
     backgroundColor:'#A69AFC',
-    marginTop:windowHeight * 0.023,
+    marginTop:windowHeight * 0.026,
     borderRadius:15,
     marginLeft:windowWidth * 0.07
   },
@@ -144,7 +144,7 @@ nbrMedocsContainer:{
   height:windowHeight * 0.09,
   alignItems:'center',
   justifyContent:'center',
-  marginTop:windowHeight * 0.04,
+  marginTop:windowHeight * 0.02,
   borderRadius:45,
 },
 nbrMedocsAujourdhui:{
