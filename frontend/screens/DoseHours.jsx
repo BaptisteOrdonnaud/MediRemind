@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Text, TextInput, TouchableOpacity, View, Switch, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useDispatch } from 'react-redux';
+import { updateTraitements } from '../reducers/user';
+
 
 export default function DoseHoursScreen({ navigation }) {
+  const dispatch = useDispatch();
+
   const [dose, setDose] = useState('');
   const [heure, setHeure] = useState(new Date());
+  const [isAlert, setIsAlert] = useState(false);
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -20,25 +28,40 @@ export default function DoseHoursScreen({ navigation }) {
     setHeure(selectedDate);
     hideDatePicker();
   };
+  const handleDoseChange = (value) => {
+    setDose(value);
+  };
 
+  const handleSubmit = () => {
+    const valueSelectionnes = Object.values(dose, heure, isAlert);
+    if (valueSelectionnes.some(value => value)) {
+      dispatch(updateTraitements(dose, heure, isAlert));
+      navigation.navigate('OptionTreatment');
+    } else {
+      alert("Veuillez remplir tous les champs.");
+    }
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerText}>Doliprane</Text>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Définir l'heure et la dose</Text>
-        <Text>Choisissez le nombre de pilules à prendre:</Text>
+        <Text style={styles.title}>Quand voulez-vous recevoir des rappels?</Text>
+        <Text>Choisissez le de pilules à prendre:</Text>
         <TextInput
-          placeholder="Numéro de pilule"
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder="Nombre de pilule(s)"
           keyboardType='numeric'
-          onChangeText={(value) => setDose(value)}
+          onChangeText={handleDoseChange}
           value={dose}
           style={styles.input}
+          returnKeyType='done'
         />
 
         <Text>Choisissez l'heure:</Text>
 
         <TouchableOpacity style={styles.datePickerButton} onPress={showDatePicker}>
-          <Text>{heure.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
+          <Text style={styles.textHeure}>{heure.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</Text>
         </TouchableOpacity>
 
         <DateTimePickerModal
@@ -48,10 +71,25 @@ export default function DoseHoursScreen({ navigation }) {
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
         />
+        <View>
+          <Text style={styles.title}>Rappels bien visibles</Text>
+        </View>
+        <View style={styles.rappelContainer}>
+          <Text>Activer les alerts</Text>
 
-        <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('OptionTreatment')}>
-          <Text style={styles.textButton}>Suivant</Text>
-        </TouchableOpacity>
+          <Switch
+            value={isAlert}
+            onValueChange={(value) => setIsAlert(value)}
+            trackColor={{ true: "#A69AFC" }}
+            thumbColor={isAlert ? "#E1DFFF" : "#A69AFC"}
+          />
+
+        </View>
+        <View>
+          <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => handleSubmit()}>
+            <Text style={styles.textButton}>Valider</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -62,6 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E1DFFF',
     alignItems: 'center',
+
   },
   headerText: {
     fontSize: 20,
@@ -71,7 +110,8 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     width: '90%',
-    marginTop: '10%'
+    marginTop: '10%',
+    alignItems: 'center',
   },
   title: {
     fontSize: 17,
@@ -79,7 +119,7 @@ const styles = StyleSheet.create({
     color: '#36373E',
     display: 'flex',
     marginLeft: '7%',
-    marginBottom: '6%'
+    marginBottom: '6%',
   },
   datePickerButton: {
     backgroundColor: '#fff',
@@ -115,4 +155,22 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     margin: 5,
   },
+
+  textHeure: {
+    color: '#A69AFC',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+
+  rappelContainer: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    height: 45,
+    width: 280,
+    borderRadius: 10,
+    padding: 5,
+    alignContent: 'center',
+    justifyContent: 'space-around',
+
+  }
 });
