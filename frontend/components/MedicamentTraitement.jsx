@@ -1,23 +1,19 @@
-import React, {useState,useEffect} from 'react';
+import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function MedicamentTraitement(props) {
-
-
-
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, { width: windowWidth * 0.65,height:windowHeight * 0.16 }]}>
             <View style={styles.content}>
                 <View style={styles.leftContent}>
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
-                    <View>
+                    <View style={styles.textContainer}>
                         <Text style={styles.medicament}>{props.drugName}</Text>
-                        <Text style={styles.qtPrendre}>Quantité a prendre: {props.dosage}</Text>
+                        <Text style={styles.qtPrendre}>Quantité à prendre: {props.dosage}</Text>
                     </View>
                 </View>
             </View>
@@ -36,29 +32,30 @@ export default MedicamentTraitement;
 
 const styles = StyleSheet.create({
     container: {
-        width: '70%',
-        height:'17%',
         backgroundColor: '#FFF',
-        marginTop: '7%',
-        borderRadius: 15,
-        marginLeft: '7%',
-
+        marginTop: windowHeight * 0.02,
+        borderRadius: 20,
+        marginLeft: windowWidth * 0.07,
+        marginRight: windowWidth * 0.07,
+        
     },
     content: {
         padding: '1%',
-        flexDirection:'row'
     },
     leftContent: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: '5%'
+        marginTop: windowHeight * 0.01,
     },
     image: {
         borderRadius: 9999,
-        width: '15%',
-        height: '100%',
-        marginRight: '3%',
-        marginLeft:'3%'
+        width:windowWidth * 0.1 ,
+        height: windowHeight *0.05,
+        marginRight: windowWidth *0.03,
+        marginLeft:windowWidth *0.03
+    },
+    textContainer: {
+        flex: 1,
     },
     medicament: {
         fontSize: 16,
@@ -66,27 +63,30 @@ const styles = StyleSheet.create({
     },
     qtPrendre: {
         fontSize: 14,
-        paddingTop:'4%'
+        paddingTop:windowHeight *0.001 ,
     },
     bottomContent: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-evenely',
-        padding: '7%',
+        justifyContent: 'space-evenly',
+        paddingHorizontal:windowWidth *0.05,
+        paddingVertical:windowHeight *0.02,
+        marginBottom:windowHeight *0.07,
+    
     },
     heureDePrise: {
         backgroundColor: 'rgba(166, 154, 252, 0.8)',
         color: '#fff',
-        paddingVertical: '1.5%',
-        paddingHorizontal:'5%',
+        paddingVertical: windowHeight *0.005,
+        paddingHorizontal:windowWidth *0.02,
         borderRadius: 10,
-        marginRight: '5%',
-        marginLeft:'1%',
+        marginRight: windowWidth *0.06,
+        marginLeft:windowWidth *0.02,
     },
     button: {
         backgroundColor: '#fff',
-        paddingVertical: '1.5%',
-        paddingHorizontal: '2%',
+        paddingVertical: windowHeight *0.002,
+        paddingHorizontal: windowWidth *0.02,
         borderRadius: 10,
         borderWidth:1,
         borderColor:'#7368BF',
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     },
     icon:{
         color:'#7368BF',
-        paddingLeft:'3%',
+        paddingLeft:windowWidth *0.009,
         fontSize:20,
     }
 });

@@ -1,49 +1,49 @@
-import { StyleSheet, Text, SafeAreaView, TouchableOpacity, Image, TextInput, View } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import React from 'react';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 
-function StockMedicamentHome() {
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+function StockMedicamentHome(props) {
     return (
-        <View style={styles.medicamentInventaire}>
-        <Text style={styles.disponibilité}> à racheter</Text>
-        <Text style={styles.medicament}>Nom du médicament</Text>
-        <Text style={styles.qtPrendre}>Quantité restante 3</Text>
-     </View>
+        <View style={[styles.container, { width: windowWidth * 0.52, height: windowHeight * 0.15 }]}>
+            <Text style={styles.disponibilite}>À racheter</Text>
+            <Text style={styles.medicament}>{props.drugName}</Text>
+            <Text style={styles.qtPrendre}>Quantité restante : {props.qtRestant}</Text>
+        </View>
     );
 }
 
 export default StockMedicamentHome;
 
 const styles = StyleSheet.create({
-    medicamentInventaire: {
-        width: '55%',
-        height:'15%', 
-        alignItems: 'flex-start',
-        backgroundColor:'#FFF',
-        marginTop:'7%',
-        borderRadius:15,
-        marginLeft:'7%'
-      },
-      disponibilité:{
-        backgroundColor: '#E4B3D4',
-        opacity:80,
-        color: '#fff',
-        paddingVertical: 7,
-        paddingHorizontal:10,
+    container: {
+        backgroundColor: '#FFF',
+        marginTop: windowHeight * 0.01,
         borderRadius: 15,
-        marginLeft:'7%',
-        marginTop:'5%'
-      },
-      medicament: {
+        marginLeft: windowWidth * 0.07,
+        paddingHorizontal:windowWidth *0.03 ,
+       paddingVertical:windowHeight *0.009,
+    }, 
+    disponibilite: {
+        backgroundColor: '#E4B3D4',
+        color: '#fff',
+        paddingVertical: windowHeight *0.006,
+        paddingHorizontal: windowWidth *0.02,
+        borderRadius: 15,
+        marginTop: windowHeight *0.005,
+        alignItems:'center',
+        width: windowWidth * 0.25
+    },
+    medicament: {
         fontSize: 16,
         fontWeight: 'bold',
-        marginTop:'4%',
-        marginLeft:'7%'
+        marginTop: windowHeight *0.009,
     },
-    qtPrendre:{
-        fontSize:16,
-        fontWeight:'bold',
-        color:'#E4B3D4',
-        marginTop:'4%',
-        marginLeft:'7%'
-    }
+    qtPrendre: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#E4B3D4',
+        marginTop: windowHeight *0.009 ,
+    },
 });
