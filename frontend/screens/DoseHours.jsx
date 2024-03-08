@@ -46,7 +46,7 @@ export default function DoseHoursScreen({ navigation }) {
       <Text style={styles.headerText}>Doliprane</Text>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Quand voulez-vous recevoir des rappels?</Text>
-        <Text>Choisissez le de pilules à prendre:</Text>
+        <Text>Choisissez le nombre de pilules à prendre:</Text>
         <TextInput
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
