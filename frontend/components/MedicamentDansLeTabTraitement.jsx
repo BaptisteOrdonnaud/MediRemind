@@ -5,9 +5,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function MedicamentTraitement(props) {
+function MedicamentDansLeTabTraitement(props) {
     return (
-        <View style={[styles.container, { width: windowWidth * 0.65,height:windowHeight * 0.16 }]}>
+        <View style={[styles.container, { width: windowWidth * 0.9,height:windowHeight * 0.16 }]}>
             <View style={styles.content}>
                 <View style={styles.leftContent}>
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
@@ -15,12 +15,16 @@ function MedicamentTraitement(props) {
                         <Text style={styles.medicament}>{props.drugName}</Text>
                         <Text style={styles.qtPrendre}>Quantité à prendre: {props.dosage}</Text>
                     </View>
+                <Text style={styles.heureDePrise}>{props.heure}</Text>
                 </View>
             </View>
             <View style={styles.bottomContent}>
-                <Text style={styles.heureDePrise}>{props.heure}</Text>
                 <TouchableOpacity style={styles.button} activeOpacity={0.8}>
                     <Text style={styles.textButton}>J'ai pris ce médicament</Text>
+                    <FontAwesome name='check-circle-o' style={styles.icon} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+                    <Text style={styles.textButton}>Je ne le prendrais pas</Text>
                     <FontAwesome name='check-circle-o' style={styles.icon} />
                 </TouchableOpacity>
             </View>
@@ -28,7 +32,7 @@ function MedicamentTraitement(props) {
     );
 }
 
-export default MedicamentTraitement;
+export default MedicamentDansLeTabTraitement;
 
 const styles = StyleSheet.create({
     container: {
@@ -69,7 +73,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        paddingHorizontal:windowWidth *0.05,
+        paddingHorizontal:windowWidth *0.01,
         paddingVertical:windowHeight *0.02,
         marginBottom:windowHeight *0.07,
     

@@ -1,44 +1,58 @@
-import React from 'react';
+import React, {useEffect,useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
+import 'moment/locale/fr'; 
+import Calendrier from '../components/Calendrier';
+import MedicamentDansLeTabTraitement from '../components/MedicamentDansLeTabTraitement';
 
 export default function TreatmentScreen({navigation}) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const { prenom, nom } = user;
+  const { prenom, nom,token } = user;
+  const currentDate = moment().format('dddd D MMMM ');
+  moment.locale('fr');
+  const [medicaments, setMedicaments] = useState([]);
+  
+
+  useEffect(() => {
+    fetch(`http://10.9.1.94:3000/traitements/${token}`)
+    .then(response => response.json())
+    .then(drug => {
+        setMedicaments(drug.traitements);
+       
+        // console.log(drug.traitements[0].medicaments[0].product_name)
+        // console.log(drug.traitements[0].rappel.dose)
+        // console.log(drug.traitements[0].rappel.heure)
+    })
+    .catch(error => {
+        console.error('erreur lors de la reccuperation des données:', error);
+    });
+},[]);
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <Image style={styles.image} source={require('../assets/TemplateImage.png')} />
-        <Text style={styles.headerText}>Hello {prenom + ' ' + nom}</Text>
+        <Text style={styles.headerText}>Traitement du {currentDate}</Text>
       </View>
+      <Calendrier/>
       <View style={styles.contentContainer}>
-        <Text style={styles.mainText}>Traitement</Text>
-        <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => {navigation.navigate('AddDrugs-part1')}}>
-            <Text style={styles.textButton}>Ajouter</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button} activeOpacity={0.8}>
-            <Text style={styles.textButton}>Retirer</Text>
-          </TouchableOpacity>
+      {medicaments.map((traitement, index) => (
+            <MedicamentDansLeTabTraitement
+                key={index}
+                drugName={traitement.medicaments[0].product_name}
+                dosage={traitement.rappel.dose}
+                heure={moment(traitement.rappel.heure).format('HH:mm')}
+            />
+        ))}
         </View>
         <View style={styles.treatmentContainer}>
-          {[1, 2, 3, 4, 5].map((item) => (
-            <View key={item} style={styles.buttonModifContainer}>
-              <TouchableOpacity style={styles.buttonModif} activeOpacity={0.8}>
-              <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
-              <View style={styles.textDescriptionContainer}>
-    <Text style={styles.textButton}>Médicament</Text>
-    <Text style={styles.descriptionText}>Description</Text>
-  </View>
-              </TouchableOpacity>
+         
             </View>
-          ))}
-        </View>
-      </View>
+       
+     
       <StatusBar style="auto" />
     </SafeAreaView>
   );
@@ -69,79 +83,6 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-  image: {
-    width: 50,
-    height: 50,
-    marginLeft: 10,
-    borderRadius: 9999,
-  },
-  contentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  mainText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  btnContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 20, // Ajout d'une marge en bas pour séparer les boutons des médicaments
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 30,
-    width: 200,
-    borderRadius: 10,
-    borderColor: '#7368BF',
-    borderWidth: 1,
-    backgroundColor: 'white',
-    marginLeft: 10,
-    marginRight: 10,
-   
-  },
- 
-  treatmentContainer: {
-    width: 350,
-    alignItems: 'center',
-    
-  },
-  buttonModifContainer: {
-    marginTop: 10,
-  },
-  buttonModif: {
-    flexDirection: 'row', // Permet d'aligner les éléments horizontalement
-    alignItems: 'center', // Alignement vertical au centre
-    height: 100, // Ajustez la hauteur en conséquence
-    width: 400,
-    borderRadius: 10,
-    borderColor: '#7368BF',
-    borderWidth: 1,
-    backgroundColor: 'white',
-    marginTop: 20,
-    paddingHorizontal: 10, // Ajout de rembourrage horizontal
-  },
-  image: {
-    width: 50,
-    height: 50,
-    marginRight: 10, // Ajout d'une marge à droite de l'image
-    borderRadius: 9999,
-  },
-  textDescriptionContainer: {
-    flexDirection: 'column', // Affiche les éléments en colonne
-  },
-  textButton: {
-    color: 'black',
-    fontWeight: '600',
-    fontSize: 16,
-  },
-  descriptionText: {
-    fontSize: 14,
-    color: '#333', // Couleur du texte de la description
-  },
+  
   
 });
