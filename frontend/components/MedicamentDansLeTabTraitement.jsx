@@ -5,19 +5,19 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function MedicamentDansLeTabTraitement(props) {
+function MedicamentDansLeTabTraitement({drugName, dosage, heure, navigation}) {
     return (
-        <TouchableOpacity style={styles.container} activeOpacity={0.8}>
-       <View style={[styles.container, { width: windowWidth * 0.8,height:windowHeight * 0.16 }]}>
+        <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={() => navigation.navigate('MedicamentDescription')}>
+       <View style={[styles.container, { width: windowWidth * 0.8,height:windowHeight * 0.15 }]}>
             <View style={styles.content}>
                 <View style={styles.leftContent}>
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
                     <View style={styles.textContainer}>
-                        <Text style={styles.medicament}>{props.drugName}</Text>
-                        <Text style={styles.qtPrendre}>Quantité à prendre: {props.dosage}</Text>
+                        <Text style={styles.medicament}>{drugName}</Text>
+                        <Text style={styles.qtPrendre}>Quantité à prendre: {dosage}</Text>
                     </View>
                     <FontAwesome name='clock-o' style={styles.iconWait} />
-                <Text style={styles.heureDePrise}>{props.heure}</Text>
+                <Text style={styles.heureDePrise}>{heure}</Text>
                 </View>
             </View>
             <View style={styles.bottomContent}>
@@ -47,19 +47,19 @@ const styles = StyleSheet.create({
         
     },
     content: {
-        padding: '1%',
+        paddingVertical:windowHeight *0.011,
     },
     leftContent: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: windowHeight * 0.003,
+        // marginTop: windowHeight * 0.001,
     },
     image: {
         borderRadius: 9999,
         width:windowWidth * 0.15 ,
         height: windowHeight *0.07,
-        marginRight: windowWidth *0.03,
-        marginLeft:windowWidth *0.03
+        marginRight: windowWidth *0.02,
+        marginLeft:windowWidth *0.018
     },
     textContainer: {
         flex: 1,
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         paddingHorizontal:windowWidth *0.002,
         paddingVertical:windowHeight *0.01,
-        marginBottom:windowHeight *0.07,
     
     },
     heureDePrise: {

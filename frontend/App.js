@@ -24,6 +24,7 @@ import TreatmentTimeScreen from './screens/TreatmentTime.jsx';
 import MedicamentStockScreen from './screens/MedicamentStock.jsx';
 import ReassortDrugsScreen from './screens/ReassortDrugs.jsx';
 import TakingInstructionScreen from './screens/TakingInstruction.jsx';
+import MedicamentDescriptionScreen from './screens/MedicamentDescription.jsx';
 
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
@@ -65,7 +66,7 @@ const TabNavigator = () => {
 
       <Tab.Screen name="Traitement" component={TreatmentScreen} />
       <Tab.Screen name="Liste" component={ListScreen} />
-      <Tab.Screen name="frequence" component={FrequenceScreen} />
+      <Tab.Screen name="Map" component={MapScreen} />
     </Tab.Navigator>
   );
 }
@@ -89,6 +90,7 @@ export default function App() {
           <Stack.Screen name="MedicamentStock" component={MedicamentStockScreen} />
           <Stack.Screen name="ReassortDrugs" component={ReassortDrugsScreen} />
           <Stack.Screen name="TakingInstruction" component={TakingInstructionScreen} />
+          <Stack.Screen name="MedicamentDescription" component={MedicamentDescriptionScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

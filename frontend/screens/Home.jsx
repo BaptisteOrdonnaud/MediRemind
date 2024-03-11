@@ -66,7 +66,7 @@ useEffect(() => {
      {medicaments.map((traitement, index) => (
             <MedicamentTraitement
                 key={index}
-                drugName={traitement.medicaments[0].product_name}
+                drugName={traitement.medicaments[0].form}
                 dosage={traitement.rappel.dose}
                 heure={moment(traitement.rappel.heure).format('HH:mm')}
             />
@@ -80,7 +80,7 @@ useEffect(() => {
     {quantite.map((data,index) => (
     <StockMedicamentHome
       key={index}
-      drugName={data.medicaments[0].product_name}
+      drugName={data.medicaments[0].form}
       qtRestant={data.qtDispo}
     />))} 
      </ScrollView>
