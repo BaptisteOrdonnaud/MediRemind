@@ -34,7 +34,7 @@ export default function MedicamentDescriptionScreen({navigation}) {
         setMedicaments(drug.traitements);
        setDetails(drug.traitements)
        setDuree(drug.traitements)
-       setMedicamentName(drug.traitements[0].medicaments[0].form);
+      //  setMedicamentName(drug.traitements[0].medicaments[0].form);
         // console.log(drug.traitements[0].medicaments[0].product_name)
         // console.log(drug.traitements[0].rappel.dose)
         // console.log(drug.traitements[0].rappel.heure)
@@ -56,8 +56,8 @@ export default function MedicamentDescriptionScreen({navigation}) {
       {medicaments.map((traitement, index) => (
             <MedicamentInformation
                 key={index}
-                drugName={traitement.medicaments[0].form}
-                completName={traitement.medicaments[0].product_name}
+                // drugName={traitement.medicaments[0].form}
+                // completName={traitement.medicaments[0].product_name}
             />
         ))}
         {details.map((detail, index) => (         
