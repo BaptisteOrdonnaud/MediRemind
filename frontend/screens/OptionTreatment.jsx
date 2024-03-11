@@ -8,32 +8,37 @@ import { useState, useEffect } from 'react';
 export default function OPtionTreatmentScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
 
-  console.log('IdMedoc:', user.idMedoc, 'freq:', user.frequence, 'rappel:', user.rappel, 'dispo:', user.qtDispo, 'qt rappel', user.qtRappel, 'instructions', user.instruction);
+  console.log('IdMedoc:', user.idMedoc, 'freq:', user.frequence, 'rappel:', user.rappel, 'dispo:', user.qtDispo, 'qtRappel:', user.qtRappel, 'instructions', user.instruction, 'areTaken:', user.areTaken);
 
 
   const handleSubmit = () => {
+    const userData = {
+      userId: user.idUser,
+      medicamentId: user.idMedoc,
+      frequence: JSON.stringify(user.frequence),
+      duree: JSON.stringify(user.duree),
+      rappel: JSON.stringify(user.rappel),
+      instruction: JSON.stringify(user.instruction),
+      qtDispo: user.qtDispo,
+      qtRappel: user.qtRappel,
+      areTaken: false,
+    };
+
+    console.log('FETCH:', userData)
     fetch('http://10.9.1.92:3000/traitements', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ medicaments: user.idMedoc, frequence: user.frequence, dure: user.duree, rappel: user.rappel, instruction: user.instruction, qtDispo: user.qtDispo, qtRappel: user.qtRappel, areTaken: false }),
+      body: JSON.stringify(userData),
     }).then(response => response.json())
       .then(data => {
         console.log('Données récupérées :', data);
         if (data.result) {
-          dispatch(enregistrerTraitements({
-            medicaments: data.user.idMedoc, frequence: data.user.frequence,
-            duree: data.user.duree,
-            rappel: data.user.rappel,
-            instruction: data.user.instruction,
-            qtDispo: data.user.qtDispo,
-            qtRappel: data.user.qtRappel,
-          }));
-
         }
         navigation.navigate('TabNavigator');
       }).catch(error => console.error('Erreur lors de la requête fetch :', error));
-
   };
+
+
 
   return (
     <SafeAreaView style={styles.container}>
