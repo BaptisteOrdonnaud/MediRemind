@@ -18,7 +18,6 @@ router.post('/', (req, res) => {
             if (!user) {
                 return res.status(404).json({ message: "Utilisateur non trouvé" });
             }
-
             const parsedFrequence = JSON.parse(frequence);
             const parsedDuree = JSON.parse(duree);
             const parsedRappel = JSON.parse(rappel);
@@ -31,11 +30,11 @@ router.post('/', (req, res) => {
 
 
             const newTreatment = {
-                medicaments: ([medicamentId]),
-                frequence: parsedFrequence,
-                duree: parsedDuree,
-                rappel: parsedRappel,
-                instruction: parsedInstruction,
+                medicaments: [medicamentId],
+                frequence: parsedFrequence.frequence,
+                duree: parsedDuree.duree,
+                rappel: parsedRappel.rappel,
+                instruction: parsedInstruction.instruction,
                 qtDispo: qtDispo,
                 qtRappel: qtRappel,
                 areTaken: [],
@@ -51,8 +50,11 @@ router.post('/', (req, res) => {
                 newTreatment.areTaken.push({ prise: currentDate, istaken: false });
             }
 
+            console.log('test', newTreatment)
             user.traitements.push(newTreatment);
+
             user.save().then(newDoc => {
+                // console.log(newDoc)
                 res.status(201).json({ message: "Nouveau traitement ajouté avec succès", newDoc });
             })
                 .catch(error => {
