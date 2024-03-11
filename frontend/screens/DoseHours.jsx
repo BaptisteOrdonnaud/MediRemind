@@ -3,7 +3,7 @@ import { Text, TextInput, TouchableOpacity, View, Switch, StyleSheet } from 'rea
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useDispatch } from 'react-redux';
-import { updateTraitements } from '../reducers/user';
+import { enregistrerTraitements } from '../reducers/user';
 
 
 export default function DoseHoursScreen({ navigation }) {
@@ -35,7 +35,7 @@ export default function DoseHoursScreen({ navigation }) {
   const handleSubmit = () => {
     const valueSelectionnes = Object.values(dose, heure, isAlert);
     if (valueSelectionnes.some(value => value)) {
-      dispatch(updateTraitements(dose, heure, isAlert));
+      dispatch(enregistrerTraitements(dose, heure, isAlert));
       navigation.navigate('OptionTreatment');
     } else {
       alert("Veuillez remplir tous les champs.");

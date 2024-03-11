@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateTraitements } from '../reducers/user';
+import { enregistrerTraitements } from '../reducers/user';
 
 export default function FrequenceScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ export default function FrequenceScreen({ navigation }) {
   const handleSubmit = () => {
     const joursSelectionnes = Object.values(frequence);
     if (joursSelectionnes.some(jour => jour)) {
-      dispatch(updateTraitements(frequence));
+      dispatch(enregistrerTraitements(frequence));
       navigation.navigate('DoseHours');
     } else {
       alert("Veuillez sélectionner au moins un jour.");

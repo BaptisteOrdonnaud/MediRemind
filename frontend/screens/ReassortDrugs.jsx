@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch } from 'react-redux';
-import { updateTraitements } from '../reducers/user';
+import { enregistrerTraitements } from '../reducers/user';
 import React, { useState } from 'react';
 
 export default function ReassortDrugsScreen({ navigation }) {
@@ -18,7 +18,7 @@ export default function ReassortDrugsScreen({ navigation }) {
   const handleSubmit = () => {
     const valueSelectionnes = Object.values(qtRappel);
     if (valueSelectionnes.some(value => value)) {
-      dispatch(updateTraitements(qtRappel));
+      dispatch(enregistrerTraitements(qtRappel));
       navigation.navigate('OptionTreatment');
     } else {
       alert("Veuillez remplir tous les champs.");

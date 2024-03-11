@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'reac
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateTraitements } from '../reducers/user';
+import { enregistrerTraitements } from '../reducers/user';
 
 export default function MedicamentStockScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ export default function MedicamentStockScreen({ navigation }) {
   const handleSubmit = () => {
     const valueSelectionnes = Object.values(qtDispo);
     if (valueSelectionnes.some(value => value)) {
-      dispatch(updateTraitements(qtDispo));
+      dispatch(enregistrerTraitements(qtDispo));
       navigation.navigate('ReassortDrugs');
     } else {
       alert("Veuillez remplir tous les champs.");
