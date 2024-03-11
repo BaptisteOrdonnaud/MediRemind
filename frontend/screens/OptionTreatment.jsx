@@ -31,8 +31,9 @@ export default function OPtionTreatmentScreen({ navigation }) {
       body: JSON.stringify(userData),
     }).then(response => response.json())
       .then(data => {
-        console.log('Données récupérées :', data);
+        console.log('Données récupérées :', data.newDoc.traitements);
         if (data.result) {
+
         }
         navigation.navigate('TabNavigator');
       }).catch(error => console.error('Erreur lors de la requête fetch :', error));
