@@ -35,26 +35,24 @@ export default function TreatmentScreen({navigation}) {
 
   return (
     <SafeAreaView style={styles.container}>
-    <ScrollView>
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Traitement du {currentDate}</Text>
       </View>
       <Calendrier/>
+    <ScrollView>
       <View style={styles.contentContainer}>
       {medicaments.map((traitement, index) => (
             <MedicamentDansLeTabTraitement
                 key={index}
-                drugName={traitement.medicaments[0].product_name}
+                drugName={traitement.medicaments[0].form}
                 dosage={traitement.rappel.dose}
                 heure={moment(traitement.rappel.heure).format('HH:mm')}
+                navigation={navigation}
             />
         ))}
         </View>
-        <View style={styles.treatmentContainer}>
-         
-            </View>
  </ScrollView>
-       
+       <AddMedicamentBtn navigation={navigation}/>
      
       <StatusBar style="auto" />
     </SafeAreaView>

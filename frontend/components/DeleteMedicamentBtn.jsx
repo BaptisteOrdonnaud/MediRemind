@@ -1,29 +1,29 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome6';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function AddMedicamentBtn({navigation}) {
+function DeleteMedicamentBtn({navigation}) {
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.18,height:windowHeight * 0.09 }]} onPress={() => navigation.navigate('AddDrugs-part2')}>
-           <FontAwesome name='plus' style={styles.icon} />
+        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.18,height:windowHeight * 0.09 }]} >
+           <FontAwesome name='trash-o' style={styles.icon} />
         </TouchableOpacity>
        
     );
 }
 
-export default AddMedicamentBtn;
+export default DeleteMedicamentBtn;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFF',
+        backgroundColor: '#fff167',
         alignItems: 'center',
         justifyContent:'center',
         marginTop:windowHeight * 0.026,
         borderRadius:45,
-        marginBottom:windowHeight * 0.04 ,
+        marginBottom:windowHeight * 0.02 ,
         },
     icon:{
         color:'#A69AFC',
