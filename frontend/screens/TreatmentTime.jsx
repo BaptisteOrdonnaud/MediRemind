@@ -108,7 +108,7 @@ export default function TreatmentTimeScreen({navigation}) {
   const dateSelected = () => {
     console.log(`DEBUT : ${moment(date1).startOf('day').format()} & FIN : ${moment(date2).startOf('day').format()}`)
     dispatch(enregistrerTraitements({ duree}));
-    // navigation.navigate('OptionTreatment')
+    navigation.navigate('OptionTreatment')
   }
 
 
@@ -139,7 +139,7 @@ export default function TreatmentTimeScreen({navigation}) {
               <Pressable onPress={toggleDatePicker} style={styles.dateDebut}>
               <TextInput
                   placeholder="Date de début"
-                  value={dateDebut}
+                  value={showPicker ? date1 : dateDebut}
                   onChangeText={setDateDebut}
                   style={styles.input}
                   editable={false}
@@ -152,7 +152,7 @@ export default function TreatmentTimeScreen({navigation}) {
      <View style={styles.finContainer}>
         <Text style={styles.label}>Date de fin du traitement :</Text>
             {showPicker2 && (
-              <DateTimePicker locale="fr-FR" mode='date' display='spinner' value={date1} onChange={onChange2} style={styles.datePicker} minimumDate={new Date()}/>
+              <DateTimePicker locale="fr-FR" mode='date' display='spinner' value={date2} onChange={onChange2} style={styles.datePicker} minimumDate={new Date()}/>
             )}
 
             {showPicker2 && Platform.OS === "ios" && (
@@ -171,7 +171,7 @@ export default function TreatmentTimeScreen({navigation}) {
               
               <TextInput
                   placeholder="Date de fin"
-                  value={dateFin}
+                  value={showPicker2 ? date2 : dateFin}
                   onChangeText={setDateFin}
                   style={styles.input}
                   editable={false}
