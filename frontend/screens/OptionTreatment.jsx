@@ -8,7 +8,8 @@ import { useState, useEffect } from 'react';
 export default function OPtionTreatmentScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
 
-  console.log('Freq :', user.idMedoc);
+  console.log('IdMedoc:', user.idMedoc, 'freq:', user.frequence, 'rappel:', user.rappel, 'dispo:', user.qtDispo, 'qt rappel', user.qtRappel, 'instructions', user.instruction);
+
 
   const handleSubmit = () => {
     fetch('http://10.9.1.92:3000/traitements', {
@@ -18,17 +19,17 @@ export default function OPtionTreatmentScreen({ navigation }) {
     }).then(response => response.json())
       .then(data => {
         console.log('Données récupérées :', data);
-        // if (data.result) {
-        //   dispatch(enregistrerTraitements({
-        //     medicaments: data.user.idMedoc, frequence: data.user.frequence,
-        //     duree: data.user.duree,
-        //     rappel: data.user.rappel,
-        //     instruction: data.user.instruction,
-        //     qtDispo: data.user.qtDispo,
-        //     qtRappel: data.user.qtRappel,
-        //   }));
+        if (data.result) {
+          dispatch(enregistrerTraitements({
+            medicaments: data.user.idMedoc, frequence: data.user.frequence,
+            duree: data.user.duree,
+            rappel: data.user.rappel,
+            instruction: data.user.instruction,
+            qtDispo: data.user.qtDispo,
+            qtRappel: data.user.qtRappel,
+          }));
 
-        // }
+        }
         navigation.navigate('TabNavigator');
       }).catch(error => console.error('Erreur lors de la requête fetch :', error));
 

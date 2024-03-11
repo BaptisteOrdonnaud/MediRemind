@@ -38,7 +38,7 @@ export default function SignInScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-        <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
+        {/* <Image style={styles.image} source={require('../assets/TemplateImage.png')}/> */}
         <View>
           <Text style={styles.titre}>Email</Text>
           <TextInput

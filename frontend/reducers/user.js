@@ -18,15 +18,48 @@ export const userSlice = createSlice({
             state.value.dateDeNaissance = action.payload.dateDeNaissance
         },
         enregistrerTraitements: (state, action) => {
-            state.value.idMedoc = action.payload.idMedoc
-            state.value.frequence = action.payload.frequence;
-            state.value.duree = action.payload.duree;
-            state.value.rappel = action.payload.rappel;
-            state.value.instruction = action.payload.instruction;
-            state.value.qtDispo = action.payload.qtDispo;
-            state.value.qtRappel = action.payload.qtRappel;
-            state.value.areTaken = action.payload.areTaken;
+            const { idMedoc, frequence, duree, rappel, instruction, qtDispo, qtRappel, areTaken } = action.payload;
+            state.value.idMedoc = idMedoc;
+            state.value.frequence = frequence;
+            state.value.duree = duree;
+            state.value.rappel = rappel;
+            state.value.instruction = instruction;
+            state.value.qtDispo = qtDispo;
+            state.value.qtRappel = qtRappel;
+            state.value.areTaken = areTaken;
         },
+        enregistrerMedicament: (state, action) => {
+            state.value.idMedoc = action.payload;
+        },
+        enregistrerFrequence: (state, action) => {
+            state.value.frequence = action.payload;
+        },
+        enregistrerDuree: (state, action) => {
+            state.value.duree = action.payload;
+        },
+        enregistrerRappel: (state, action) => {
+            state.value.rappel = action.payload;
+        },
+        enregistrerInstruction: (state, action) => {
+            state.value.instruction = action.payload;
+        },
+        enregistrerQtDispo: (state, action) => {
+            state.value.qtDispo = action.payload;
+        },
+        enregistrerQtRappel: (state, action) => {
+            state.value.qtRappel = action.payload;
+        },
+
+        // enregistrerTraitements: (state, action) => {
+        //     action.payload.idMedoc && (state.traitement.medicaments = action.payload.idMedoc);
+        //     state.value.frequence && (state.value.frequence = action.payload.frequence);
+        //     state.value.duree && (state.value.duree = action.payload.duree);
+        //     state.value.rappel && (state.value.rappel = action.payload.rappel);
+        //     state.value.instruction && (state.value.instruction= action.payload.instruction);
+        //     state.value.qtDispo && (state.value.qtDispo= action.payload.qtDispo);
+        //     state.value.qtRappel &&  (state.value.qtRappel= action.payload.qtRappel);
+        //     state.value.areTaken && (state.value.areTaken= action.payload.areTaken);
+        // },
 
         logout: (state) => {
             state.value.token = null;
@@ -39,5 +72,5 @@ export const userSlice = createSlice({
     },
 });
 
-export const { login, logout, enregistrerTraitements } = userSlice.actions;
+export const { login, logout, enregistrerTraitements, enregistrerDuree, enregistrerFrequence, enregistrerInstruction, enregistrerMedicament, enregistrerQtDispo, enregistrerQtRappel, enregistrerRappel } = userSlice.actions;
 export default userSlice.reducer;
