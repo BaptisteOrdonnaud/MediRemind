@@ -1,16 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import React,{ useEffect, useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import { StyleSheet, Text, View, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import 'moment/locale/fr'; 
 import DeleteMedicamentBtn from '../components/DeleteMedicamentBtn';
 import MedicamentInformation from '../components/MedicamentInformation';
 import DetailsTakingDrugs from '../components/DetailsTakingDrugs';
 import DrugTime from '../components/DrugTime';
+import FlecheRetour from '../components/FlecheRetour';
 
-export default function MedicamentDescriptionScreen() {
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+export default function MedicamentDescriptionScreen({navigation}) {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
@@ -20,7 +25,7 @@ export default function MedicamentDescriptionScreen() {
   const [medicaments, setMedicaments] = useState([]);
   const [details, setDetails] = useState([]);
   const [duree, setDuree] = useState([]);
-  
+  const [medicamentName, setMedicamentName] = useState("");
 
   useEffect(() => {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)
@@ -29,6 +34,7 @@ export default function MedicamentDescriptionScreen() {
         setMedicaments(drug.traitements);
        setDetails(drug.traitements)
        setDuree(drug.traitements)
+       setMedicamentName(drug.traitements[0].medicaments[0].form);
         // console.log(drug.traitements[0].medicaments[0].product_name)
         // console.log(drug.traitements[0].rappel.dose)
         // console.log(drug.traitements[0].rappel.heure)
@@ -39,9 +45,10 @@ export default function MedicamentDescriptionScreen() {
 },[]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container, { width: windowWidth * 1,height:windowHeight * 0.17 }]}>
     <View style={styles.headerContainer}>
-        <Text style={styles.headerText}></Text>
+   <FlecheRetour navigation={navigation}/>
+        <Text style={styles.headerText}>{medicamentName}</Text>
       </View>
       <ScrollView>
 
@@ -82,8 +89,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#E1DFFF',
         alignItems: 'center',
         flexDirection: 'column',
-        height:Dimensions.get('screen').height,
-        width:Dimensions.get('screen').width
+       
       },
       headerContainer: {
         backgroundColor: '#E1DFFF',
@@ -92,12 +98,13 @@ const styles = StyleSheet.create({
         height: 90,
         justifyContent: 'center',
         alignItems: 'center',
-         
+         paddingLeft: windowWidth * 0.01
       },
       headerText: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+     textAlign:'center',
+        marginRight:windowWidth *0.23
       },
+    
 });

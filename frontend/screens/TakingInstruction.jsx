@@ -2,13 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import { enregistrerInstruction } from '../reducers/user';
+import { enregistrerInstruction, enregistrerAreTaken } from '../reducers/user';
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 
 export default function TakingInstructionScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+  const [areTaken, setAreTaken] = useState(false);
+
 
 
   const [selectedOption, setSelectedOption] = useState(null);
@@ -22,7 +24,9 @@ export default function TakingInstructionScreen({ navigation }) {
         aJeun: selectedOption === 'aJeun',
         peuImporte: selectedOption === 'peuImporte',
       };
-      dispatch(enregistrerInstruction(instruction));
+      setAreTaken(false)
+      dispatch(enregistrerInstruction({ instruction }));
+      dispatch(enregistrerAreTaken(areTaken));
       navigation.navigate('OptionTreatment');
     } else {
       alert("Veuillez sélectionner une option.");

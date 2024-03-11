@@ -3,14 +3,14 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView, Dimensions,TouchableWithoutFeedback,useWindowDimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import 'moment/locale/fr'; 
-
+import moment from 'moment';
+import Swiper from 'react-native-swiper';
 moment.locale('fr');
+
 const windowDimensions = Dimensions.get('window');
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-import moment from 'moment';
-import Swiper from 'react-native-swiper';
 const { width } = Dimensions.get('window');
 
 function Calendrier() {

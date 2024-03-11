@@ -17,6 +17,7 @@ export default function TreatmentScreen({navigation}) {
   moment.locale('fr');
   const [medicaments, setMedicaments] = useState([]);
   
+  
 
   useEffect(() => {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)
@@ -43,7 +44,8 @@ export default function TreatmentScreen({navigation}) {
       <View style={styles.contentContainer}>
       {medicaments.map((traitement, i) => (
             <MedicamentDansLeTabTraitement
-                key={i}
+                key={traitement.id}
+                drugId={traitement}
                 drugName={traitement.medicaments[0].form}
                 dosage={traitement.rappel.dose}
                 heure={moment(traitement.rappel.heure).format('HH:mm')}
