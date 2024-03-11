@@ -2,9 +2,10 @@ import React, { useState} from 'react';
 import { StyleSheet, Text, TouchableOpacity, View, TextInput, Pressable, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from "@react-native-community/datetimepicker"
+import moment from 'moment';
 
 export default function TreatmentTimeScreen({navigation}) {
-
+  moment.locale('fr');
   const [dateDebut, setDateDebut] = useState("");
   const [dateFin, setDateFin] = useState("");
 
@@ -97,6 +98,11 @@ export default function TreatmentTimeScreen({navigation}) {
 
   }
 
+  const dateSelected = () => {
+    console.log(`DEBUT : ${moment(date1).startOf('day').format()} & FIN : ${moment(date2).startOf('day').format()}`)
+    // navigation.navigate('OptionTreatment')
+  }
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -111,9 +117,9 @@ export default function TreatmentTimeScreen({navigation}) {
             {showPicker && Platform.OS === "ios" && (
               <View style={{flexDirection: "row", justifyContent: 'space-around'}}>
                 <TouchableOpacity style={[styles.button, styles.pickerButton, {backgroundColor: "#11182711"}]} onPress={toggleDatePicker}>
-                  <Text style={[styles.buttonText, {color: "#075985"}]}>Cancel</Text>
+                  <Text style={[styles.buttonText, {color: "#7368BF"}]}>Cancel</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.pickerButton, {backgroundColor: "red"}]} onPress={confirmIOSDate}>
+                <TouchableOpacity style={[styles.button, styles.pickerButton, {backgroundColor: "#7368BF"}]} onPress={confirmIOSDate}>
                   <Text style={[styles.buttonText,]}>Confirm</Text>
                 </TouchableOpacity>
               </View>
@@ -144,15 +150,13 @@ export default function TreatmentTimeScreen({navigation}) {
             {showPicker2 && Platform.OS === "ios" && (
               <View style={{flexDirection: "row", justifyContent: 'space-around'}}>
                 <TouchableOpacity style={[styles.button, styles.pickerButton, {backgroundColor: "#11182711"}]} onPress={toggleDatePicker2}>
-                  <Text style={[styles.buttonText, {color: "#075985"}]}>Cancel</Text>
+                  <Text style={[styles.buttonText, {color: "#7368BF"}]}>Cancel</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.button, styles.pickerButton, {backgroundColor: "red"}]} onPress={confirmIOSDate2}>
+                <TouchableOpacity style={[styles.button, styles.pickerButton, {backgroundColor: "#7368BF"}]} onPress={confirmIOSDate2}>
                   <Text style={[styles.buttonText,]}>Confirm</Text>
                 </TouchableOpacity>
               </View>
-            )}
-
-          
+            )}       
 
             {!showPicker2 && (
               <Pressable onPress={toggleDatePicker2} style={styles.dateDebut}>
@@ -166,11 +170,9 @@ export default function TreatmentTimeScreen({navigation}) {
                   onPressIn={toggleDatePicker2}
                 />
             </Pressable>
-            )}
-
-  
+            )} 
      </View>
-      <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8}  onPress={() => navigation.navigate('OptionTreatment')}>
+      <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={dateSelected}>
         <Text style={styles.textButton}>Suivant</Text>
       </TouchableOpacity>
     </SafeAreaView>
