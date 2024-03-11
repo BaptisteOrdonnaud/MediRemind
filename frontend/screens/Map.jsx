@@ -3,6 +3,8 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
+import { Linking } from 'react-native';
+import { Platform } from 'react-native';
 import axios from 'axios';
 
 const API_KEY = 'AIzaSyALGhtLR_EbOr_YXherjdRyhHGw2yuaJ3M';
@@ -34,13 +36,13 @@ const MapScreen = () => {
 
       setNearbyPharmacies(response.data.results);
     } catch (error) {
-      console.error('Error fetching nearby pharmacies', error);
+      // console.error('Error fetching nearby pharmacies', error);
     }
   };
 
   const handleMarkerPress = (pharmacy) => {
     // Ici, vous pouvez mettre en œuvre la logique pour afficher la page de la pharmacie
-    console.log('Pharmacy selected:', pharmacy);
+    // console.log('Pharmacy selected:', pharmacy);
 
     // Calculer la distance entre la pharmacie et la position actuelle de l'utilisateur
     const distance = calculateDistance(
@@ -51,7 +53,7 @@ const MapScreen = () => {
     );
 
     // Afficher la distance dans la console
-    console.log(`Distance to pharmacy: ${distance} km`);
+    // console.log(`Distance to pharmacy: ${distance} km`);
   };
 
   useEffect(() => {
@@ -78,11 +80,24 @@ const MapScreen = () => {
     })();
   }, [user]);
 
+  const openMaps = (pharmacy) => {
+    const { geometry } = pharmacy;
+    const lat = geometry.location.lat;
+    const lng = geometry.location.lng;
+    const label = pharmacy.name;
+    const url = Platform.select({
+      ios: `http://maps.apple.com/?ll=${lat},${lng}&q=${label}`,
+      android: `geo:${lat},${lng}?q=${label}`,
+    });
+
+    Linking.openURL(url);
+  };
+
   return (
     <MapView ref={mapRef} mapType="hybrid" style={{ flex: 1 }}>
       {currentPosition && <Marker coordinate={currentPosition} title="Ma position" pinColor="#fecb2d" />}
       {nearbyPharmacies.map((pharmacy, index) => (
-        <Marker
+        <Marker 
           key={index}
           coordinate={{
             latitude: pharmacy.geometry.location.lat,
@@ -93,15 +108,22 @@ const MapScreen = () => {
           onPress={() => handleMarkerPress(pharmacy)}
         >
           <Callout>
-            <Text>{pharmacy.name}</Text>
-            <Text>{pharmacy.vicinity}</Text>
-            <Text>{`Distance: ${calculateDistance(
-              currentPosition.latitude,
-              currentPosition.longitude,
-              pharmacy.geometry.location.lat,
-              pharmacy.geometry.location.lng
-            ).toFixed(2)} km`}</Text>
-            {/* Ajoutez d'autres informations de la pharmacie ici */}
+            <View style={styles.pharmacyContainer}>
+                <Text style={styles.pharmacyName}>{pharmacy.name}</Text>
+                <Text style={styles.pharmacyAdress}>{pharmacy.vicinity}</Text>
+                <Text style={styles.pharmacyDistance}>{`Distance: ${calculateDistance(
+                  currentPosition.latitude,
+                  currentPosition.longitude,
+                  pharmacy.geometry.location.lat,
+                  pharmacy.geometry.location.lng
+                ).toFixed(2)} km`}</Text>
+              {pharmacy.rating && (
+        <Text style={styles.pharmacyNote}>{`Note: ${pharmacy.rating}`}</Text>
+      )}
+                <TouchableOpacity style={styles.mapsButton} onPress={() => openMaps(pharmacy)}>
+                  <Text style={styles.mapsText}>Ouvrir dans Maps</Text>
+                </TouchableOpacity>
+            </View>
           </Callout>
         </Marker>
       ))}
@@ -121,18 +143,27 @@ const styles = StyleSheet.create({
   map: {
     flex: 1,
   },
-  calloutContainer: {
-    width: 200,
+  pharmacyContainer: {
+    flex: 1,
+    padding: 10,
+    // backgroundColor: 'red',
   },
-
-  calloutText: {
-    fontSize: 14,
-    marginBottom: 5,
+  pharmacyName : {
+    textAlign: 'center',
+    fontWeight: '600',
+    color: '#7368BF',
+    marginBottom: 10,
+  }, 
+  mapsButton: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#7368BF',
+    paddingVertical: 10,
+    borderRadius: 10,
   },
-
-  calloutImage: {
-    width: 100,
-    height: 100,
-    marginBottom: 5,
+  mapsText : {
+    color: '#fff',
+    fontWeight: '600',
   },
 });
