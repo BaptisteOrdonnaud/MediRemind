@@ -7,6 +7,7 @@ import moment from 'moment';
 import 'moment/locale/fr'; 
 import Calendrier from '../components/Calendrier';
 import MedicamentDansLeTabTraitement from '../components/MedicamentDansLeTabTraitement';
+import AddMedicamentBtn from '../components/AddMedicamentBtn';
 
 export default function TreatmentScreen({navigation}) {
   const dispatch = useDispatch();

@@ -8,7 +8,7 @@ const windowHeight = Dimensions.get('window').height;
 function MedicamentDansLeTabTraitement(props) {
     return (
         <TouchableOpacity style={styles.container} activeOpacity={0.8}>
-       <View style={[styles.container, { width: windowWidth * 0.9,height:windowHeight * 0.16 }]}>
+       <View style={[styles.container, { width: windowWidth * 0.8,height:windowHeight * 0.16 }]}>
             <View style={styles.content}>
                 <View style={styles.leftContent}>
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
@@ -52,12 +52,12 @@ const styles = StyleSheet.create({
     leftContent: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: windowHeight * 0.01,
+        marginTop: windowHeight * 0.003,
     },
     image: {
         borderRadius: 9999,
-        width:windowWidth * 0.1 ,
-        height: windowHeight *0.05,
+        width:windowWidth * 0.15 ,
+        height: windowHeight *0.07,
         marginRight: windowWidth *0.03,
         marginLeft:windowWidth *0.03
     },
@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        paddingHorizontal:windowWidth *0.01,
-        paddingVertical:windowHeight *0.02,
+        paddingHorizontal:windowWidth *0.002,
+        paddingVertical:windowHeight *0.01,
         marginBottom:windowHeight *0.07,
     
     },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
         paddingVertical: windowHeight *0.005,
         paddingHorizontal:windowWidth *0.02,
         borderRadius: 10,
-        marginRight: windowWidth *0.06,
+        marginRight: windowWidth *0.01,
         marginLeft:windowWidth *0.02,
     },
     button: {
@@ -112,12 +112,13 @@ const styles = StyleSheet.create({
     buttonPrendPas: {
         backgroundColor: '#fff',
         paddingVertical: windowHeight *0.002,
-        paddingHorizontal: windowWidth *0.02,
+        paddingHorizontal: windowWidth *0.01,
         borderRadius: 10,
         borderWidth:1,
         borderColor:'#E4B3B3',
         flexDirection: 'row',
         alignItems: 'center',
+        marginLeft:windowWidth * 0.04
     },
     textButtonPas: {
         color: '#E4B3B3',
