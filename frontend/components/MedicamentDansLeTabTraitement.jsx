@@ -17,7 +17,7 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
     };
 
     return (
-        <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={() => navigation.navigate('MedicamentDescription')}>
+        <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={() => navigation.navigate('MedicamentDescription'   )}>
             <View style={[styles.container, { width: windowWidth * 0.8, height: windowHeight * 0.15 }]}>
                 <View style={styles.content}>
                     <View style={styles.leftContent}>
