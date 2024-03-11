@@ -99,42 +99,42 @@ export default function SignUpScreen({ navigation }) {
 
   return (
     <SafeAreaView>
- <View style={styles.container}>
-      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
-        <Text style={styles.title}>Information complémentaire</Text>
+      <View style={styles.container}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
+          <Text style={styles.title}>Information complémentaire</Text>
 
-        <View style={styles.inputContainer}>
-          <Text style={styles.titre}>Email</Text>
-          <TextInput
-            placeholder="Email"
-            autoCapitalize="none" // https://reactnative.dev/docs/textinput#autocapitalize
-            keyboardType="email-address" // https://reactnative.dev/docs/textinput#keyboardtype
-            textContentType="emailAddress" // https://reactnative.dev/docs/textinput#textcontenttype-ios
-            autoComplete="email" // https://reactnative.dev/docs/textinput#autocomplete-android
-            onChangeText={(value) => setEmail(value)}
-            value={email}
-            style={styles.input}
-          />
-          {emailError && <Text style={styles.error}>Le email est invalide</Text>}
+          <View style={styles.inputContainer}>
+            <Text style={styles.titre}>Email</Text>
+            <TextInput
+              placeholder="Email"
+              autoCapitalize="none" // https://reactnative.dev/docs/textinput#autocapitalize
+              keyboardType="email-address" // https://reactnative.dev/docs/textinput#keyboardtype
+              textContentType="emailAddress" // https://reactnative.dev/docs/textinput#textcontenttype-ios
+              autoComplete="email" // https://reactnative.dev/docs/textinput#autocomplete-android
+              onChangeText={(value) => setEmail(value)}
+              value={email}
+              style={styles.input}
+            />
+            {emailError && <Text style={styles.error}>Le email est invalide</Text>}
 
-          <Text style={styles.titre}>Téléphone</Text>
-          <TextInput placeholder="Téléphone" keyboardType='numeric' onChangeText={(value) => setTelephone(value)} value={telephone} style={styles.input} />
-          {telephoneError && <Text style={styles.error}>Le numéro de téléphone est invalide</Text>}
+            <Text style={styles.titre}>Téléphone</Text>
+            <TextInput placeholder="Téléphone" keyboardType='numeric' onChangeText={(value) => setTelephone(value)} value={telephone} style={styles.input} />
+            {telephoneError && <Text style={styles.error}>Le numéro de téléphone est invalide</Text>}
 
-          <Text style={styles.titre}>Mot de passe</Text>
-          <TextInput placeholder="Mode de passe" secureTextEntry={true} autoCapitalize="none" onChangeText={(value) => setPassword(value)} value={password} style={styles.input} textContentType='password' />
-          {passwordError && <Text style={styles.error}>Mot de passe invalide, le mot de passe doit avoir minimum 6 characters et 1 chiffre</Text>}
+            <Text style={styles.titre}>Mot de passe</Text>
+            <TextInput placeholder="Mode de passe" secureTextEntry={true} autoCapitalize="none" onChangeText={(value) => setPassword(value)} value={password} style={styles.input} textContentType='password' />
+            {passwordError && <Text style={styles.error}>Mot de passe invalide, le mot de passe doit avoir minimum 6 characters et 1 chiffre</Text>}
 
-          <Text style={styles.titre}>Confirmation de mot de passe</Text>
-          <TextInput placeholder="Confirmation de mot de passe" secureTextEntry={true} autoCapitalize="none" onChangeText={(value) => setConfirmationPassword(value)} value={confirmationPassword} style={styles.input} />
-          {confirmationPasswordError && <Text style={styles.error}>Les mots de passe ne correspondent pas</Text>}
+            <Text style={styles.titre}>Confirmation de mot de passe</Text>
+            <TextInput placeholder="Confirmation de mot de passe" secureTextEntry={true} autoCapitalize="none" onChangeText={(value) => setConfirmationPassword(value)} value={confirmationPassword} style={styles.input} />
+            {confirmationPasswordError && <Text style={styles.error}>Les mots de passe ne correspondent pas</Text>}
 
-          <TouchableOpacity onPress={() => handleSubmit()} style={styles.buttonSignUp} activeOpacity={0.8}>
-            <Text style={styles.textButton}>Valider</Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
-    </View>
+            <TouchableOpacity onPress={() => handleSubmit()} style={styles.buttonSignUp} activeOpacity={0.8}>
+              <Text style={styles.textButton}>Valider</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </View>
     </SafeAreaView>
   );
 }
