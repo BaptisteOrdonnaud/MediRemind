@@ -3,8 +3,11 @@ import { StyleSheet, Text, TouchableOpacity, View, TextInput, Pressable, Platfor
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from "@react-native-community/datetimepicker"
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { enregistrerTraitements } from '../reducers/user';
 
 export default function TreatmentTimeScreen({navigation}) {
+  const dispatch = useDispatch();
   moment.locale('fr');
   const [dateDebut, setDateDebut] = useState("");
   const [dateFin, setDateFin] = useState("");
@@ -15,6 +18,10 @@ export default function TreatmentTimeScreen({navigation}) {
   const [showPicker, setShowPicker] = useState(false)
   const [showPicker2, setShowPicker2] = useState(false)
 
+  const duree = {
+    dateDebut: moment(date1).startOf('day').format(),
+    dateFin: moment(date2).startOf('day').format(),
+  }
 
 
   // VERSION DATE DU DEBUT ! 
@@ -100,6 +107,7 @@ export default function TreatmentTimeScreen({navigation}) {
 
   const dateSelected = () => {
     console.log(`DEBUT : ${moment(date1).startOf('day').format()} & FIN : ${moment(date2).startOf('day').format()}`)
+    dispatch(enregistrerTraitements({ duree}));
     // navigation.navigate('OptionTreatment')
   }
 
