@@ -18,10 +18,10 @@ export default DeleteMedicamentBtn;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#fff167',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent:'center',
-        marginTop:windowHeight * 0.026,
+        marginTop:windowHeight * 0.1,
         borderRadius:45,
         marginBottom:windowHeight * 0.02 ,
         },

@@ -8,39 +8,14 @@ import { useState, useEffect } from 'react';
 export default function OPtionTreatmentScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
 
-  const [medicaments, setMedicaments] = useState('');
-  const [frequence, setFrequence] = useState('');
-  const [duree, setDuree] = useState('');
-  const [rappel, setRappel] = useState('');
-  const [instruction, setInstruction] = useState('');
-  const [qtDispo, setQtDispo] = useState('');
-  const [qtRappel, setQtRappel] = useState('');
+  console.log('IdMedoc:', user.idMedoc, 'freq:', user.frequence, 'rappel:', user.rappel, 'dispo:', user.qtDispo, 'qt rappel', user.qtRappel, 'instructions', user.instruction);
 
-  const userMedicament = user.idMedoc;
-  const userFrequence = user.frequence;
-  const userDuree = user.duree;
-  const userRappel = user.rappel;
-  const userInstruction = user.instruction;
-  const userQtDispo = user.qtDispo;
-  const userQtRappel = user.qtRappel;
-
-  useEffect(() => {
-    setMedicaments(userMedicament);
-    setFrequence(userFrequence);
-    setDuree(userDuree);
-    setRappel(userRappel);
-    setInstruction(userInstruction);
-    setQtDispo(userQtDispo);
-    setQtRappel(userQtRappel);
-  }, []);
 
   const handleSubmit = () => {
-    console.log('Avant la requête fetch :', { medicaments, frequence, duree, rappel, instruction, qtDispo, qtRappel });
-
     fetch('http://10.9.1.92:3000/traitements', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ medicaments, frequence, duree, rappel, instruction, qtDispo, qtRappel }),
+      body: JSON.stringify({ medicaments: user.idMedoc, frequence: user.frequence, dure: user.duree, rappel: user.rappel, instruction: user.instruction, qtDispo: user.qtDispo, qtRappel: user.qtRappel, areTaken: false }),
     }).then(response => response.json())
       .then(data => {
         console.log('Données récupérées :', data);

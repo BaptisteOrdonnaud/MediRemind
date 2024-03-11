@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { Text, TextInput, TouchableOpacity, View, Switch, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { useDispatch } from 'react-redux';
-import { enregistrerTraitements } from '../reducers/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { enregistrerRappel } from '../reducers/user';
+import moment from 'moment';
 
 
 export default function DoseHoursScreen({ navigation }) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+
+  console.log('IdMedoc + frequence:', user.frequence, user.idMedoc);
 
   const [dose, setDose] = useState('');
   const [heure, setHeure] = useState(new Date());
@@ -16,6 +20,13 @@ export default function DoseHoursScreen({ navigation }) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
+
+  const rappel = {
+    isAlert,
+    heure: moment(heure).startOf('day').format(),
+    dose,
+
+  }
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -35,7 +46,7 @@ export default function DoseHoursScreen({ navigation }) {
   const handleSubmit = () => {
     const valueSelectionnes = Object.values(dose, heure, isAlert);
     if (valueSelectionnes.some(value => value)) {
-      dispatch(enregistrerTraitements(dose, heure, isAlert));
+      dispatch(enregistrerRappel({ rappel }));
       navigation.navigate('OptionTreatment');
     } else {
       alert("Veuillez remplir tous les champs.");

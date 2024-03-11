@@ -3,11 +3,13 @@ import { StyleSheet, Text, TouchableOpacity, Image, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { enregistrerTraitements } from '../reducers/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { enregistrerFrequence } from '../reducers/user';
 
 export default function FrequenceScreen({ navigation }) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+
 
   const [lundi, setLundi] = useState(false);
   const [mardi, setMardi] = useState(false);
@@ -26,6 +28,7 @@ export default function FrequenceScreen({ navigation }) {
     vendredi,
     samedi,
     dimanche
+
   }
 
   const handleLundi = () => {
@@ -54,7 +57,7 @@ export default function FrequenceScreen({ navigation }) {
   const handleSubmit = () => {
     const joursSelectionnes = Object.values(frequence);
     if (joursSelectionnes.some(jour => jour)) {
-      dispatch(enregistrerTraitements(frequence));
+      dispatch(enregistrerFrequence({ frequence }));
       navigation.navigate('DoseHours');
     } else {
       alert("Veuillez sélectionner au moins un jour.");

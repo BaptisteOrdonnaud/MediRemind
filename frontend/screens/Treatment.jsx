@@ -41,9 +41,9 @@ export default function TreatmentScreen({navigation}) {
       <Calendrier/>
     <ScrollView>
       <View style={styles.contentContainer}>
-      {medicaments.map((traitement, index) => (
+      {medicaments.map((traitement, i) => (
             <MedicamentDansLeTabTraitement
-                key={index}
+                key={i}
                 drugName={traitement.medicaments[0].form}
                 dosage={traitement.rappel.dose}
                 heure={moment(traitement.rappel.heure).format('HH:mm')}

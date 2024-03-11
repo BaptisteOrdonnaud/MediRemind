@@ -6,20 +6,25 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
-function MedicamentInformation(props) {
+function DetailsTakingDrugs(props) {
     return (
     <View style={[styles.container, { width: windowWidth * 0.9,height:windowHeight * 0.17 }]} >
        <View >
         <View style={styles.content}>
-            <View style={styles.topContent}>
-                <View style={styles.itemContainer}>
+             <View style={styles.middleContent}>
+                 <View style={styles.itemContainer}>
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')} />
                     <View style={styles.textContainer}>
-                        <Text style={styles.medicament}>{props.drugName}</Text>
+                        <Text style={styles.medicament}>Détails de la prise</Text>
                     </View>
                 </View>
-                    <Text style={styles.medicamentComplet}>{props.completName}</Text>
-            </View>
+                    <View style={styles.textHours}>
+                        <Text style={styles.medicamentTime}>{props.frequence}</Text>
+                        <Text style={styles.medicamentJour}>{props.nbre} prise(s) par jour à :  </Text>
+                        <Text>{props.heure}</Text>
+                    </View>
+                 </View>
+                
         </View>
             
         </View>
@@ -28,25 +33,15 @@ function MedicamentInformation(props) {
     );
 }
 
-export default MedicamentInformation;
+export default DetailsTakingDrugs;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: windowHeight * 0.02,
+        marginTop: windowHeight * 0.01,
         borderRadius: 20,
     },
     content: {
         padding: '1%',
-    },
-    topContent: {
-        backgroundColor: '#FFF',
-        marginTop: windowHeight * 0.02,
-        borderRadius: 20,
-        marginLeft: windowWidth * 0.045,
-        marginRight: windowWidth * 0.07,
-        height:windowHeight * 0.15,
-        width:windowWidth * 0.8,
-        paddingLeft:windowWidth * 0.03
     },
     itemContainer: {
         flexDirection: 'row',
@@ -67,12 +62,22 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
-    medicamentComplet: {
-        fontSize: 14,
-        color: '#888',
-        marginLeft: windowWidth * 0.07, // Ajuster la marge gauche selon vos besoins
-        marginBottom: windowHeight * 0.02, // Ajouter une marge inférieure
-        marginTop: windowHeight * 0.01
+    middleContent: {
+        backgroundColor: '#FFF',
+        marginTop: windowHeight * 0.02,
+        borderRadius: 20,
+        marginLeft: windowWidth * 0.045,
+        marginRight: windowWidth * 0.07,
+        height:windowHeight * 0.27,
+        width:windowWidth * 0.8,
+        paddingLeft:windowWidth * 0.03
     },
-  
+textHours:{
+marginLeft: windowWidth * 0.045,
+marginVertical:windowHeight * 0.025
+},
+medicamentJour:{
+    marginTop:windowHeight *0.025
+},
+   
 });
