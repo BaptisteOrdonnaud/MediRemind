@@ -16,8 +16,7 @@ export const userSlice = createSlice({
             state.value.traitements = action.payload.traitements
             state.value.dateDeNaissance = action.payload.dateDeNaissance
         },
-        updateTraitements: (state, action) => {
-            // state.value.traitements.medicaments = action.payload.medicaments;
+        enregistrerTraitements: (state, action) => {
             state.value.idMedoc = action.payload.idMedoc
             state.value.frequence = action.payload.frequence;
             state.value.duree = action.payload.duree;
@@ -27,6 +26,7 @@ export const userSlice = createSlice({
             state.value.qtRappel = action.payload.qtRappel;
             state.value.areTaken = action.payload.areTaken;
         },
+
         logout: (state) => {
             state.value.token = null;
             state.value.prenom = null;
@@ -38,5 +38,5 @@ export const userSlice = createSlice({
     },
 });
 
-export const { login, logout, updateTraitements } = userSlice.actions;
+export const { login, logout, enregistrerTraitements } = userSlice.actions;
 export default userSlice.reducer;
