@@ -3,9 +3,62 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { enregistrerTraitements } from '../reducers/user';
+import { useState, useEffect } from 'react';
 
 export default function OPtionTreatmentScreen({ navigation }) {
   const user = useSelector((state) => state.user.value);
+
+  const [medicaments, setMedicaments] = useState('');
+  const [frequence, setFrequence] = useState('');
+  const [duree, setDuree] = useState('');
+  const [rappel, setRappel] = useState('');
+  const [instruction, setInstruction] = useState('');
+  const [qtDispo, setQtDispo] = useState('');
+  const [qtRappel, setQtRappel] = useState('');
+
+  const userMedicament = user.idMedoc;
+  const userFrequence = user.frequence;
+  const userDuree = user.duree;
+  const userRappel = user.rappel;
+  const userInstruction = user.instruction;
+  const userQtDispo = user.qtDispo;
+  const userQtRappel = user.qtRappel;
+
+  useEffect(() => {
+    setMedicaments(userMedicament);
+    setFrequence(userFrequence);
+    setDuree(userDuree);
+    setRappel(userRappel);
+    setInstruction(userInstruction);
+    setQtDispo(userQtDispo);
+    setQtRappel(userQtRappel);
+  }, []);
+
+  const handleSubmit = () => {
+    console.log('Avant la requête fetch :', { medicaments, frequence, duree, rappel, instruction, qtDispo, qtRappel });
+
+    fetch('http://10.9.1.92:3000/traitements', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ medicaments, frequence, duree, rappel, instruction, qtDispo, qtRappel }),
+    }).then(response => response.json())
+      .then(data => {
+        console.log('Données récupérées :', data);
+        if (data.result) {
+          dispatch(enregistrerTraitements({
+            medicaments: data.user.idMedoc, frequence: data.user.frequence,
+            duree: data.user.duree,
+            rappel: data.user.rappel,
+            instruction: data.user.instruction,
+            qtDispo: data.user.qtDispo,
+            qtRappel: data.user.qtRappel,
+          }));
+
+        }
+        navigation.navigate('TabNavigator');
+      }).catch(error => console.error('Erreur lors de la requête fetch :', error));
+
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,7 +78,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('TabNavigator')}>
+      <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => handleSubmit()}>
         <Text style={styles.textButton}>Enregistrer</Text>
       </TouchableOpacity>
     </SafeAreaView>

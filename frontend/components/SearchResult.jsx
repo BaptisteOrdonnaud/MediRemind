@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useDispatch } from 'react-redux';
-import { updateTraitements } from '../reducers/user';
+import { enregistrerTraitements } from '../reducers/user';
 
 function SearchResult(props, i, navigation) {
     const dispatch = useDispatch();
@@ -10,11 +10,11 @@ function SearchResult(props, i, navigation) {
         <View style={styles.container}>
             <TouchableOpacity style={styles.drugContainer} onPress={() => {
                 console.log(`ID : ${props.id}, nom: ${props.drugName}`)
-                dispatch(updateTraitements({ idMedoc : props.id }));
+                dispatch(enregistrerTraitements({ idMedoc: props.id }));
                 props.navigation.navigate('Frequence')
-                }}>
-            <Text style={styles.drugTitle}>{props.drugName}</Text>
-            <FontAwesome key={i} name='chevron-right' style={styles.icon}/>
+            }}>
+                <Text style={styles.drugTitle}>{props.drugName}</Text>
+                <FontAwesome key={i} name='chevron-right' style={styles.icon} />
 
             </TouchableOpacity>
         </View>
@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
         marginHorizontal: '5%',
         borderRadius: 10,
         marginBottom: '5%'
-    
+
     },
-    drugContainer : {
+    drugContainer: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',

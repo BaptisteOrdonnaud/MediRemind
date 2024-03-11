@@ -30,7 +30,6 @@ export default function FrequenceScreen({ navigation }) {
 
   const handleLundi = () => {
     setLundi((prevState) => !prevState)
-    console.log(lundi)
   };
   const handleMar = () => {
     setMardi((prevState) => !prevState)

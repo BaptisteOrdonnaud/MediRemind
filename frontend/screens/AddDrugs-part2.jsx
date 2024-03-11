@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SearchResult from '../components/SearchResult';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 
 export default function AddDrugsRestScreen({ navigation }) {
 
