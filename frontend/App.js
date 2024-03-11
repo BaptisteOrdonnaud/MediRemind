@@ -51,7 +51,7 @@ const TabNavigator = () => {
           iconName = 'pills';
         } else if (route.name === 'Liste') {
           iconName = 'list'
-        } else if (route.name === 'frequence') {
+        } else if (route.name === 'Map') {
           iconName = 'map'
         }
 
