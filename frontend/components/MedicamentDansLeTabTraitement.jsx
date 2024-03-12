@@ -8,6 +8,7 @@ const windowHeight = Dimensions.get('window').height;
 function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, navigation }) {
     const [medicationTaken, setMedicationTaken] = useState(false);
 
+    
     const handleMedicationTaken = () => {
         setMedicationTaken(true);
     };
@@ -17,7 +18,16 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
     };
 
     return (
-        <TouchableOpacity style={styles.container} activeOpacity={0.8} onPress={() => navigation.navigate('MedicamentDescription'   )}>
+        <TouchableOpacity 
+            style={styles.container} 
+            activeOpacity={0.8} 
+            onPress={() => navigation.navigate('MedicamentDescription', {
+                drugId: drugId,
+                drugName: drugName,
+                dosage: dosage,
+                heure: heure
+            })}
+        >
             <View style={[styles.container, { width: windowWidth * 0.8, height: windowHeight * 0.15 }]}>
                 <View style={styles.content}>
                     <View style={styles.leftContent}>

@@ -7,6 +7,18 @@ const windowHeight = Dimensions.get('window').height;
 
 
 function DetailsTakingDrugs(props) {
+
+    const getSelectedDays = () => {
+        const selectedDays = [];
+        for (const day in props.frequence) {
+            if (props.frequence[day]) {
+                selectedDays.push(day);
+            }
+        }
+        return selectedDays.join(', '); // Formater les jours sélectionnés en une chaîne de texte
+    };
+
+
     return (
     <View style={[styles.container, { width: windowWidth * 0.9,height:windowHeight * 0.17 }]} >
        <View >
@@ -21,7 +33,8 @@ function DetailsTakingDrugs(props) {
                     <View style={styles.textHours}>
                         <Text style={styles.medicamentTime}>{props.frequence}</Text>
                         <Text style={styles.medicamentJour}>{props.nbre} prise(s) par jour à :  </Text>
-                        <Text>{props.heure}</Text>
+                        <Text style={styles.time}>{props.heure}</Text>
+                    
                     </View>
                  </View>
                 
@@ -37,7 +50,7 @@ export default DetailsTakingDrugs;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: windowHeight * 0.01,
+        marginTop: windowHeight * 0.002,
         borderRadius: 20,
     },
     content: {
@@ -76,8 +89,18 @@ textHours:{
 marginLeft: windowWidth * 0.045,
 marginVertical:windowHeight * 0.025
 },
+medicamentTime:{
+color:'#7368BF',
+fontSize:14,
+fontWeight:'bold'
+},
 medicamentJour:{
     marginTop:windowHeight *0.025
 },
-   
+  time:{
+    color:'#7368BF',
+    fontSize:16,
+    fontWeight:'bold',
+    marginTop:windowHeight * 0.01
+  } 
 });

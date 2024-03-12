@@ -19,8 +19,8 @@ function DrugTime(props) {
                     </View>
                 </View>
                     <View style={styles.textdurée}>
-                        <Text style={styles.medicamentDebut}>Début du traitement : {props.debut} </Text>
-                        <Text style={styles.medicamentFin}>Fin du traitement : {props.fin} </Text>
+                        <Text style={styles.medicamentDebut}>Début du traitement : <Text style={styles.color}>{props.debut}</Text></Text>
+                        <Text style={styles.medicamentFin}>Fin du traitement : <Text style={styles.color}>{props.fin}</Text></Text>
                     </View>
                 </View>
         </View>
@@ -35,8 +35,9 @@ export default DrugTime;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: windowHeight * 0.13,
+        marginTop: windowHeight * 0.12,
         borderRadius: 20,
+        // backgroundColor:'red'
     },
     content: {
         padding: '1%',
@@ -77,4 +78,9 @@ bottomContent: {
     medicamentFin:{
         marginTop:windowHeight *0.025
     },
+    color:{
+        color:'#7368BF',
+        fontSize:16,
+        fontWeight:'bold',
+    }
 });
