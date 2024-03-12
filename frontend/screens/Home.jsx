@@ -21,13 +21,19 @@ export default function HomeScreen() {
   const user = useSelector((state) => state.user.value);
   const { prenom, token } = user;
 
-
   const currentDate = moment().format('dddd D MMMM YYYY');
   const [selectedDate, setSelectedDate] = useState(moment().format('YYYY-MM-DD'));
   const [medicaments, setMedicaments] = useState([]);
   const [quantite, setQuantite] = useState([])
+  
+const medicamentsToTakeToday = medicaments.filter(traitement => {
+    const rappelDate = moment(traitement.rappel.date).format('YYYY-MM-DD');
+    return rappelDate === selectedDate;
+});
 
-  useEffect(() => {
+const nbrMedocsAujourdhui = medicamentsToTakeToday.length;
+ 
+useEffect(() => {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)
       .then(response => response.json())
       .then(drug => {
@@ -55,7 +61,7 @@ export default function HomeScreen() {
      <Calendrier onSelectDate={date => setSelectedDate(date)}/>
      <View style={styles.nombrePriseMedicament}>
      <View style={styles.nbrMedocsContainer}>
-      <Text style={styles.nbrMedocsAujourdhui}>4</Text>
+      <Text style={styles.nbrMedocsAujourdhui}>{nbrMedocsAujourdhui}</Text>
      </View>
       <Text style={styles.textPriseMedoc}>Médicaments a prendre aujourd'hui</Text>
      </View>
@@ -66,7 +72,7 @@ export default function HomeScreen() {
      {medicaments.map((traitement, index) => (
             <MedicamentTraitement
                 key={index}
-                // drugName={traitement.medicaments[0].form}
+                drugName={traitement.medicaments[0].form}
                 dosage={traitement.rappel.dose}
                 heure={moment(traitement.rappel.heure).format('HH:mm')}
             />
@@ -80,8 +86,9 @@ export default function HomeScreen() {
     {quantite.map((data,index) => (
     <StockMedicamentHome
       key={index}
-      // drugName={data.medicaments[0].form}
+      drugName={data.medicaments[0].form}
       qtRestant={data.qtDispo}
+      qtRappel={data.qtRappel}
     />))} 
      </ScrollView>
       {/* </ScrollView> */}

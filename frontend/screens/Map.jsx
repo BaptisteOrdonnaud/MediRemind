@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import MapView, { Marker, Callout } from 'react-native-maps';
-import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Modal, StyleSheet, Text, TextInput, TouchableOpacity, View, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Location from 'expo-location';
 import { Linking } from 'react-native';
@@ -196,5 +196,9 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       paddingBottom: 15,
+    },
+    markerImage: {
+      width: 40,
+  height: 40
     }
 });

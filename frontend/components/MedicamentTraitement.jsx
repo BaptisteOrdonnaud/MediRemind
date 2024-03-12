@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -6,6 +6,17 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function MedicamentTraitement(props) {
+
+    const [medicationTaken, setMedicationTaken] = useState(false);
+
+    const handleMedicationTaken = () => {
+        setMedicationTaken(true);
+    };
+
+    const handleMedicationNotTaken = () => {
+        setMedicationTaken(false);
+    };
+    
     return (
         <View style={[styles.container, { width: windowWidth * 0.65,height:windowHeight * 0.16 }]}>
             <View style={styles.content}>
@@ -19,10 +30,11 @@ function MedicamentTraitement(props) {
             </View>
             <View style={styles.bottomContent}>
                 <Text style={styles.heureDePrise}>{props.heure}</Text>
-                <TouchableOpacity style={styles.button} activeOpacity={0.8}>
+                {!medicationTaken && (
+                <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleMedicationTaken}>
                     <Text style={styles.textButton}>J'ai pris ce médicament</Text>
                     <FontAwesome name='check-circle-o' style={styles.icon} />
-                </TouchableOpacity>
+                </TouchableOpacity>)}
             </View>
         </View>
     );
@@ -82,6 +94,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginRight: windowWidth *0.06,
         marginLeft:windowWidth *0.02,
+        overflow:'hidden'
     },
     button: {
         backgroundColor: '#fff',
