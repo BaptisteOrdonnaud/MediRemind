@@ -6,6 +6,9 @@ import * as Location from 'expo-location';
 import { Linking } from 'react-native';
 import { Platform } from 'react-native';
 import axios from 'axios';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome2 from 'react-native-vector-icons/FontAwesome6';
+
 
 const API_KEY = 'AIzaSyALGhtLR_EbOr_YXherjdRyhHGw2yuaJ3M';
 
@@ -110,16 +113,30 @@ const MapScreen = () => {
           <Callout>
             <View style={styles.pharmacyContainer}>
                 <Text style={styles.pharmacyName}>{pharmacy.name}</Text>
-                <Text style={styles.pharmacyAdress}>{pharmacy.vicinity}</Text>
+
+                  <View style={styles.infoContainer}>
+                    <FontAwesome name='map-marker' style={styles.icon} />
+                    <Text style={styles.pharmacyAdress}>{pharmacy.vicinity}</Text>
+                  </View>
+
+                  <View style={styles.infoContainer}>
+                  <FontAwesome2 name='route' style={styles.icon} />
                 <Text style={styles.pharmacyDistance}>{`Distance: ${calculateDistance(
                   currentPosition.latitude,
                   currentPosition.longitude,
                   pharmacy.geometry.location.lat,
                   pharmacy.geometry.location.lng
                 ).toFixed(2)} km`}</Text>
-              {pharmacy.rating && (
-        <Text style={styles.pharmacyNote}>{`Note: ${pharmacy.rating}`}</Text>
+                  </View>
+
+                  <View style={styles.infoContainer}>
+                  {pharmacy.rating && (<FontAwesome name='star' style={styles.icon} />)}
+                  {pharmacy.rating && (
+        <Text style={styles.pharmacyNote}> {`Note: ${pharmacy.rating}`}</Text>
       )}
+                  </View>
+
+              
                 <TouchableOpacity style={styles.mapsButton} onPress={() => openMaps(pharmacy)}>
                   <Text style={styles.mapsText}>Ouvrir dans Maps</Text>
                 </TouchableOpacity>
@@ -150,10 +167,13 @@ const styles = StyleSheet.create({
   },
   pharmacyName : {
     textAlign: 'center',
-    fontWeight: '600',
+    fontWeight: '700',
     color: '#7368BF',
-    marginBottom: 10,
+    marginBottom: 15,
+    fontSize: 16
   }, 
+  pharmacyAdress: {
+  },
   mapsButton: {
     display: 'flex',
     justifyContent: 'center',
@@ -166,4 +186,15 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '600',
   },
+  icon:{
+    color:'#A69AFC',
+    fontSize:20,
+    marginRight: 10,
+    },
+    infoContainer: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingBottom: 15,
+    }
 });
