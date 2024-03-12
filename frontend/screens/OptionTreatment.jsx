@@ -15,7 +15,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
   const handleSubmit = () => {
     const userData = {
       userId: user.idUser,
-      medicamentId: user.idMedoc,
+      medicamentId: user.idMedoc.idMedoc,
       frequence: JSON.stringify(user.frequence),
       duree: JSON.stringify(user.duree),
       rappel: JSON.stringify(user.rappel),
@@ -24,7 +24,6 @@ export default function OPtionTreatmentScreen({ navigation }) {
       qtRappel: user.qtRappel,
       areTaken: false,
     };
-
     console.log('FETCH:', userData)
     fetch('http://10.9.1.92:3000/traitements', {
       method: 'POST',
@@ -33,20 +32,19 @@ export default function OPtionTreatmentScreen({ navigation }) {
     }).then(response => response.json())
       .then(data => {
         if (data.result) {
-          dispatch(enregistrerTraitements({
-            medicamentId: data.medicaments.idMedoc,
-            frequence: data.frequence,
-            duree: data.duree,
-            rappel: data.rappel,
-            instruction: data.instruction,
-            qtDispo: data.qtDispo,
-            qtRappel: data.qtRappel,
-            areTaken: data.areTaken
-          }));
+          // dispatch(enregistrerTraitements({
+          //   medicamentId: data.medicaments.idMedoc,
+          //   frequence: data.frequence,
+          //   duree: data.duree,
+          //   rappel: data.rappel,
+          //   instruction: data.instruction,
+          //   qtDispo: data.qtDispo,
+          //   qtRappel: data.qtRappel,
+          //   areTaken: data.areTaken
+          // }));
           console.log('Données récupérées :', data.result);
-
+          navigation.navigate('TabNavigator');
         }
-        navigation.navigate('TabNavigator');
       }).catch(error => console.error('Erreur lors de la requête fetch :', error));
   };
 

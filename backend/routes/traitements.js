@@ -8,11 +8,11 @@ const Medicament = require('../models/medicaments');
 // Créer un nouveau traitement
 router.post('/', (req, res) => {
     const { userId, medicamentId, frequence, duree, rappel, instruction, qtDispo, qtRappel, areTaken } = req.body;
-
+    console.log(`MEDICAMENT ID !! -- ${medicamentId.idMedoc}`)
     User.findById(userId)
         .populate({
-            path: 'traitements.medicaments', // Chemin à peupler
-            model: Medicament // Nom du modèle à utiliser pour le peuplement
+            path: 'traitements.medicaments',
+            model: Medicament
         })
         .then(user => {
             if (!user) {
@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
 
 
             const newTreatment = {
-                medicaments: [medicamentId],
+                medicaments: medicamentId,
                 frequence: parsedFrequence.frequence,
                 duree: parsedDuree.duree,
                 rappel: parsedRappel.rappel,
@@ -50,19 +50,19 @@ router.post('/', (req, res) => {
                 newTreatment.areTaken.push({ prise: currentDate, istaken: false });
             }
 
-            console.log('test', newTreatment)
             user.traitements.push(newTreatment);
 
             user.save().then(newDoc => {
                 // console.log(newDoc)
-                res.status(201).json({ message: "Nouveau traitement ajouté avec succès", newDoc });
+                res.status(201).json({ result: true, newDoc });
             })
                 .catch(error => {
                     console.error(error);
-                    res.status(500).json({ message: "Erreur interne du serveur" });
+                    res.status(500).json({ result: false });
                 });
         });
 })
+
 
 // GET traitements/:traitementId/frequence
 router.get('/:userId/frequence/:traitementId', async (req, res) => {
@@ -99,7 +99,6 @@ router.get('/:token', (req, res) => {
             model: Medicament // Nom du modèle à utiliser pour le peuplement
         })
         .then(user => {
-            console.log('test', user)
             if (!user) {
                 return res.status(404).json({ message: "Utilisateur non trouvé." });
             }
