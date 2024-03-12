@@ -6,6 +6,7 @@ import { enregistrerTraitements } from '../reducers/user';
 import { useState, useEffect } from 'react';
 
 export default function OPtionTreatmentScreen({ navigation }) {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
 
   console.log('IdMedoc:', user.idMedoc, 'freq:', user.frequence, 'rappel:', user.rappel, 'dispo:', user.qtDispo, 'qtRappel:', user.qtRappel, 'instructions', user.instruction, 'areTaken:', user.areTaken);
@@ -31,8 +32,18 @@ export default function OPtionTreatmentScreen({ navigation }) {
       body: JSON.stringify(userData),
     }).then(response => response.json())
       .then(data => {
-        console.log('Données récupérées :', data.newDoc.traitements);
         if (data.result) {
+          dispatch(enregistrerTraitements({
+            medicamentId: data.medicaments.idMedoc,
+            frequence: data.frequence,
+            duree: data.duree,
+            rappel: data.rappel,
+            instruction: data.instruction,
+            qtDispo: data.qtDispo,
+            qtRappel: data.qtRappel,
+            areTaken: data.areTaken
+          }));
+          console.log('Données récupérées :', data.result);
 
         }
         navigation.navigate('TabNavigator');

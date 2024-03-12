@@ -23,16 +23,20 @@ export default function AddDrugsRestScreen({ navigation }) {
       .then(data => {
         setAllDrugs(data);
       })
-  }
-
-  useEffect(() => {
-    if (allDrugs && Array.isArray(allDrugs)) {
-      setDrugs(allDrugs.map((dataDrug, i, _id) => (
-        <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation}/>
-      )));
     }
-  }, [allDrugs]);
-
+    useEffect(() => {
+      if (allDrugs && Array.isArray(allDrugs)) {
+        setDrugs(allDrugs.map((dataDrug, i, _id) =>{ 
+          
+          console.log(dataDrug)
+          
+          return  (
+          <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation}/>
+          )}));
+        }
+      }, [allDrugs]);
+      
+      
   return (
     <SafeAreaView style={styles.container}>
       <FontAwesome name='remove' style={styles.icon} onPress={() => navigation.navigate('Home')} />
