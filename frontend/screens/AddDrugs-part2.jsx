@@ -6,6 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SearchResult from '../components/SearchResult';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { enregistrerMedicament } from '../reducers/user';
 
 export default function AddDrugsRestScreen({ navigation }) {
 
@@ -28,7 +29,7 @@ export default function AddDrugsRestScreen({ navigation }) {
   useEffect(() => {
     if (allDrugs && Array.isArray(allDrugs)) {
       setDrugs(allDrugs.map((dataDrug, i, _id) => (
-        <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation}/>
+        <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation} />
       )));
     }
   }, [allDrugs]);

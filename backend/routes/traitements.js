@@ -99,7 +99,6 @@ router.get('/:token', (req, res) => {
             model: Medicament // Nom du modèle à utiliser pour le peuplement
         })
         .then(user => {
-            console.log('test', user)
             if (!user) {
                 return res.status(404).json({ message: "Utilisateur non trouvé." });
             }
