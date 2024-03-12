@@ -23,7 +23,7 @@ export default function DoseHoursScreen({ navigation }) {
 
   const rappel = {
     isAlert,
-    heure: moment(heure).startOf('day').format(),
+    heure: heure.toISOString(),
     dose,
 
   }
