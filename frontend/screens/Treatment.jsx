@@ -7,25 +7,30 @@ import MedicamentDansLeTabTraitement from '../components/MedicamentDansLeTabTrai
 import AddMedicamentBtn from '../components/AddMedicamentBtn';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function TreatmentScreen({ navigation }) {
-    const user = useSelector((state) => state.user.value);
-    const { token } = user;
-    const currentDate = moment().format('dddd D MMMM ');
-    moment.locale('fr');
-    const [medicaments, setMedicaments] = useState([]);
+export default function TreatmentScreen({navigation}) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+  const { prenom, nom,token } = user;
+  const currentDate = moment().format('dddd D MMMM ');
+  moment.locale('fr');
+  const [medicaments, setMedicaments] = useState([]);
+  
+  
 
-    
-    
-    useEffect(() => {
-        fetch(`http://10.9.1.94:3000/traitements/${token}`)
-        .then(response => response.json())
-        .then(drug => {
-            setMedicaments(drug.traitements);
-        })
-        .catch(error => {
-            console.error('erreur lors de la récupération des données:', error);
-        });
-    }, []);
+  useEffect(() => {
+    fetch(`http://10.9.1.94:3000/traitements/${token}`)
+    .then(response => response.json())
+    .then(drug => {
+        setMedicaments(drug.traitements);
+      //  dispatch(enregistrerMedicament(medicaments))
+        // console.log(drug.traitements[0].medicaments[0].product_name)
+        // console.log(drug.traitements[0].rappel.dose)
+        // console.log(drug.traitements[0].rappel.heure)
+    })
+    .catch(error => {
+        console.error('erreur lors de la reccuperation des données:', error);
+    });
+},[]);
 
     return (
         <SafeAreaView style={styles.container}>
