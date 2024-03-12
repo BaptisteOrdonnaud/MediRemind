@@ -11,8 +11,8 @@ router.post('/', (req, res) => {
     console.log(`MEDICAMENT ID !! -- ${medicamentId.idMedoc}`)
     User.findById(userId)
         .populate({
-            path: 'traitements.medicaments', // Chemin à peupler
-            model: Medicament // Nom du modèle à utiliser pour le peuplement
+            path: 'traitements.medicaments',
+            model: Medicament
         })
         .then(user => {
             if (!user) {
@@ -63,6 +63,7 @@ router.post('/', (req, res) => {
         });
 })
 
+
 // GET traitements/:traitementId/frequence
 router.get('/:userId/frequence/:traitementId', async (req, res) => {
     try {
@@ -98,7 +99,6 @@ router.get('/:token', (req, res) => {
             model: Medicament // Nom du modèle à utiliser pour le peuplement
         })
         .then(user => {
-            console.log('test', user)
             if (!user) {
                 return res.status(404).json({ message: "Utilisateur non trouvé." });
             }

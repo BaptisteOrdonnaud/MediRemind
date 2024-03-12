@@ -6,6 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SearchResult from '../components/SearchResult';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { enregistrerMedicament } from '../reducers/user';
 
 export default function AddDrugsRestScreen({ navigation }) {
 
@@ -23,45 +24,56 @@ export default function AddDrugsRestScreen({ navigation }) {
       .then(data => {
         setAllDrugs(data);
       })
-    }
-    useEffect(() => {
-      if (allDrugs && Array.isArray(allDrugs)) {
-        setDrugs(allDrugs.map((dataDrug, i, _id) =>{ 
-          
-          console.log(dataDrug)
-          
-          return  (
-          <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation}/>
-          )}));
-        }
-      }, [allDrugs]);
-      
-      
-  return (
-    <SafeAreaView style={styles.container}>
-      <FontAwesome name='remove' style={styles.icon} onPress={() => navigation.navigate('Home')} />
-      <View style={styles.titleContainer}>
-        <Text style={[styles.title, { display: isFocused ? 'none' : 'flex' }]}> Quel médicament souhaitez-vous ajouter?</Text>
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          placeholder="Nom du médicament "
-          onChangeText={(value) => {
-            setDrug(value)
-            handleSearch(value)
-          }}
-          value={drug}
-          style={styles.input}
-        />
-      </View>
-      <ScrollView>
-        {drugs}
+  }
 
-      </ScrollView>
-    </SafeAreaView>
-  );
+  useEffect(() => {
+    if (allDrugs && Array.isArray(allDrugs)) {
+      setDrugs(allDrugs.map((dataDrug, i, _id) => (
+        <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation} />
+      )));
+    }
+  }, [allDrugs]);
+
+}
+useEffect(() => {
+  if (allDrugs && Array.isArray(allDrugs)) {
+    setDrugs(allDrugs.map((dataDrug, i, _id) => {
+
+      console.log(dataDrug)
+
+      return (
+        <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation} />
+      )
+    }));
+  }
+}, [allDrugs]);
+
+
+return (
+  <SafeAreaView style={styles.container}>
+    <FontAwesome name='remove' style={styles.icon} onPress={() => navigation.navigate('Home')} />
+    <View style={styles.titleContainer}>
+      <Text style={[styles.title, { display: isFocused ? 'none' : 'flex' }]}> Quel médicament souhaitez-vous ajouter?</Text>
+    </View>
+    <View style={styles.inputContainer}>
+      <TextInput
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        placeholder="Nom du médicament "
+        onChangeText={(value) => {
+          setDrug(value)
+          handleSearch(value)
+        }}
+        value={drug}
+        style={styles.input}
+      />
+    </View>
+    <ScrollView>
+      {drugs}
+
+    </ScrollView>
+  </SafeAreaView>
+);
 }
 
 const styles = StyleSheet.create({
