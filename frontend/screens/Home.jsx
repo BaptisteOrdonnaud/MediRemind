@@ -66,7 +66,7 @@ export default function HomeScreen() {
      {medicaments.map((traitement, index) => (
             <MedicamentTraitement
                 key={index}
-                // drugName={traitement.medicaments[0].form}
+                drugName={traitement.medicaments[0].form}
                 dosage={traitement.rappel.dose}
                 heure={moment(traitement.rappel.heure).format('HH:mm')}
             />
@@ -80,7 +80,7 @@ export default function HomeScreen() {
     {quantite.map((data,index) => (
     <StockMedicamentHome
       key={index}
-      // drugName={data.medicaments[0].form}
+      drugName={data.medicaments[0].form}
       qtRestant={data.qtDispo}
     />))} 
      </ScrollView>
