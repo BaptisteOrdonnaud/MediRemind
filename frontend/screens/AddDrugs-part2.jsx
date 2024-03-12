@@ -28,53 +28,55 @@ export default function AddDrugsRestScreen({ navigation }) {
 
   useEffect(() => {
     if (allDrugs && Array.isArray(allDrugs)) {
-      setDrugs(allDrugs.map((dataDrug, i, _id) => (
-        <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation} />
-      )));
+      setDrugs(allDrugs.map((dataDrug, i, _id) => {
+        (
+          <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation} />
+        )
+      }));
     }
   }, [allDrugs]);
 
 
-useEffect(() => {
-  if (allDrugs && Array.isArray(allDrugs)) {
-    setDrugs(allDrugs.map((dataDrug, i, _id) => {
+  useEffect(() => {
+    if (allDrugs && Array.isArray(allDrugs)) {
+      setDrugs(allDrugs.map((dataDrug, i, _id) => {
 
-      console.log(dataDrug)
+        console.log(dataDrug)
 
-      return (
-        <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation} />
-      )
-    }));
-  }
-}, [allDrugs]);
+        return (
+          <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation} />
+        )
+      }));
+    }
+  }, [allDrugs]);
 
 
-return (
-  <SafeAreaView style={styles.container}>
-    <FontAwesome name='remove' style={styles.icon} onPress={() => navigation.navigate('Home')} />
-    <View style={styles.titleContainer}>
-      <Text style={[styles.title, { display: isFocused ? 'none' : 'flex' }]}> Quel médicament souhaitez-vous ajouter?</Text>
-    </View>
-    <View style={styles.inputContainer}>
-      <TextInput
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-        placeholder="Nom du médicament "
-        onChangeText={(value) => {
-          setDrug(value)
-          handleSearch(value)
-        }}
-        value={drug}
-        style={styles.input}
-      />
-    </View>
-    <ScrollView>
-      {drugs}
+  return (
+    <SafeAreaView style={styles.container}>
+      <FontAwesome name='remove' style={styles.icon} onPress={() => navigation.navigate('Home')} />
+      <View style={styles.titleContainer}>
+        <Text style={[styles.title, { display: isFocused ? 'none' : 'flex' }]}> Quel médicament souhaitez-vous ajouter?</Text>
+      </View>
+      <View style={styles.inputContainer}>
+        <TextInput
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          placeholder="Nom du médicament "
+          onChangeText={(value) => {
+            setDrug(value)
+            handleSearch(value)
+          }}
+          value={drug}
+          style={styles.input}
+        />
+      </View>
+      <ScrollView>
+        {drugs}
 
-    </ScrollView>
-  </SafeAreaView>
-);
-      }
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {

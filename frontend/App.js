@@ -29,9 +29,10 @@ import MedicamentDescriptionScreen from './screens/MedicamentDescription.jsx';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import user from './reducers/user.js';
+import tasks from './reducers/tasks.js';
 
 const store = configureStore({
-  reducer: { user },
+  reducer: { user, tasks },
 });
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
