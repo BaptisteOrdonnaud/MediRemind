@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
             const parsedDuree = JSON.parse(duree);
             const parsedRappel = JSON.parse(rappel);
             const parsedInstruction = JSON.parse(instruction);
-            let parseTaken = JSON.parse([areTaken])
+            // let parseTaken = JSON.parse([areTaken])
 
             const startDate = new Date(parsedDuree.dateDebut);
             const endDate = new Date(parsedDuree.dateFin);
@@ -37,7 +37,7 @@ router.post('/', (req, res) => {
                 instruction: parsedInstruction.instruction,
                 qtDispo: qtDispo,
                 qtRappel: qtRappel,
-                areTaken: [],
+                isTook: false,
             }
 
             for (let i = 0; i < daysDifference; i++) {
