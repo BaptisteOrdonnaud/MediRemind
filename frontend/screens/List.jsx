@@ -25,7 +25,7 @@ export default function ListScreen() {
 
   const [task, setTask] = useState('');
   const [urgent, setUrgent] = useState(false);
-  const [showAddButton, setShowAddButton] = useState(true); // Variable d'état pour contrôler la visibilité du bouton "Ajouter"
+  const [showAddButton, setShowAddButton] = useState(false);
 
   const currentDate = moment().format('dddd D MMMM YYYY');
 
