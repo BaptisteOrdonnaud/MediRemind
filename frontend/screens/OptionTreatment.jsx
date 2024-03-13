@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
-import { enregistrerTraitements } from '../reducers/user';
+import { updateIsLoaded } from '../reducers/user';
 import { useState, useEffect } from 'react';
 import FlecheRetour from '../components/FlecheRetour';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -10,7 +10,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 export default function OPtionTreatmentScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-
+  const {isLoaded} = user
   const [duree, setDuree] = useState(false);
   const [rappel, setRappel] = useState(false);
   const [instruction, setInstruction] = useState(false);
@@ -53,6 +53,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
             // }));
             console.log('Données récupérées :', data.result);
             navigation.navigate('TabNavigator');
+            dispatch(updateIsLoaded(!isLoaded))
           }
         }).catch(error => console.error('Erreur lors de la requête fetch :', error));
     } else {

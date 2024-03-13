@@ -19,7 +19,7 @@ export default function HomeScreen() {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const { prenom, token } = user;
+  const { prenom, token, isLoaded } = user;
 
   const currentDate = moment().format('dddd D MMMM YYYY');
   const [selectedDate, setSelectedDate] = useState(moment().format('DD-MM-YYYY'));
@@ -47,7 +47,7 @@ useEffect(() => {
       .catch(error => {
         console.error('erreur lors de la reccuperation des données:', error);
       });
-  }, [medicaments]);
+  }, [isLoaded]);
 
 
 

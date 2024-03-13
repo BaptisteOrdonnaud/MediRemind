@@ -8,16 +8,17 @@ import 'moment/locale/fr';
 import Calendrier from '../components/Calendrier';
 import MedicamentDansLeTabTraitement from '../components/MedicamentDansLeTabTraitement';
 import AddMedicamentBtn from '../components/AddMedicamentBtn';
-import { enregistrerTraitements } from '../reducers/user';
+import { updateIsLoaded } from '../reducers/user';
 
 
 export default function TreatmentScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const { prenom, nom, token } = user;
+  const { prenom, nom, token, isLoaded } = user;
   const currentDate = moment().format('dddd D MMMM ');
   moment.locale('fr');
   const [medicaments, setMedicaments] = useState([]);
+
 
 
 
@@ -34,7 +35,7 @@ export default function TreatmentScreen({ navigation }) {
       .catch(error => {
         console.error('erreur lors de la reccuperation des données:', error);
       });
-  }, [medicaments]);
+  }, [isLoaded]);
 
   return (
     <SafeAreaView style={styles.container}>

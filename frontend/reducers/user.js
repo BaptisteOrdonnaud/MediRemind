@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    value: { token: null, prenom: null, nom: null, idUser: null, traitements: null, dateDeNaissance: null },
+    value: { token: null, prenom: null, nom: null, idUser: null, traitements: null, dateDeNaissance: null, isLoaded: false },
     // traitement: { medicaments: null, frequence: null, duree: null, rappel: null, instruction: null, qtDispo: null, qtRappel: null, areTaken: null }
 };
 
@@ -72,9 +72,12 @@ export const userSlice = createSlice({
             state.value.idUser = null;
             state.value.traitements = null;
         },
+        updateIsLoaded: (state, action) => {
+            state.value.isLoaded = action.payload
+        },
 
     },
 });
 
-export const { login, logout, enregistrerTraitements, enregistrerDuree, enregistrerFrequence, enregistrerInstruction, enregistrerMedicament, enregistrerQtDispo, enregistrerQtRappel, enregistrerRappel, enregistrerAreTaken } = userSlice.actions;
+export const { updateIsLoaded, login, logout, enregistrerTraitements, enregistrerDuree, enregistrerFrequence, enregistrerInstruction, enregistrerMedicament, enregistrerQtDispo, enregistrerQtRappel, enregistrerRappel, enregistrerAreTaken } = userSlice.actions;
 export default userSlice.reducer;
