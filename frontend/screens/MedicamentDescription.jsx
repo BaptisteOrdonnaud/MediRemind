@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StyleSheet, Text, View, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, ScrollView, TouchableOpacity, Modal, Alert, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
@@ -29,7 +29,10 @@ export default function MedicamentDescriptionScreen({ navigation }) {
   const [stock, setStock] = useState([]);
   const [medicamentName, setMedicamentName] = useState("");
 
-
+  const [modalVisible, setModalVisible] = useState(false);
+  const openModal = () => {
+    setModalVisible(true);
+  };
   useEffect(() => {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)
       .then(response => response.json())
@@ -54,7 +57,6 @@ export default function MedicamentDescriptionScreen({ navigation }) {
         <FlecheRetour navigation={navigation} />
         <Text style={styles.headerText}>{medicamentName}</Text>
       </View>
-
 
       <View style={styles.contentContainer}>
         {medicaments.map((traitement, index) => (
@@ -93,6 +95,8 @@ export default function MedicamentDescriptionScreen({ navigation }) {
             key={index}
             qtDispo={stock.qtDispo}
             qtRappel={stock.qtRappel}
+            openModal={openModal}
+            onPress={() => setModalVisible(true)}
           />))}
       </View>
 
@@ -100,6 +104,32 @@ export default function MedicamentDescriptionScreen({ navigation }) {
         <DeleteMedicamentBtn />
       </View>
       <StatusBar style="auto" />
+
+
+      <Modal
+        animationType='slide'
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(false);
+        }}
+        onTouchOutside={() => {
+          setModalVisible(false);
+        }}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalText}>Hello</Text>
+            <Pressable
+              style={styles.modalCloseButton}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.modalCloseButtonText}>Fermer</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+
     </SafeAreaView>
   );
 }
@@ -127,4 +157,42 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginRight: windowWidth * 0.07
   },
-});
+  contentContainer: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    width: '70%',
+    height: '40%',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  modalCloseButton: {
+    marginTop: 10,
+    paddingVertical: 10,
+  },
+
+})

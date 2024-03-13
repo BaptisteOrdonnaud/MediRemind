@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     urgentText: {
         fontSize: 12,
         marginLeft: 5,
+        marginTop: 5,
         textAlign: 'center',
     },
     strikeThrough: {

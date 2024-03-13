@@ -15,7 +15,7 @@ import { KeyboardAvoidingView } from 'react-native';
 
 moment.locale('fr');
 
-export default function ListScreen() {
+export default function ListScreen({ navigation }) {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
@@ -108,6 +108,9 @@ export default function ListScreen() {
           </View>
         </View>}
         <StatusBar style="auto" />
+        <TouchableOpacity onPress={navigation.navigate('TestModal')} >
+          <FontAwesome name='chevron-left' style={styles.icon} />
+        </TouchableOpacity>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -213,7 +216,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 5,
     height: 30,
-    width: '95%',
+    width: '100%',
     backgroundColor: '#A69AFC',
     borderRadius: 10,
   },

@@ -1,23 +1,28 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Modal, Alert, Pressable, TouchableOpacity } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useState } from 'react';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function Stock(props) {
-    const textColor = props.qtDispo >= props.qtRappel ? '#6DBEA1' : '#EDA774';
+export default function Stock({ qtDispo, openModal }) {
+
+
 
     return (
         <View style={[styles.container, { width: windowWidth * 0.9 }]}>
+
             <View style={styles.content}>
                 <View style={styles.topContent}>
                     <View style={styles.itemContainer}>
-                        <View style={[styles.disponibiliteContainer, { backgroundColor: textColor }]}>
-                            <Text style={styles.disponibilite}>{props.qtDispo}</Text>
+                        <View style={styles.disponibiliteContainer}>
+                            <Text style={styles.disponibilite}>{qtDispo}</Text>
                         </View>
                         <Text style={styles.medicament}>Comprimés restants </Text>
-                    <FontAwesome name='chevron-right' style={styles.icon} />
+                        <TouchableOpacity onPress={openModal}>
+                            <FontAwesome name='chevron-right' style={styles.icon} />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
@@ -25,7 +30,7 @@ function Stock(props) {
     );
 }
 
-export default Stock;
+
 
 const styles = StyleSheet.create({
     container: {
@@ -68,8 +73,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: windowWidth * 0.09
     },
-    icon:{
-        fontSize:20,
-        marginLeft:windowWidth * 0.04,
+    icon: {
+        fontSize: 20,
+        marginLeft: windowWidth * 0.04,
     }
 });
