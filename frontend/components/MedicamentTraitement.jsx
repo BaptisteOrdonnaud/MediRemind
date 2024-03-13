@@ -13,7 +13,27 @@ function MedicamentTraitement(props) {
     const [medicationTaken, setMedicationTaken] = useState(false);
 
     const handleMedicationTaken = () => {
-        setMedicationTaken(true);
+        
+        fetch(`http://localhost:3000/markMedicationTaken/${props.userId}/${props.treatmentId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                // Si nécessaire, vous pouvez envoyer des données supplémentaires ici
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la mise à jour du médicament pris');
+                }
+                // Mettre à jour l'état local du médicament pris
+                setMedicationTaken(true);
+            })
+            .catch(error => {
+                console.error(error);
+                // Gérer les erreurs de requête
+            });
     };
 
     const handleMedicationNotTaken = () => {
