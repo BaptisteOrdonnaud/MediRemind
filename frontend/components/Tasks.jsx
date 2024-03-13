@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     urgentTextList: {
         justifyContent: 'center',
         fontSize: 12,
-        backgroundColor: '#A69AFC',
+        backgroundColor: '#6DBEA1',
         padding: 5,
         borderRadius: 10,
         margin: 2,

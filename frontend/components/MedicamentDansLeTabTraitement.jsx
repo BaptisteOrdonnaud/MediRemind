@@ -7,18 +7,18 @@ import { enregistrerAreTaken } from '../reducers/user';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, navigation }) {
+function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, navigation, props }) {
     const [medicationTaken, setMedicationTaken] = useState(false);
     const areTaken = useSelector(state => state.user.value.areTaken);
     const dispatch = useDispatch();
     
     const handleMedicationTaken = () => {
-        setMedicationTaken(true);
+        // setMedicationTaken(true);
         
     };
 
     const handleMedicationNotTaken = () => {
-        setMedicationTaken(false);
+        // setMedicationTaken(false);
       
     };
 

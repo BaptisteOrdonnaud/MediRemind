@@ -112,7 +112,37 @@ router.get('/:token', (req, res) => {
 
 
 
+// Modifier isTook d'un traitement
 
+router.post('/markMedicationTaken', async (req, res) => {
+    try {
+        const { userId, treatmentId } = req.body;
+
+        // Trouver l'utilisateur par son ID
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: "Utilisateur non trouvé" });
+        }
+
+        // Trouver le traitement dans les traitements de l'utilisateur
+        const traitement = user.traitements.id(treatmentId);
+        if (!traitement) {
+            return res.status(404).json({ message: "Traitement non trouvé" });
+        }
+
+        // Mettre à jour la propriété isTook du traitement
+        traitement.isTook = true;
+
+        // Sauvegarder les modifications de l'utilisateur
+        await user.save();
+
+        res.status(200).json({ message: "Médicament marqué comme pris avec succès." });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erreur lors de la mise à jour du médicament pris." });
+    }
+});
 
 
 module.exports = router;
