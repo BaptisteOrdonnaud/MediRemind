@@ -30,6 +30,7 @@ export default function MedicamentDescriptionScreen({ navigation }) {
   const [medicamentName, setMedicamentName] = useState("");
 
 
+
   useEffect(() => {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)
       .then(response => response.json())

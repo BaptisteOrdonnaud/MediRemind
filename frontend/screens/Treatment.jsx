@@ -8,6 +8,7 @@ import 'moment/locale/fr';
 import Calendrier from '../components/Calendrier';
 import MedicamentDansLeTabTraitement from '../components/MedicamentDansLeTabTraitement';
 import AddMedicamentBtn from '../components/AddMedicamentBtn';
+import { enregistrerTraitements } from '../reducers/user';
 
 
 export default function TreatmentScreen({ navigation }) {
@@ -25,7 +26,7 @@ export default function TreatmentScreen({ navigation }) {
       .then(response => response.json())
       .then(drug => {
         setMedicaments(drug.traitements);
-        //  dispatch(enregistrerMedicament(medicaments))
+        //  dispatch(enregistrerMedicament(drug.traitements))
         // console.log(drug.traitements[0].medicaments[0].product_name)
         // console.log(drug.traitements[0].rappel.dose)
         // console.log(drug.traitements[0].rappel.heure)
@@ -33,7 +34,7 @@ export default function TreatmentScreen({ navigation }) {
       .catch(error => {
         console.error('erreur lors de la reccuperation des données:', error);
       });
-  }, []);
+  }, [medicaments]);
 
   return (
     <SafeAreaView style={styles.container}>

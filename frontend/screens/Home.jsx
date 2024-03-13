@@ -47,7 +47,7 @@ useEffect(() => {
       .catch(error => {
         console.error('erreur lors de la reccuperation des données:', error);
       });
-  }, []);
+  }, [medicaments]);
 
 
 

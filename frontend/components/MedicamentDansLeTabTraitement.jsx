@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useDispatch,useSelector } from 'react-redux';
+import { enregistrerAreTaken } from '../reducers/user';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, navigation }) {
     const [medicationTaken, setMedicationTaken] = useState(false);
-
+    const areTaken = useSelector(state => state.user.value.areTaken);
+    const dispatch = useDispatch();
     
     const handleMedicationTaken = () => {
         setMedicationTaken(true);
+        dispatch(enregistrerAreTaken(true));
     };
 
     const handleMedicationNotTaken = () => {
         setMedicationTaken(false);
+        dispatch(enregistrerAreTaken(false));
     };
 
     return (
