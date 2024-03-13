@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        paddingHorizontal: windowWidth * 0.002,
+        paddingHorizontal: windowWidth * 0.0001,
         paddingVertical: windowHeight * 0.01,
     },
     heureDePrise: {

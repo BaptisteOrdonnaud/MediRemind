@@ -21,7 +21,7 @@ function MedicamentTraitement(props) {
     };
     
     return (
-        <View style={[styles.container, { width: windowWidth * 0.65,height:windowHeight * 0.16 }]}>
+        <View style={[styles.container, { width: windowWidth * 0.72,height:windowHeight * 0.145 }]}>
             <View style={styles.content}>
                 <View style={styles.leftContent}>
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     },
     image: {
         borderRadius: 9999,
-        width:windowWidth * 0.1 ,
+        width:windowWidth * 0.11 ,
         height: windowHeight *0.05,
         marginRight: windowWidth *0.03,
         marginLeft:windowWidth *0.03
