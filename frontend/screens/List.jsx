@@ -16,7 +16,7 @@ import { KeyboardAvoidingView } from 'react-native';
 moment.locale('fr');
 
 export default function ListScreen({ route }) {
-  const { medicamentName } = route.params;
+  // const { medicamentName } = route.params;
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
