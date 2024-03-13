@@ -8,7 +8,7 @@ import 'moment/locale/fr';
 import Calendrier from '../components/Calendrier';
 import MedicamentDansLeTabTraitement from '../components/MedicamentDansLeTabTraitement';
 import AddMedicamentBtn from '../components/AddMedicamentBtn';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
 
 export default function TreatmentScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export default function TreatmentScreen({ navigation }) {
             <MedicamentDansLeTabTraitement
               key={i}
 
-              // drugName={traitement.medicaments[0].form}
+              drugName={traitement.medicaments[0].product_name}
               dosage={traitement.rappel.dose}
               heure={moment(traitement.rappel.heure).format('HH:mm')}
               navigation={navigation}
