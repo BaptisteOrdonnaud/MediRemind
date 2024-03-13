@@ -73,9 +73,19 @@ export default function ListScreen({ navigation }) {
 
         <ScrollView style={styles.listContainer}>
           <Text style={styles.mainText}>Ma liste</Text>
-          <View style={styles.tasksContainer}>
-            {allTasks}
-          </View>
+          {tasks.length > 0 ? (
+            <View style={styles.tasksContainer}>
+              {allTasks}
+            </View>
+          ) : (
+            <View style={styles.emptyListContainer}>
+              <View style={[styles.urgentSection, { justifyContent: 'center', flex: 1 }]}>
+                <View style={styles.urgentContent}>
+                  <Text style={styles.urgent}>Aucune tâche disponible</Text>
+                </View>
+              </View>
+            </View>
+          )}
           <View style={styles.containerBtn}>
             <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={() => setShowAddButton(true)}>
               <FontAwesome name='plus' style={styles.icon} />
@@ -108,9 +118,7 @@ export default function ListScreen({ navigation }) {
           </View>
         </View>}
         <StatusBar style="auto" />
-        <TouchableOpacity onPress={navigation.navigate('TestModal')} >
-          <FontAwesome name='chevron-left' style={styles.icon} />
-        </TouchableOpacity>
+
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -125,6 +133,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingTop: 20,
 
+  },
+  emptyListContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerContainer: {
     backgroundColor: '#E1DFFF',
@@ -210,6 +223,7 @@ const styles = StyleSheet.create({
   urgent: {
     fontSize: 10,
     textAlign: 'center',
+    padding: 10,
   },
   button: {
     alignItems: 'center',

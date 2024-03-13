@@ -25,7 +25,6 @@ import MedicamentStockScreen from './screens/MedicamentStock.jsx';
 import ReassortDrugsScreen from './screens/ReassortDrugs.jsx';
 import TakingInstructionScreen from './screens/TakingInstruction.jsx';
 import MedicamentDescriptionScreen from './screens/MedicamentDescription.jsx';
-import TestModal from './screens/TestModal.jsx';
 
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
@@ -93,7 +92,6 @@ export default function App() {
           <Stack.Screen name="ReassortDrugs" component={ReassortDrugsScreen} />
           <Stack.Screen name="TakingInstruction" component={TakingInstructionScreen} />
           <Stack.Screen name="MedicamentDescription" component={MedicamentDescriptionScreen} />
-          <Stack.Screen name="TestModal" component={TestModal} />
 
         </Stack.Navigator>
       </NavigationContainer>

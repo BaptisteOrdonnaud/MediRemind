@@ -6,8 +6,9 @@ import { useState } from 'react';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function Stock({ qtDispo, openModal }) {
+export default function Stock({ qtDispo, qtRappel, openModal }) {
 
+    const textColor = qtDispo >= qtRappel ? '#6DBEA1' : '#EDA774';
 
 
     return (
@@ -16,7 +17,7 @@ export default function Stock({ qtDispo, openModal }) {
             <View style={styles.content}>
                 <View style={styles.topContent}>
                     <View style={styles.itemContainer}>
-                        <View style={styles.disponibiliteContainer}>
+                        <View style={[styles.disponibiliteContainer, { backgroundColor: textColor }]}>
                             <Text style={styles.disponibilite}>{qtDispo}</Text>
                         </View>
                         <Text style={styles.medicament}>Comprimés restants </Text>

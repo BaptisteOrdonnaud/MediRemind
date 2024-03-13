@@ -90,11 +90,11 @@ export default function MedicamentDescriptionScreen({ navigation }) {
             debut={moment(time.duree.dateDebut).format('Do MMMM YYYY')}
             fin={moment(time.duree.dateFin).format('Do MMMM YYYY')}
           />))}
-        {stock.map((stock, index) => (
+        {stock.map((stockItem, index) => (
           <Stock
             key={index}
-            qtDispo={stock.qtDispo}
-            qtRappel={stock.qtRappel}
+            qtDispo={stockItem.qtDispo}
+            qtRappel={stockItem.qtRappel}
             openModal={openModal}
             onPress={() => setModalVisible(true)}
           />))}
