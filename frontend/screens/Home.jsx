@@ -19,7 +19,7 @@ export default function HomeScreen() {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const { prenom, token, isLoaded } = user;
+  const { prenom, token, isLoaded, idUser } = user;
 
   const currentDate = moment().format('dddd D MMMM YYYY');
   const [selectedDate, setSelectedDate] = useState(moment().format('DD-MM-YYYY'));
@@ -73,6 +73,8 @@ useEffect(() => {
      {medicaments.map((traitement, index) => (
             <MedicamentTraitement
                 key={index}
+                idUser={idUser}
+                treatmentId={traitement._id}
                 drugName={traitement.medicaments[0].product_name}
                 dosage={traitement.rappel.dose}
                 heure={moment(traitement.rappel.heure).format('HH:mm')}

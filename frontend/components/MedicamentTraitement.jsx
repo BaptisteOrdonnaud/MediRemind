@@ -2,38 +2,46 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useDispatch,useSelector } from 'react-redux';
-import { enregistrerAreTaken } from '../reducers/user';
+import { enregistrerAreTaken, updateIsTook } from '../reducers/user';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function MedicamentTraitement(props) {
 
+    const user = useSelector((state) => state.user.value);
+    const { idUser } = user;
+    const dispatch = useDispatch();
+
    
     const [medicationTaken, setMedicationTaken] = useState(false);
 
     const handleMedicationTaken = () => {
         
-        fetch(`http://localhost:3000/markMedicationTaken/${props.userId}/${props.treatmentId}`, {
+        fetch(`http://localhost:3000/traitements/markMedicationTaken`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                // Si nécessaire, vous pouvez envoyer des données supplémentaires ici
+                userId: idUser,
+                treatmentId: props.treatmentId
             })
         })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erreur lors de la mise à jour du médicament pris');
                 }
-                // Mettre à jour l'état local du médicament pris
-                setMedicationTaken(true);
+                
+              return response.json()
+                
             })
-            .catch(error => {
-                console.error(error);
-                // Gérer les erreurs de requête
-            });
+            .then(result => {
+                setMedicationTaken(true);
+                dispatch(updateIsTook(true))
+
+            })
+            
     };
 
     const handleMedicationNotTaken = () => {
