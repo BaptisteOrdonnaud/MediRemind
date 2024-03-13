@@ -29,6 +29,20 @@ export default function ListScreen({ navigation }) {
 
   const currentDate = moment().format('dddd D MMMM YYYY');
 
+  const [allMedicaments, setAllMedicaments] = useState([]);
+
+  const addMedicaments = allMedicaments.map((medicament, id) => {
+    return <Task key={id} task={medicament.medicamentName} isUrgent={task.isUrgent} />;
+  })
+    .sort((a, b) => {
+      if (a.props.isUrgent && !b.props.isUrgent) {
+        return -1;
+      } else if (!a.props.isUrgent && b.props.isUrgent) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
 
   const handleAddTask = () => {
     if (!task.trim()) {
@@ -46,7 +60,6 @@ export default function ListScreen({ navigation }) {
     setShowAddButton(true);
   }
 
-  console.log(tasks)
 
   const allTasks = tasks.map((task, id) => {
     return <Task key={id} task={task.task} isUrgent={task.isUrgent} />;
@@ -81,7 +94,7 @@ export default function ListScreen({ navigation }) {
             <View style={styles.emptyListContainer}>
               <View style={[styles.urgentSection, { justifyContent: 'center', flex: 1 }]}>
                 <View style={styles.urgentContent}>
-                  <Text style={styles.urgent}>Aucune tâche disponible</Text>
+                  <Text style={styles.urgentText}>Aucune médicament disponible</Text>
                 </View>
               </View>
             </View>
@@ -224,6 +237,12 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: 'center',
     padding: 10,
+  },
+
+  urgentText: {
+    fontSize: 14,
+    textAlign: 'center',
+    padding: 14,
   },
   button: {
     alignItems: 'center',
