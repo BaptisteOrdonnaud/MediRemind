@@ -25,7 +25,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
       areTaken: false,
     };
     console.log('FETCH:', userData)
-    fetch('http://10.9.1.92:3000/traitements', {
+    fetch('http://10.9.1.94:3000/traitements', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userData),

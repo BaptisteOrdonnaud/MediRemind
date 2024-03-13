@@ -15,7 +15,6 @@ export const tasksSlice = createSlice({
         setdelete: (state, action) => {
             state.value = state.value.filter((task) => task.task !== action.payload)
         },
-
     },
 });
 
