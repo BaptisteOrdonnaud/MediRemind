@@ -9,18 +9,15 @@ const windowHeight = Dimensions.get('window').height;
 
 function MedicamentTraitement(props) {
 
-    const areTaken = useSelector(state => state.user.value.areTaken);
-    const dispatch = useDispatch();
+   
     const [medicationTaken, setMedicationTaken] = useState(false);
 
     const handleMedicationTaken = () => {
         setMedicationTaken(true);
-        dispatch(enregistrerAreTaken(true));
     };
 
     const handleMedicationNotTaken = () => {
         setMedicationTaken(false);
-        dispatch(enregistrerAreTaken(false));
     };
     
     return (

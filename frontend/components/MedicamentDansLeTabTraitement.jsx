@@ -14,12 +14,12 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
     
     const handleMedicationTaken = () => {
         setMedicationTaken(true);
-        dispatch(enregistrerAreTaken(true));
+        
     };
 
     const handleMedicationNotTaken = () => {
         setMedicationTaken(false);
-        dispatch(enregistrerAreTaken(false));
+      
     };
 
     return (
