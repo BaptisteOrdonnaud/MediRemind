@@ -15,7 +15,8 @@ import { KeyboardAvoidingView } from 'react-native';
 
 moment.locale('fr');
 
-export default function ListScreen({ navigation }) {
+export default function ListScreen({ route }) {
+  const { medicamentName } = route.params;
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
@@ -23,30 +24,49 @@ export default function ListScreen({ navigation }) {
 
   const { prenom, nom } = user;
 
+  const [medicaments, setMedicaments] = useState([]);
   const [task, setTask] = useState('');
   const [urgent, setUrgent] = useState(false);
   const [showAddButton, setShowAddButton] = useState(false);
 
   const currentDate = moment().format('dddd D MMMM YYYY');
 
-  const [allMedicaments, setAllMedicaments] = useState([]);
+  const newMedicament = () => {
+    const isExisting = tasks.some(task => task.task === medicamentName);
 
-  const addMedicaments = allMedicaments.map((medicament, id) => {
-    return <Task key={id} task={medicament.medicamentName} isUrgent={task.isUrgent} />;
-  })
-    .sort((a, b) => {
-      if (a.props.isUrgent && !b.props.isUrgent) {
-        return -1;
-      } else if (!a.props.isUrgent && b.props.isUrgent) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
+    if (isExisting) {
+      Alert.alert('Médicament déjà ajouté');
+      return;
+    }
+
+    const newTask = {
+      task: medicamentName,
+      isUrgent: urgent,
+    };
+
+    dispatch(addTask(newTask));
+
+    setTask('');
+    setUrgent(false);
+    setShowAddButton(true);
+
+    if (!isExisting) {
+      const allTasks = tasks.map((task, id) => {
+        return <Task key={id} task={task.medicamentName} isUrgent={task.isUrgent} />;
+      })
+    }
+  }
+
 
   const handleAddTask = () => {
     if (!task.trim()) {
       Alert.alert('Champ Vide', 'Veuillez entrer un médicament avant de l\'ajouter.');
+      return;
+    }
+    const isExisting = allTasks.some(task => task === task);
+
+    if (isExisting) {
+      Alert.alert('Médicament déjà ajouté');
       return;
     }
 
@@ -59,7 +79,6 @@ export default function ListScreen({ navigation }) {
     setUrgent(false);
     setShowAddButton(true);
   }
-
 
   const allTasks = tasks.map((task, id) => {
     return <Task key={id} task={task.task} isUrgent={task.isUrgent} />;
