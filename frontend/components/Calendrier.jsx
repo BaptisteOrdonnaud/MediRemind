@@ -118,11 +118,12 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         borderRadius:30,
         marginHorizontal:windowWidth *0.02,
+        marginVertical: windowHeight * 0.001
         
       },
       item: {
         flex: 1,
-        height: windowHeight *0.059,
+        height: windowHeight *0.05,
         marginHorizontal: windowWidth *0.009,
         paddingVertical: windowHeight *0.001,
         paddingHorizontal: windowWidth *0.005,

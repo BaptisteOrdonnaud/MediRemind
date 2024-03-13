@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: windowHeight * 0.004,
+        marginTop: windowHeight * 0.01,
         borderRadius: 45,
-        marginBottom: windowHeight * 0.02,
+        marginBottom: windowHeight * 0.002,
     },
     icon: {
         color: '#A69AFC',
-        fontSize: 54,
+        fontSize: 48,
     }
 });

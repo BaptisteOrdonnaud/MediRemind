@@ -10,6 +10,8 @@ import MedicamentDansLeTabTraitement from '../components/MedicamentDansLeTabTrai
 import AddMedicamentBtn from '../components/AddMedicamentBtn';
 import { updateIsLoaded } from '../reducers/user';
 
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export default function TreatmentScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -71,8 +73,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    height: Dimensions.get('screen').height,
-    width: Dimensions.get('screen').width
+    height: windowHeight * 1,
+    width:windowWidth *1
   },
   headerContainer: {
     backgroundColor: '#E1DFFF',

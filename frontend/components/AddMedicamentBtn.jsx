@@ -7,7 +7,7 @@ const windowHeight = Dimensions.get('window').height;
 
 function AddMedicamentBtn({ navigation }) {
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.18, height: windowHeight * 0.09 }]} onPress={() => navigation.navigate('AddDrugs-part2')}>
+        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.19, height: windowHeight * 0.09 }]} onPress={() => navigation.navigate('AddDrugs-part2')}>
             <FontAwesome name='plus' style={styles.icon} />
         </TouchableOpacity>
 

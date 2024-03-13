@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        paddingHorizontal: windowWidth * 0.002,
+        paddingHorizontal: windowWidth * 0.0001,
         paddingVertical: windowHeight * 0.01,
     },
     heureDePrise: {
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginRight: windowWidth * 0.01,
         marginLeft: windowWidth * 0.02,
+        overflow:'hidden'
     },
     button: {
         backgroundColor: '#fff',

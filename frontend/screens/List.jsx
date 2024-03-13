@@ -15,7 +15,8 @@ import { KeyboardAvoidingView } from 'react-native';
 
 moment.locale('fr');
 
-export default function ListScreen({ navigation }) {
+export default function ListScreen({ route }) {
+  const { medicamentName } = route.params;
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
@@ -29,10 +30,15 @@ export default function ListScreen({ navigation }) {
 
   const currentDate = moment().format('dddd D MMMM YYYY');
 
-
   const handleAddTask = () => {
     if (!task.trim()) {
       Alert.alert('Champ Vide', 'Veuillez entrer un médicament avant de l\'ajouter.');
+      return;
+    }
+    const isExisting = allTasks.some(task => task.medicamentName === task);
+
+    if (isExisting) {
+      Alert.alert('Médicament déjà ajouté');
       return;
     }
 
@@ -45,8 +51,6 @@ export default function ListScreen({ navigation }) {
     setUrgent(false);
     setShowAddButton(true);
   }
-
-  console.log(tasks)
 
   const allTasks = tasks.map((task, id) => {
     return <Task key={id} task={task.task} isUrgent={task.isUrgent} />;
@@ -81,7 +85,7 @@ export default function ListScreen({ navigation }) {
             <View style={styles.emptyListContainer}>
               <View style={[styles.urgentSection, { justifyContent: 'center', flex: 1 }]}>
                 <View style={styles.urgentContent}>
-                  <Text style={styles.urgent}>Aucune tâche disponible</Text>
+                  <Text style={styles.urgentText}>Aucune médicament disponible</Text>
                 </View>
               </View>
             </View>
@@ -224,6 +228,12 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: 'center',
     padding: 10,
+  },
+
+  urgentText: {
+    fontSize: 14,
+    textAlign: 'center',
+    padding: 14,
   },
   button: {
     alignItems: 'center',

@@ -35,7 +35,7 @@ export default DrugTime;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: windowHeight * 0.12,
+        marginTop: windowHeight * 0.15,
         borderRadius: 20,
         // backgroundColor:'red'
     },
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     image: {
         borderRadius: 9999,
         width: windowWidth * 0.1,
-        height: windowHeight * 0.05,
+        height: windowHeight * 0.045,
         marginRight: windowWidth * 0.03,
         marginLeft: windowWidth * 0.018,
     },

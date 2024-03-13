@@ -13,26 +13,64 @@ import DrugTime from '../components/DrugTime';
 import FlecheRetour from '../components/FlecheRetour';
 import Stock from '../components/Stock';
 
+import Task from '../components/Tasks';
+import { addTask } from '../reducers/tasks';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function MedicamentDescriptionScreen({ navigation }) {
-
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+  const tasks = useSelector((state) => state.tasks.value);
+
   const { prenom, nom, token } = user;
+
   const currentDate = moment().format('dddd D MMMM ');
   moment.locale('fr');
+
   const [medicaments, setMedicaments] = useState([]);
   const [details, setDetails] = useState([]);
   const [duree, setDuree] = useState([]);
   const [stock, setStock] = useState([]);
   const [medicamentName, setMedicamentName] = useState("");
+  const [qtDispo, setQtDispo] = useState('');
+  const [qtRappel, setQtRappel] = useState('');
+
+  const [task, setTask] = useState('');
+  const [urgent, setUrgent] = useState(false);
+
+
+  const addToList = () => {
+    const isExisting = tasks.some(task => task.task === medicamentName);
+
+    if (isExisting) {
+      Alert.alert('Médicament déjà ajouté');
+      return;
+    }
+
+    const newTask = {
+      task: medicamentName,
+      isUrgent: urgent,
+    };
+
+    dispatch(addTask(newTask));
+
+
+    if (!isExisting) {
+      const allTasks = tasks.map((task, id) => {
+        return <Task key={id} task={task.medicamentName} isUrgent={task.isUrgent} />;
+      })
+    }
+    navigation.navigate('Liste', { medicamentName });
+  };
 
   const [modalVisible, setModalVisible] = useState(false);
   const openModal = () => {
     setModalVisible(true);
   };
+
+
   useEffect(() => {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)
       .then(response => response.json())
@@ -42,6 +80,9 @@ export default function MedicamentDescriptionScreen({ navigation }) {
         setDuree(drug.traitements)
         setStock(drug.traitements)
         setMedicamentName(drug.traitements[0].medicaments[0].product_name);
+        setQtDispo(drug.traitements[0].qtDispo);
+        setQtRappel(drug.traitements[0].qtRappel);
+
         // console.log(drug.traitements[0].medicaments[0].product_name)
         // console.log(drug.traitements[0].rappel.dose)
         // console.log(drug.traitements[0].rappel.heure)
@@ -119,12 +160,23 @@ export default function MedicamentDescriptionScreen({ navigation }) {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Hello</Text>
+            <View style={styles.remove}>
+              <FontAwesome name='remove' style={styles.icon} onPress={() => setModalVisible(false)} />
+            </View>
+            <View style={styles.contenue}>
+              <Text style={styles.modalText}>{medicamentName}</Text>
+              <Text>Il reste {qtRappel} comprimés</Text>
+              <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8} onPress={() => addToList()}>
+                <Text style={styles.textButton}>Ajouter a ma liste</Text>
+                <View style={styles.btn}>
+                  <FontAwesome name='plus' style={styles.icon} />
+                </View>
+              </TouchableOpacity>
+            </View>
             <Pressable
               style={styles.modalCloseButton}
               onPress={() => setModalVisible(false)}
             >
-              <Text style={styles.modalCloseButtonText}>Fermer</Text>
             </Pressable>
           </View>
         </View>
@@ -146,7 +198,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E1DFFF',
     flexDirection: 'row',
     width: '100%',
-    height: 90,
+    height: '7%',
     justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: windowWidth * 0.009
@@ -174,7 +226,7 @@ const styles = StyleSheet.create({
     width: '70%',
     height: '40%',
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -186,6 +238,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalText: {
+    marginTop: 20,
     marginBottom: 15,
     textAlign: 'center',
     fontWeight: 'bold',
@@ -193,6 +246,52 @@ const styles = StyleSheet.create({
   modalCloseButton: {
     marginTop: 10,
     paddingVertical: 10,
+  },
+  remove: {
+    alignSelf: 'flex-start',
+
+  },
+  buttonSignIn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    height: '25%',
+    width: '100%',
+    marginTop: '10%',
+    marginBottom: '10%',
+    backgroundColor: '#7368BF',
+    borderRadius: 10,
+  },
+  textButton: {
+    alignSelf: 'center',
+    flex: 1,
+    color: '#ffffff',
+    height: 30,
+    fontWeight: '600',
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 10,
+  },
+  contenue: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: '10%',
+  },
+
+  icon: {
+    color: '#A69AFC',
+    fontSize: 20,
+  },
+
+  btn: {
+    backgroundColor: '#FFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 23,
+    height: 23,
+    borderRadius: 45,
   },
 
 })

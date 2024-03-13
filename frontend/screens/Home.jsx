@@ -59,13 +59,13 @@ useEffect(() => {
         <Text style={styles.headerText}>Bonjour {prenom} 👋🏼</Text>
         <Text style={styles.dateText}>{currentDate}</Text>
       </View>
-     <Calendrier onSelectDate={date => setSelectedDate(date)}/>
+     <Calendrier style={styles.date} onSelectDate={date => setSelectedDate(date)}/>
      <View style={styles.nombrePriseMedicament}>
      <View style={styles.nbrMedocsContainer}>
       <Text style={styles.nbrMedocsAujourdhui}>{nbrMedocsAujourdhui}</Text>
      </View>
       <Text style={styles.textPriseMedoc}>Médicaments à prendre aujourd'hui</Text>
-     </View>
+     </View> 
      <View>
       <Text style={styles.mainText}>Vos traitements du jour</Text>
      </View>
@@ -93,7 +93,7 @@ useEffect(() => {
       qtRestant={data.qtDispo}
       qtRappel={data.qtRappel}
     />))} 
-     </ScrollView>
+     </ScrollView> 
       {/* </ScrollView> */}
       <StatusBar style="auto" />
     </SafeAreaView>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E1DFFF',
     flexDirection: 'column',
     width: windowWidth * 1,
-    height: windowHeight * 0.09,
+    height: windowHeight * 0.08,
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingLeft: 20,
@@ -130,12 +130,16 @@ const styles = StyleSheet.create({
     color: '#737373',
     alignSelf: 'flex-start'
   },
+  date:{
+    width: windowWidth *1,
+    height: windowHeight *1
+  },
   nombrePriseMedicament: {
     width: windowWidth * 0.85,
-    height: windowHeight * 0.17,
+    height: windowHeight * 0.16,
     alignItems: 'center',
     backgroundColor: '#A69AFC',
-    marginTop: windowHeight * 0.026,
+    marginTop: windowHeight * 0.02,
     borderRadius: 15,
     marginLeft: windowWidth * 0.07
   },
@@ -150,7 +154,7 @@ const styles = StyleSheet.create({
   },
   nbrMedocsContainer: {
     backgroundColor: 'white',
-    width: windowWidth * 0.18,
+    width: windowWidth * 0.2,
     height: windowHeight * 0.09,
     alignItems: 'center',
     justifyContent: 'center',
@@ -166,22 +170,22 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginLeft: windowWidth * 0.09,
-    marginTop: windowHeight * 0.009,
+    marginTop: windowHeight * 0.003,
     // backgroundColor:'green'
 
   },
   containerMedicament: {
     height: windowHeight * 0.19,
     flexDirection: 'row',
-    // backgroundColor:'red',
-    paddingVertical: windowWidth * 0.015,
+    // backgroundColor:'yellow',
+    paddingVertical: windowWidth * 0.001,
     paddingHorizontal: windowHeight * 0.008
   },
   containerStock: {
-    height: windowHeight * 0.18,
+    height: windowHeight * 0.125,
     flexDirection: 'row',
-    // backgroundColor:'red',
-    paddingVertical: windowHeight * 0.015,
+    // backgroundColor:'blue',
+    paddingVertical: windowHeight * 0.01,
     paddingHorizontal: windowWidth * 0.008
 
   }
