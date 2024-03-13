@@ -5,11 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { enregistrerTraitements } from '../reducers/user';
 import { useState, useEffect } from 'react';
 import FlecheRetour from '../components/FlecheRetour';
-import FontAwesome from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function OPtionTreatmentScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+
+  const [duree, setDuree] = useState(false);
+  const [rappel, setRappel] = useState(false);
+  const [instruction, setInstruction] = useState(false);
+
 
   // console.log('IdMedoc:', user.idMedoc, 'freq:', user.frequence, 'rappel:', user.rappel, 'dispo:', user.qtDispo, 'qtRappel:', user.qtRappel, 'instructions', user.instruction, 'areTaken:', user.areTaken);
 
@@ -27,27 +32,33 @@ export default function OPtionTreatmentScreen({ navigation }) {
       isTook: false,
     };
     console.log('FETCH:', userData)
-    fetch('http://10.9.1.94:3000/traitements', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData),
-    }).then(response => response.json())
-      .then(data => {
-        if (data.result) {
-          // dispatch(enregistrerTraitements({
-          //   medicamentId: data.medicaments.idMedoc,
-          //   frequence: data.frequence,
-          //   duree: data.duree,
-          //   rappel: data.rappel,
-          //   instruction: data.instruction,
-          //   qtDispo: data.qtDispo,
-          //   qtRappel: data.qtRappel,
-          //   areTaken: data.areTaken
-          // }));
-          console.log('Données récupérées :', data.result);
-          navigation.navigate('TabNavigator');
-        }
-      }).catch(error => console.error('Erreur lors de la requête fetch :', error));
+
+    if(duree && rappel && instruction){
+      fetch('http://10.9.1.94:3000/traitements', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      }).then(response => response.json())
+        .then(data => {
+          if (data.result) {
+            // dispatch(enregistrerTraitements({
+            //   medicamentId: data.medicaments.idMedoc,
+            //   frequence: data.frequence,
+            //   duree: data.duree,
+            //   rappel: data.rappel,
+            //   instruction: data.instruction,
+            //   qtDispo: data.qtDispo,
+            //   qtRappel: data.qtRappel,
+            //   areTaken: data.areTaken
+            // }));
+            console.log('Données récupérées :', data.result);
+            navigation.navigate('TabNavigator');
+          }
+        }).catch(error => console.error('Erreur lors de la requête fetch :', error));
+    } else {
+      alert("Veuillez remplir tous les champs.");
+    }
+
   };
 
 
@@ -62,24 +73,39 @@ export default function OPtionTreatmentScreen({ navigation }) {
       <Text style={styles.title}>Option de traitement</Text>
       <View style={styles.titleContainer}>
 
-        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => navigation.navigate('TreatmentTime')}>
-        <FontAwesome name='icons' style={styles.iconLeft} />
+        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => { 
+          setDuree(true)
+          navigation.navigate('TreatmentTime')
+          }}>
+          <View style={styles.optionLeft}>
+        <FontAwesome name='calendar' style={styles.iconLeft} />
           <Text style={styles.textButtonOption}>Durée du traitement</Text>
-          <FontAwesome name='icons' style={styles.iconRight} />
+          </View>
+          <FontAwesome name='check-circle' style={[styles.iconRight, { color: duree ? '#6DBEA1' : '#DBE4EA' }]} />
         </TouchableOpacity>
 
 
 
 
-        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => navigation.navigate('MedicamentStock')}>
-          <FontAwesome name='icons' style={styles.iconLeft} />
+        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => {
+          setRappel(true)
+          navigation.navigate('MedicamentStock')
+          }}>
+          <View style={styles.optionLeft}>
+          <FontAwesome name='clock-o' style={styles.iconLeft} />
           <Text style={styles.textButtonOption}>Rappel de renouvellement</Text>
-          <FontAwesome name='icons' style={styles.iconRight} />
+          </View>
+          <FontAwesome name='check-circle' style={[styles.iconRight, { color: rappel ? '#6DBEA1' : '#DBE4EA' }]} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => navigation.navigate('TakingInstruction')}>
-        <FontAwesome name='icons' style={styles.iconLeft} />
+        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => {
+          setInstruction(true)
+          navigation.navigate('TakingInstruction')
+          }}>
+          <View style={styles.optionLeft}>
+        <FontAwesome name='edit' style={styles.iconLeft} />
           <Text style={styles.textButtonOption}>Ajouter des instructions ?</Text>
-          <FontAwesome name='icons' style={styles.iconRight} />
+          </View>
+          <FontAwesome name='check-circle' style={[styles.iconRight, { color: instruction ? '#6DBEA1' : '#DBE4EA' }]} />
         </TouchableOpacity>
       </View>
 
@@ -105,6 +131,7 @@ const styles = StyleSheet.create({
     paddingVertical: '5%',
     borderRadius: 10,
     alignItems: 'center',
+    justifyContent: 'space-between'
   },
   textButtonOption: {
     
@@ -116,15 +143,19 @@ const styles = StyleSheet.create({
     paddingLeft: '7%',
   },
   iconRight:{
-    color: '#36373E',
-    fontSize:16,
+    fontSize:20,
+    marginRight: '6 %',
   },
   iconLeft:{
     color: '#36373E',
-    fontSize:16,
-    marginLeft: '7%',
-    marginRight: '5%'
-
+    fontSize:17,
+    marginLeft: '10%',
+    marginRight: '7%'
+  },
+  optionLeft: {
+    // backgroundColor: 'red',
+    display: 'flex',
+    flexDirection: 'row'
   },
   headerText: {
     fontSize: 20,
@@ -132,7 +163,7 @@ const styles = StyleSheet.create({
     margin: 20,
     alignSelf: 'center',
     textAlign: 'center',
-    
+  
   },
   titleContainer: {
     width: '90%',
@@ -144,8 +175,8 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#36373E',
     display: 'flex',
-    marginLeft: '7%',
-    marginBottom: '6%',
+    marginTop: '10%',
+    marginBottom: '5%',
   },
   buttonSuivant: {
     alignItems: 'center',
