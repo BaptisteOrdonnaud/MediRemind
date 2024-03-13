@@ -13,12 +13,17 @@ import DrugTime from '../components/DrugTime';
 import FlecheRetour from '../components/FlecheRetour';
 import Stock from '../components/Stock';
 
+import Task from '../components/Tasks';
+import { addTask } from '../reducers/tasks';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 export default function MedicamentDescriptionScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+  const tasks = useSelector((state) => state.tasks.value);
+
   const { prenom, nom, token } = user;
 
   const currentDate = moment().format('dddd D MMMM ');
@@ -32,8 +37,31 @@ export default function MedicamentDescriptionScreen({ navigation }) {
   const [qtDispo, setQtDispo] = useState('');
   const [qtRappel, setQtRappel] = useState('');
 
+  const [task, setTask] = useState('');
+  const [urgent, setUrgent] = useState(false);
+
 
   const addToList = () => {
+    const isExisting = tasks.some(task => task.task === medicamentName);
+
+    if (isExisting) {
+      Alert.alert('Médicament déjà ajouté');
+      return;
+    }
+
+    const newTask = {
+      task: medicamentName,
+      isUrgent: urgent,
+    };
+
+    dispatch(addTask(newTask));
+
+
+    if (!isExisting) {
+      const allTasks = tasks.map((task, id) => {
+        return <Task key={id} task={task.medicamentName} isUrgent={task.isUrgent} />;
+      })
+    }
     navigation.navigate('Liste', { medicamentName });
   };
 

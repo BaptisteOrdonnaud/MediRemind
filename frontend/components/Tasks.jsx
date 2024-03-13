@@ -50,11 +50,13 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
+
     },
     task: {
         flex: 1,
         width: '100%',
         backgroundColor: 'white',
+
         borderRadius: 10,
         flexDirection: 'row',
         alignItems: 'center',
@@ -66,6 +68,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
+
     },
     taskText: {
         fontSize: 16,
@@ -80,9 +83,10 @@ const styles = StyleSheet.create({
     taskContent: {
         flexDirection: 'row',
         flex: 1,
-        justifyContent: 'space-between', // Centrer horizontalement
+        justifyContent: 'space-between',
         alignItems: 'center',
-        padding: 7,
+        padding: 0,
+
     },
     urgentText: {
         fontSize: 12,

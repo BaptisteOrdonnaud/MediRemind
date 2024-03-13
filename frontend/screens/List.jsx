@@ -24,46 +24,18 @@ export default function ListScreen({ route }) {
 
   const { prenom, nom } = user;
 
-  const [medicaments, setMedicaments] = useState([]);
   const [task, setTask] = useState('');
   const [urgent, setUrgent] = useState(false);
   const [showAddButton, setShowAddButton] = useState(false);
 
   const currentDate = moment().format('dddd D MMMM YYYY');
 
-  const newMedicament = () => {
-    const isExisting = tasks.some(task => task.task === medicamentName);
-
-    if (isExisting) {
-      Alert.alert('Médicament déjà ajouté');
-      return;
-    }
-
-    const newTask = {
-      task: medicamentName,
-      isUrgent: urgent,
-    };
-
-    dispatch(addTask(newTask));
-
-    setTask('');
-    setUrgent(false);
-    setShowAddButton(true);
-
-    if (!isExisting) {
-      const allTasks = tasks.map((task, id) => {
-        return <Task key={id} task={task.medicamentName} isUrgent={task.isUrgent} />;
-      })
-    }
-  }
-
-
   const handleAddTask = () => {
     if (!task.trim()) {
       Alert.alert('Champ Vide', 'Veuillez entrer un médicament avant de l\'ajouter.');
       return;
     }
-    const isExisting = allTasks.some(task => task === task);
+    const isExisting = allTasks.some(task => task.medicamentName === task);
 
     if (isExisting) {
       Alert.alert('Médicament déjà ajouté');
