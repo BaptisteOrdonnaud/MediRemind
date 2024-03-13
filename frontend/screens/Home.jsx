@@ -22,12 +22,13 @@ export default function HomeScreen() {
   const { prenom, token } = user;
 
   const currentDate = moment().format('dddd D MMMM YYYY');
-  const [selectedDate, setSelectedDate] = useState(moment().format('YYYY-MM-DD'));
+  const [selectedDate, setSelectedDate] = useState(moment().format('DD-MM-YYYY'));
   const [medicaments, setMedicaments] = useState([]);
   const [quantite, setQuantite] = useState([])
+  const [verrif, setVerrif] = useState(null)
   
 const medicamentsToTakeToday = medicaments.filter(traitement => {
-    const rappelDate = moment(traitement.rappel.date).format('YYYY-MM-DD');
+    const rappelDate = moment(traitement.rappel.date).format('DD-MM-YYYY');
     return rappelDate === selectedDate;
 });
 
@@ -63,16 +64,16 @@ useEffect(() => {
      <View style={styles.nbrMedocsContainer}>
       <Text style={styles.nbrMedocsAujourdhui}>{nbrMedocsAujourdhui}</Text>
      </View>
-      <Text style={styles.textPriseMedoc}>Médicaments a prendre aujourd'hui</Text>
+      <Text style={styles.textPriseMedoc}>Médicaments à prendre aujourd'hui</Text>
      </View>
      <View>
-      <Text style={styles.mainText}>Vos traitement du jour</Text>
+      <Text style={styles.mainText}>Vos traitements du jour</Text>
      </View>
      <ScrollView horizontal={true} contentContainerStyle={styles.containerMedicament}>
      {medicaments.map((traitement, index) => (
             <MedicamentTraitement
                 key={index}
-                drugName={traitement.medicaments[0].form}
+                drugName={traitement.medicaments[0].product_name}
                 dosage={traitement.rappel.dose}
                 heure={moment(traitement.rappel.heure).format('HH:mm')}
             />
@@ -80,13 +81,13 @@ useEffect(() => {
      </ScrollView>
       
      <View>
-      <Text style={styles.mainText}>votre inventaire</Text>
+      <Text style={styles.mainText}>Votre inventaire</Text>
      </View>
      <ScrollView horizontal={true} contentContainerStyle={styles.containerStock}>
     {quantite.map((data,index) => (
     <StockMedicamentHome
       key={index}
-      drugName={data.medicaments[0].form}
+      drugName={data.medicaments[0].product_name}
       qtRestant={data.qtDispo}
       qtRappel={data.qtRappel}
     />))} 

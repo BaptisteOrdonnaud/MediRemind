@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         marginTop: 5,
         alignSelf: 'flex-start', // Align text within the container
+        overflow:'hidden'
     },
     medicament: {
         fontSize: 16,

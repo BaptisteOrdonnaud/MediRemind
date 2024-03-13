@@ -1,4 +1,4 @@
-import React ,{useState,useRef} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView, TouchableOpacity, ScrollView, Dimensions,TouchableWithoutFeedback,useWindowDimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,8 +18,13 @@ function Calendrier() {
     const swiper = useRef();
     const [value, setValue] = useState(new Date());
     const [week, setWeek] = useState(0);
+    const [initialIndex, setInitialIndex] = useState(1);
   
-   
+    useEffect(() => {
+      const currentDate = moment(value);
+      const initialIndex = Math.floor(currentDate.diff(moment().startOf('week'), 'days') / 7) + 1;
+      setInitialIndex(initialIndex);
+  }, [value]);
   
     const weeks = React.useMemo(() => {
       const start = moment().add(week, 'weeks').startOf('week');
@@ -40,7 +45,7 @@ function Calendrier() {
     return (
         <View style={[styles.picker, { width: windowWidth * 0.95, height: windowHeight * 0.9}]}>
         <Swiper
-          index={1}
+          index={initialIndex}
           ref={swiper}
           loop={false}
           showsPagination={false}

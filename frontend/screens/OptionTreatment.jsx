@@ -9,7 +9,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
 
-  console.log('IdMedoc:', user.idMedoc, 'freq:', user.frequence, 'rappel:', user.rappel, 'dispo:', user.qtDispo, 'qtRappel:', user.qtRappel, 'instructions', user.instruction, 'areTaken:', user.areTaken);
+  // console.log('IdMedoc:', user.idMedoc, 'freq:', user.frequence, 'rappel:', user.rappel, 'dispo:', user.qtDispo, 'qtRappel:', user.qtRappel, 'instructions', user.instruction, 'areTaken:', user.areTaken);
 
 
   const handleSubmit = () => {
@@ -22,7 +22,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
       instruction: JSON.stringify(user.instruction),
       qtDispo: user.qtDispo,
       qtRappel: user.qtRappel,
-      areTaken: false,
+      isTook: false,
     };
     console.log('FETCH:', userData)
     fetch('http://10.9.1.94:3000/traitements', {

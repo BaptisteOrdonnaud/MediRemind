@@ -7,7 +7,7 @@ const windowHeight = Dimensions.get('window').height;
 
 function DeleteMedicamentBtn({ navigation }) {
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.18, height: windowHeight * 0.09 }]} >
+        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.14, height: windowHeight * 0.07 }]} >
             <FontAwesome name='trash-o' style={styles.icon} />
         </TouchableOpacity>
 
@@ -21,12 +21,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: windowHeight * 0.1,
+        marginTop: windowHeight * 0.004,
         borderRadius: 45,
         marginBottom: windowHeight * 0.02,
     },
     icon: {
         color: '#A69AFC',
-        fontSize: '30%',
+        fontSize: 54,
     }
 });

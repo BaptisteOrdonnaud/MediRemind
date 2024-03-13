@@ -8,7 +8,7 @@ import 'moment/locale/fr';
 import Calendrier from '../components/Calendrier';
 import MedicamentDansLeTabTraitement from '../components/MedicamentDansLeTabTraitement';
 import AddMedicamentBtn from '../components/AddMedicamentBtn';
-import enregistrerMedicament from '../reducers/user';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function TreatmentScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function TreatmentScreen({ navigation }) {
       .then(response => response.json())
       .then(drug => {
         setMedicaments(drug.traitements);
-        dispatch(enregistrerMedicament(medicaments))
+        //  dispatch(enregistrerMedicament(medicaments))
         // console.log(drug.traitements[0].medicaments[0].product_name)
         // console.log(drug.traitements[0].rappel.dose)
         // console.log(drug.traitements[0].rappel.heure)
