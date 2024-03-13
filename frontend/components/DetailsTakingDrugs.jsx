@@ -20,7 +20,7 @@ function DetailsTakingDrugs(props) {
 
 
     return (
-    <View style={[styles.container, { width: windowWidth * 0.9,height:windowHeight * 0.17 }]} >
+    <View style={[styles.container, { width: windowWidth * 0.9,height:windowHeight * 0.13 }]} >
        <View >
         <View style={styles.content}>
              <View style={styles.middleContent}>
@@ -32,7 +32,7 @@ function DetailsTakingDrugs(props) {
                 </View>
                     <View style={styles.textHours}>
                         <Text style={styles.medicamentTime}>{props.frequence}</Text>
-                        <Text style={styles.medicamentJour}>{props.nbre} prise(s) par jour à :  </Text>
+                        <Text style={styles.medicamentJour}><Text style={styles.color}>{props.nbre}</Text> prise(s) par jour à :  </Text>
                         <Text style={styles.time}>{props.heure}</Text>
                     
                     </View>
@@ -50,7 +50,7 @@ export default DetailsTakingDrugs;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: windowHeight * 0.002,
+        marginTop: windowHeight * 0.0001,
         borderRadius: 20,
     },
     content: {
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     image: {
         borderRadius: 9999,
         width: windowWidth * 0.1,
-        height: windowHeight * 0.05,
+        height: windowHeight * 0.045,
         marginRight: windowWidth * 0.03,
         marginLeft: windowWidth * 0.018,
     },
@@ -102,5 +102,10 @@ medicamentJour:{
     fontSize:16,
     fontWeight:'bold',
     marginTop:windowHeight * 0.01
-  } 
+  },
+  color:{
+    color:'#7368BF',
+    fontSize:16,
+    fontWeight:'bold'
+  }
 });

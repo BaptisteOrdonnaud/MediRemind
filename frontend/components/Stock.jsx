@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginLeft: windowWidth * 0.045,
         marginRight: windowWidth * 0.07,
-        height: windowHeight * 0.12,
+        height: windowHeight * 0.08,
         width: windowWidth * 0.8,
         paddingLeft: windowWidth * 0.03,
         flexDirection: 'row',
@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
     },
     disponibiliteContainer: {
         borderRadius: 45,
-        paddingVertical: 5,
-        paddingHorizontal: 10,
+        paddingVertical: windowHeight * 0.004,
+        paddingHorizontal: windowHeight * 0.012,
     },
     disponibilite: {
         color: '#fff',

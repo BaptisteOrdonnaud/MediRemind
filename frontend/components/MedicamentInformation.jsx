@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     image: {
         borderRadius: 9999,
         width: windowWidth * 0.1,
-        height: windowHeight * 0.05,
+        height: windowHeight * 0.045,
         marginRight: windowWidth * 0.03,
         marginLeft: windowWidth * 0.018,
     },

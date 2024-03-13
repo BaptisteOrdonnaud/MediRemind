@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginRight: windowWidth * 0.01,
         marginLeft: windowWidth * 0.02,
+        overflow:'hidden'
     },
     button: {
         backgroundColor: '#fff',
