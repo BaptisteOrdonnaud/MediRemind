@@ -18,7 +18,6 @@ export default FlecheRetour;
 
 const styles = StyleSheet.create({
     icon:{
-        marginRight: windowWidth * 0.2,
         fontSize: 24,
       }
 });

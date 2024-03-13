@@ -29,7 +29,8 @@ export const userSlice = createSlice({
             state.value.areTaken = areTaken;
         },
         enregistrerMedicament: (state, action) => {
-            state.value.idMedoc = action.payload;
+            state.value.idMedoc = action.payload.idMedoc;
+            state.value.nomMedoc = action.payload.nomMedoc;
         },
         enregistrerFrequence: (state, action) => {
             state.value.frequence = action.payload;

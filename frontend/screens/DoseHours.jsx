@@ -5,6 +5,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { useDispatch, useSelector } from 'react-redux';
 import { enregistrerRappel } from '../reducers/user';
 import moment from 'moment';
+import FlecheRetour from '../components/FlecheRetour';
 
 
 export default function DoseHoursScreen({ navigation }) {
@@ -54,7 +55,10 @@ export default function DoseHoursScreen({ navigation }) {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>Doliprane</Text>
+      <View style={styles.goBack}>
+        <FlecheRetour navigation={navigation} />
+      </View>
+      <Text style={styles.headerText}>{user.nomMedoc}</Text>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Quand voulez-vous recevoir des rappels?</Text>
         <Text>Choisissez le nombre de pilules à prendre:</Text>
@@ -111,13 +115,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#E1DFFF',
     alignItems: 'center',
-
+  },
+  goBack: {
+    width: '100%',
+    marginTop: '4%',
+    marginBottom: '4%',
+    paddingLeft: '7%',
   },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
     margin: 20,
     alignSelf: 'center',
+    textAlign: 'center'
   },
   titleContainer: {
     width: '90%',

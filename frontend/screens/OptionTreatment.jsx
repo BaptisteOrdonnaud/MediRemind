@@ -4,6 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
 import { enregistrerTraitements } from '../reducers/user';
 import { useState, useEffect } from 'react';
+import FlecheRetour from '../components/FlecheRetour';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
 export default function OPtionTreatmentScreen({ navigation }) {
   const dispatch = useDispatch();
@@ -15,7 +17,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
   const handleSubmit = () => {
     const userData = {
       userId: user.idUser,
-      medicamentId: user.idMedoc.idMedoc,
+      medicamentId: user.idMedoc,
       frequence: JSON.stringify(user.frequence),
       duree: JSON.stringify(user.duree),
       rappel: JSON.stringify(user.rappel),
@@ -52,19 +54,32 @@ export default function OPtionTreatmentScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>Doliprane</Text>
+      <View style={styles.goBack}>
+        <FlecheRetour navigation={navigation} />
+      </View>
+      <Text style={styles.headerText}>{user.nomMedoc}</Text>
 
       <Text style={styles.title}>Option de traitement</Text>
       <View style={styles.titleContainer}>
 
-        <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('TreatmentTime')}>
-          <Text style={styles.textButton}>Durée du traitement</Text>
+        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => navigation.navigate('TreatmentTime')}>
+        <FontAwesome name='icons' style={styles.iconLeft} />
+          <Text style={styles.textButtonOption}>Durée du traitement</Text>
+          <FontAwesome name='icons' style={styles.iconRight} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('MedicamentStock')}>
-          <Text style={styles.textButton}>Rappel de renouvellement</Text>
+
+
+
+
+        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => navigation.navigate('MedicamentStock')}>
+          <FontAwesome name='icons' style={styles.iconLeft} />
+          <Text style={styles.textButtonOption}>Rappel de renouvellement</Text>
+          <FontAwesome name='icons' style={styles.iconRight} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonSuivant} activeOpacity={0.8} onPress={() => navigation.navigate('TakingInstruction')}>
-          <Text style={styles.textButton}>Ajouter des instructions ?</Text>
+        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => navigation.navigate('TakingInstruction')}>
+        <FontAwesome name='icons' style={styles.iconLeft} />
+          <Text style={styles.textButtonOption}>Ajouter des instructions ?</Text>
+          <FontAwesome name='icons' style={styles.iconRight} />
         </TouchableOpacity>
       </View>
 
@@ -81,11 +96,43 @@ const styles = StyleSheet.create({
     backgroundColor: '#E1DFFF',
     alignItems: 'center',
   },
+  buttonOption: {
+    display: 'flex',
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    marginBottom: '10%',
+    width: '100%',
+    paddingVertical: '5%',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  textButtonOption: {
+    
+  },
+  goBack: {
+    width: '100%',
+    marginTop: '4%',
+    marginBottom: '4%',
+    paddingLeft: '7%',
+  },
+  iconRight:{
+    color: '#36373E',
+    fontSize:16,
+  },
+  iconLeft:{
+    color: '#36373E',
+    fontSize:16,
+    marginLeft: '7%',
+    marginRight: '5%'
+
+  },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
     margin: 20,
     alignSelf: 'center',
+    textAlign: 'center',
+    
   },
   titleContainer: {
     width: '90%',

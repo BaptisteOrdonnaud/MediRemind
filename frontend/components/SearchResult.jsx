@@ -10,7 +10,7 @@ function SearchResult(props, i, navigation) {
         <View style={styles.container}>
             <TouchableOpacity style={styles.drugContainer} onPress={() => {
                 // console.log(`ID : ${props.id}, nom: ${props.drugName}`)
-                dispatch(enregistrerMedicament({ idMedoc: props.id }));
+                dispatch(enregistrerMedicament({ idMedoc: props.id, nomMedoc: props.drugName}));
                 
                 props.navigation.navigate('Frequence')
             }}>

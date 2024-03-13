@@ -41,7 +41,7 @@ export default function AddDrugsRestScreen({ navigation }) {
     if (allDrugs && Array.isArray(allDrugs)) {
       setDrugs(allDrugs.map((dataDrug, i, _id) => {
 
-        console.log(dataDrug)
+        // console.log(dataDrug)
 
         return (
           <SearchResult key={i} drugName={dataDrug.product_name} id={dataDrug._id} navigation={navigation} />

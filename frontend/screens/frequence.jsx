@@ -5,11 +5,12 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { enregistrerFrequence } from '../reducers/user';
+import FlecheRetour from '../components/FlecheRetour';
 
 export default function FrequenceScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-
+  const medicament = user.nomMedoc
 
   const [lundi, setLundi] = useState(false);
   const [mardi, setMardi] = useState(false);
@@ -67,7 +68,13 @@ export default function FrequenceScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>Doliprane</Text>
+  
+      <View style={styles.goBack}>
+        <FlecheRetour navigation={navigation} />
+      </View>
+
+        <Text style={styles.headerText}>{medicament}</Text>
+
 
       <View style={styles.titleContainer}>
         <Text style={styles.title}> À quelle fréquence prenez-vous le médicament ?</Text>
@@ -129,11 +136,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
+  goBack: {
+    width: '100%',
+    marginTop: '4%',
+    marginBottom: '4%',
+    paddingLeft: '7%',
+  },
+
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
     margin: 20,
-    alignSelf: 'center',
+    textAlign: 'center'
   },
 
   titleContainer: {
@@ -165,7 +179,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   buttonDay: {
-
     width: '30%',
     height: 40,
     backgroundColor: '#A69AFC',
