@@ -32,7 +32,7 @@ export default MedicamentInformation;
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: windowHeight * 0.02,
+        marginTop: windowHeight * 0.001,
         borderRadius: 20,
     },
     content: {

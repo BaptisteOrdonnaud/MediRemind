@@ -1,12 +1,19 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Switch } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Switch, ScrollView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDispatch, useSelector } from 'react-redux';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { useState } from 'react'
 import { addTask } from '../reducers/tasks';
 import Task from '../components/Tasks';
+import moment from 'moment';
+import { Alert } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native';
+
+
+moment.locale('fr');
 
 export default function ListScreen() {
 
@@ -18,9 +25,17 @@ export default function ListScreen() {
 
   const [task, setTask] = useState('');
   const [urgent, setUrgent] = useState(false);
+  const [showAddButton, setShowAddButton] = useState(true); // Variable d'état pour contrôler la visibilité du bouton "Ajouter"
+
+  const currentDate = moment().format('dddd D MMMM YYYY');
 
 
   const handleAddTask = () => {
+    if (!task.trim()) {
+      Alert.alert('Champ Vide', 'Veuillez entrer un médicament avant de l\'ajouter.');
+      return;
+    }
+
     const newTask = {
       task: task,
       isUrgent: urgent,
@@ -28,6 +43,7 @@ export default function ListScreen() {
     dispatch(addTask(newTask));
     setTask('');
     setUrgent(false);
+    setShowAddButton(true);
   }
 
   console.log(tasks)
@@ -47,39 +63,53 @@ export default function ListScreen() {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Image style={styles.image} source={require('../assets/TemplateImage.png')} />
-        <Text style={styles.headerText}>Hello {prenom + ' ' + nom}</Text>
-      </View>
-      <View style={styles.addContainer}>
-        <TextInput
-          onChangeText={(text) => setTask(text)}
-          value={task}
-          placeholder="Task"
-          style={styles.input}
-        />
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
 
-        <View style={styles.urgentSection}>
-          <Switch
-            value={urgent}
-            onValueChange={(value) => setUrgent(value)}
-            style={styles.urgentCheckbox}
-          />
-          <Text style={styles.urgent}>URGENT</Text>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerText}>Bonjour {prenom} 👋🏼</Text>
+          <Text style={styles.dateText}>{currentDate}</Text>
         </View>
-        <TouchableOpacity style={styles.button} onPress={() => handleAddTask()}>
-          <Text style={styles.textButton}>ADD TASK</Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <Text style={styles.mainText}>Ma liste</Text>
-        <View style={styles.tasksContainer}>
-          <Text>{allTasks}</Text>
-        </View>
-      </View>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+
+        <ScrollView style={styles.listContainer}>
+          <Text style={styles.mainText}>Ma liste</Text>
+          <View style={styles.tasksContainer}>
+            {allTasks}
+          </View>
+          <View style={styles.containerBtn}>
+            <TouchableOpacity activeOpacity={0.8} style={styles.btn} onPress={() => setShowAddButton(true)}>
+              <FontAwesome name='plus' style={styles.icon} />
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+        {showAddButton && <View style={styles.card} >
+          <View style={styles.urgentSection}>
+            <TextInput
+              onChangeText={(text) => setTask(text)}
+              value={task}
+              placeholder="Ajouter un nouveau médicament"
+              style={styles.input}
+            />
+            <View style={styles.urgentContent}>
+              <Switch
+                value={urgent}
+                onValueChange={(value) => setUrgent(value)}
+                style={styles.urgentCheckbox}
+                trackColor={{ true: "#A69AFC" }}
+                thumbColor={urgent ? "#E1DFFF" : "#A69AFC"}
+              />
+              <Text style={styles.urgent}>URGENT</Text>
+            </View>
+            <View>
+              <TouchableOpacity style={styles.button} onPress={() => { handleAddTask(), setShowAddButton(false) }}>
+                <Text style={styles.textButton}>Ajouter</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>}
+        <StatusBar style="auto" />
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -87,62 +117,105 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E1DFFF',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
     flexDirection: 'column',
+    paddingTop: 20,
+
   },
   headerContainer: {
     backgroundColor: '#E1DFFF',
-    flexDirection: 'row',
-    width: '100%',
-    height: 90,
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingLeft: 20,
   },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    alignSelf: 'flex-start',
   },
-  image: {
-    width: 50,
-    height: 50,
-    marginLeft: 10,
-    borderRadius: 9999,
+  dateText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#737373',
+    alignSelf: 'flex-start'
   },
+
   mainText: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    margin: 10,
     fontSize: 24,
     fontWeight: 'bold',
   },
+
   addContainer: {
-    flexDirection: 'row',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    borderRadius: 4,
     marginBottom: 20,
+    marginTop: 20,
+    padding: 10,
+    padding: 20,
+  },
+  card: {
+    backgroundColor: 'white',
+    height: '18%',
+    width: '95%',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    margin: 10,
+  },
+  topSection: {
+    marginTop: 10,
+    flexDirection: 'row',
+    alignContent: 'space-between',
+    justifyContent: 'space-between',
   },
   input: {
-    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'space-between',
+    width: '60%',
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginRight: 10,
+    marginRight: 5,
+    marginBottom: 10,
   },
   urgentSection: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 5,
+    width: '95%',
+    textAlign: 'center',
+
+  },
+  urgentContent: {
+    flexDirection: 'column',
   },
   urgentCheckbox: {
-    marginRight: 5,
+    transform: [{ scaleX: .7 }, { scaleY: .7 }],
   },
   urgent: {
-    fontSize: 16,
+    fontSize: 10,
+    textAlign: 'center',
   },
   button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 5,
+    height: 30,
+    width: '95%',
+    backgroundColor: '#A69AFC',
+    borderRadius: 10,
   },
   textButton: {
     color: 'white',
@@ -151,6 +224,31 @@ const styles = StyleSheet.create({
   },
   tasksContainer: {
     flexDirection: 'column',
-    alignItems: 'flex-start',
+    alignItems: 'stretch',
+    width: '100%',
+  },
+
+  listContainer: {
+    width: '95%',
+    margin: 10,
+    flexDirection: 'column',
+  },
+  icon: {
+    color: '#A69AFC',
+    fontSize: 30,
+  },
+  containerBtn: {
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  btn: {
+    backgroundColor: '#FFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: 45,
   },
 });
+
