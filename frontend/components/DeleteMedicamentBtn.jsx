@@ -1,13 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useDispatch } from 'react-redux';
+import { setdelete } from '../reducers/tasks';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function DeleteMedicamentBtn({ navigation }) {
+function DeleteMedicamentBtn({ navigation,task }) {
+
+    const dispatch = useDispatch();
+    const handleDelete = () => {
+        dispatch(setdelete(task));
+    };
+    
+
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.14, height: windowHeight * 0.07 }]} >
+        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.14, height: windowHeight * 0.07 }]} onPress={() => handleDelete()} >
             <FontAwesome name='trash-o' style={styles.icon} />
         </TouchableOpacity>
 

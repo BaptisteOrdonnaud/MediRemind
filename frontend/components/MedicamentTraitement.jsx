@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { useDispatch,useSelector } from 'react-redux';
+import { enregistrerAreTaken } from '../reducers/user';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 function MedicamentTraitement(props) {
 
+   
     const [medicationTaken, setMedicationTaken] = useState(false);
 
     const handleMedicationTaken = () => {

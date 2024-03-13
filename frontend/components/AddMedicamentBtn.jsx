@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     },
     icon: {
         color: '#A69AFC',
-        fontSize: 30,
+        fontSize: 54,
     }
 });
