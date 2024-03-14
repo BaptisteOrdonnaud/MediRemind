@@ -19,6 +19,7 @@ export default function HomeScreen() {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+  // FAIRE LE SELECTOR DE MON DISPATCH ISTOOK ET TESTER DE LE METTRE DANS LE USE EFFECT ??
   const { prenom, token, isLoaded, idUser } = user;
 
   const currentDate = moment().format('dddd D MMMM YYYY');

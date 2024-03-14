@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    value: { token: null, prenom: null, nom: null, idUser: null, traitements: null, dateDeNaissance: null, isLoaded: false },
+    value: { token: null, prenom: null, nom: null, idUser: null, traitements: null, dateDeNaissance: null, isLoaded: false, isTook: false },
     // traitement: { medicaments: null, frequence: null, duree: null, rappel: null, instruction: null, qtDispo: null, qtRappel: null, areTaken: null }
 };
 
