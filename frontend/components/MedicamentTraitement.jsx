@@ -61,7 +61,7 @@ function MedicamentTraitement(props) {
             </View>
             <View style={styles.bottomContent}>
                 <Text style={styles.heureDePrise}>{props.heure}</Text>
-                {!medicationTaken && (
+                {!props.isTook && (
                 <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleMedicationTaken}>
                     <Text style={styles.textButton}>J'ai pris ce médicament</Text>
                     <FontAwesome name='check-circle-o' style={styles.icon} />
