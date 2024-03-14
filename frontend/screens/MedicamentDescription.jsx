@@ -23,9 +23,11 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const tasks = useSelector((state) => state.tasks.value);
- 
 
-  const { prenom, nom, token } = user;
+
+  const { prenom, nom, token, idUser } = user;
+  const treatmentId = user.traitements[0]._id
+  console.log('TEST:', idUser, user.traitements[0]._id)
 
   const currentDate = moment().format('dddd D MMMM ');
   moment.locale('fr');
@@ -93,7 +95,7 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
       });
   }, []);
 
-  
+
 
   return (
     <SafeAreaView style={[styles.container, { width: windowWidth * 1, height: windowHeight * 0.17 }]}>
@@ -145,7 +147,7 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
       </View>
 
       <View style={styles.btnContainer}>
-        <DeleteMedicamentBtn />
+        <DeleteMedicamentBtn treatmentId={treatmentId} userId={idUser} />
       </View>
       <StatusBar style="auto" />
 

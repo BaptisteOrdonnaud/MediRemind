@@ -155,10 +155,9 @@ router.post('/markMedicationTaken', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/', async (req, res) => {
     try {
-        const userId = req.params.id;
-        const treatmentId = req.body.treatmentId;
+        const { userId, treatmentId } = req.body;
 
         const user = await User.findById(userId);
         if (!user) {
@@ -173,6 +172,10 @@ router.delete('/:id', async (req, res) => {
         user.traitements.splice(treatmentIndex, 1);
 
         await user.save();
+        console.log('userId:', userId);
+        console.log('treatmentId:', treatmentId);
+        console.log('User:', user);
+        console.log('Treatment index:', treatmentIndex);
 
         res.json({ message: "Traitement supprimé avec succès" });
     } catch (error) {
