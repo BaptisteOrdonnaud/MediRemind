@@ -30,7 +30,7 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
         <TouchableOpacity 
             style={styles.container} 
             activeOpacity={0.8} 
-            onPress={() => {handlePress()}}
+            onPress={() => handlePress()}
             
         >
             <View style={[styles.container, { width: windowWidth * 0.8, height: windowHeight * 0.15 }]}>

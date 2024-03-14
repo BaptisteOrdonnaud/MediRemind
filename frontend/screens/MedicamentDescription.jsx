@@ -24,7 +24,7 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
   const user = useSelector((state) => state.user.value);
   const tasks = useSelector((state) => state.tasks.value);
  
-
+// console.log(route.params.medicamentId)
   const { prenom, nom, token } = user;
 
   const currentDate = moment().format('dddd D MMMM ');
@@ -32,6 +32,7 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
 
   const [medicaments, setMedicaments] = useState([]);
   const [details, setDetails] = useState([]);
+  const [freq, setFreq] = useState([])
   const [duree, setDuree] = useState([]);
   const [stock, setStock] = useState([]);
   const [medicamentName, setMedicamentName] = useState("");
@@ -76,24 +77,42 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)
       .then(response => response.json())
       .then(drug => {
-        setMedicaments(drug.traitements);
-        setDetails(drug.traitements)
-        setDuree(drug.traitements)
-        setStock(drug.traitements)
-        setMedicamentName(drug.traitements[0].medicaments[0].product_name);
-        setQtDispo(drug.traitements[0].qtDispo);
-        setQtRappel(drug.traitements[0].qtRappel);
-
-        // console.log(drug.traitements[0].medicaments[0].product_name)
-        // console.log(drug.traitements[0].rappel.dose)
-        // console.log(drug.traitements[0].rappel.heure)
+        const traitement = drug.traitements.filter((el)=> el._id === route.params.medicamentId )
+       console.log(traitement)
+        console.log(traitement.medicaments[0])
+        setMedicaments(traitement.medicaments);
+        setFreq(traitement.frequence)
+        setDetails(traitement.rappel)
+        setDuree(traitement.duree)
+        setStock([traitement.qtDispo,traitement.qtRappel])
+        setMedicamentName(traitement.medicaments[0].product_name);
+        setQtDispo(traitement.qtDispo);
+        setQtRappel(traitement.qtRappel);
+       
       })
       .catch(error => {
         console.error('erreur lors de la reccuperation des données:', error);
       });
   }, []);
 
-  
+  // const takingDrug = details.map((detail, index) => {
+  //   // Extraire les jours sélectionnés de la propriété "frequence"
+  //   const selectedDays = [];
+  //   for (const day of detail.frequence) {
+  //     if (day !== '_id' && detail.frequence[day]) {
+  //       selectedDays.push(day);
+  //     }
+  //   }
+
+  //   return (
+  //     <DetailsTakingDrugs
+  //       key={index}
+  //       frequence={selectedDays.join(', ')} // Passer les jours sélectionnés ici
+  //       nbre={detail.rappel.dose}
+  //       heure={moment(detail.dose.heure).format('HH:mm')}
+  //     />
+  //   );
+  // })
 
   return (
     <SafeAreaView style={[styles.container, { width: windowWidth * 1, height: windowHeight * 0.17 }]}>
@@ -103,18 +122,19 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
       </View>
 
       <View style={styles.contentContainer}>
-        {medicaments.map((traitement, index) => (
+        {medicaments && medicaments.map((traitement, index) => (
           <MedicamentInformation
             key={index}
-            drugName={traitement.medicaments[0].product_name}
-            completName={traitement.medicaments[0].form}
+            drugName={traitement.product_name}
+            completName={traitement.form}
           />
         ))}
-        {details.map((detail, index) => {
+        {/* {details && takingDrug} */}
+        {/* {details && details.map((detail, index) => {
           // Extraire les jours sélectionnés de la propriété "frequence"
           const selectedDays = [];
-          for (const day in detail.frequence) {
-            if (day !== '_id' && detail.frequence[day]) {
+          for (const day of detail[0]) {
+            if (day !== '_id' && detail[0][day]) {
               selectedDays.push(day);
             }
           }
@@ -123,25 +143,25 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
             <DetailsTakingDrugs
               key={index}
               frequence={selectedDays.join(', ')} // Passer les jours sélectionnés ici
-              nbre={detail.rappel.dose}
-              heure={moment(detail.rappel.heure).format('HH:mm')}
+              nbre={detail[1].dose}
+              heure={moment(detail[1].heure).format('HH:mm')}
             />
           );
-        })}
-        {duree.map((time, index) => (
+        })} */}
+        {/* {duree && duree.map((time, index) => (
           <DrugTime
             key={index}
             debut={moment(time.duree.dateDebut).format('Do MMMM YYYY')}
             fin={moment(time.duree.dateFin).format('Do MMMM YYYY')}
           />))}
-        {stock.map((stockItem, index) => (
+        {stock && stock.map((stockItem, index) => (
           <Stock
             key={index}
             qtDispo={stockItem.qtDispo}
             qtRappel={stockItem.qtRappel}
             openModal={openModal}
             onPress={() => setModalVisible(true)}
-          />))}
+          />))} */}
       </View>
 
       <View style={styles.btnContainer}>

@@ -50,7 +50,7 @@ export default function TreatmentScreen({ navigation }) {
           {medicaments.map((traitement, i) => (
             <MedicamentDansLeTabTraitement
               key={i}
-
+drugId={traitement._id}
               drugName={traitement.medicaments[0].product_name}
               dosage={traitement.rappel.dose}
               heure={moment(traitement.rappel.heure).format('HH:mm')}
