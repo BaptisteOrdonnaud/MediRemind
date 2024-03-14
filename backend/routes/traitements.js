@@ -155,5 +155,30 @@ router.post('/markMedicationTaken', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const treatmentId = req.body.treatmentId;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "L'utilisateur n'a pas été trouvé" });
+        }
+
+        const treatmentIndex = user.traitements.findIndex(treatment => treatment._id == treatmentId);
+        if (treatmentIndex === -1) {
+            return res.status(404).json({ error: "Le traitement n'a pas été trouvé" });
+        }
+
+        user.traitements.splice(treatmentIndex, 1);
+
+        await user.save();
+
+        res.json({ message: "Traitement supprimé avec succès" });
+    } catch (error) {
+        console.error('Erreur lors de la suppression du traitement:', error);
+        res.status(500).json({ error: "Erreur lors de la suppression du traitement" });
+    }
+});
 
 module.exports = router;
