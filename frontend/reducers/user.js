@@ -54,16 +54,6 @@ export const userSlice = createSlice({
             state.value.areTaken = action.payload;
         },
 
-        // enregistrerTraitements: (state, action) => {
-        //     action.payload.idMedoc && (state.traitement.medicaments = action.payload.idMedoc);
-        //     state.value.frequence && (state.value.frequence = action.payload.frequence);
-        //     state.value.duree && (state.value.duree = action.payload.duree);
-        //     state.value.rappel && (state.value.rappel = action.payload.rappel);
-        //     state.value.instruction && (state.value.instruction= action.payload.instruction);
-        //     state.value.qtDispo && (state.value.qtDispo= action.payload.qtDispo);
-        //     state.value.qtRappel &&  (state.value.qtRappel= action.payload.qtRappel);
-        //     state.value.areTaken && (state.value.areTaken= action.payload.areTaken);
-        // },
 
         logout: (state) => {
             state.value.token = null;
@@ -78,7 +68,9 @@ export const userSlice = createSlice({
         updateIsTook: (state, action) => {
             state.value.isTook = action.payload
         },
-
+        // setdelete: (state, action) => {
+        //     state.value = state.value.filter((traitements) => traitements.traitements !== action.payload)
+        // },
     },
 });
 

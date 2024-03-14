@@ -7,13 +7,13 @@ import { setdelete } from '../reducers/tasks';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function DeleteMedicamentBtn({ navigation,task }) {
+function DeleteMedicamentBtn({ navigation, task }) {
 
     const dispatch = useDispatch();
     const handleDelete = () => {
-        dispatch(setdelete(task));
+        dispatch(setdelete());
     };
-    
+
 
     return (
         <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.14, height: windowHeight * 0.07 }]} onPress={() => handleDelete()} >
