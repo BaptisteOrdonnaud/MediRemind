@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         marginHorizontal: windowWidth * 0.07,
         padding: windowWidth * 0.03,
         marginTop: windowHeight * 0.01,
-        height:windowHeight * 0.15,
+        height:windowHeight * 0.5,
         width: windowWidth *0.6
     },
     disponibilite: {
