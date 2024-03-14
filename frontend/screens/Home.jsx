@@ -32,7 +32,8 @@ const medicamentsToTakeToday = medicaments.filter(traitement => {
     return rappelDate === selectedDate;
 });
 
-const nbrMedocsAujourdhui = medicamentsToTakeToday.length;
+const nbrMedocsAujourdhui = medicamentsToTakeToday.filter(traitement => !traitement.isTook).length;
+
  
 useEffect(() => {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)

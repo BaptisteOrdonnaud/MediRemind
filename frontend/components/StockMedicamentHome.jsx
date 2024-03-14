@@ -10,7 +10,7 @@ function StockMedicamentHome(props) {
         if (props.qtRestant >= props.qtRappel) {
             return { color: '#6DBEA1', availability: 'En stock' };
         } else {
-            return { color: '#E4B3D4', availability: 'À racheter' };
+            return { color: '#EDA774', availability: 'À racheter' };
         }
     };
 
