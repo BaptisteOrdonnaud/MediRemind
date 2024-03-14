@@ -16,7 +16,7 @@ const windowHeight = Dimensions.get('window').height;
 export default function TreatmentScreen({ navigation }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const { prenom, nom, token, isLoaded } = user;
+  const { prenom, nom, token, isLoaded, isTook } = user;
   const currentDate = moment().format('dddd D MMMM ');
   moment.locale('fr');
   const [medicaments, setMedicaments] = useState([]);
@@ -37,7 +37,7 @@ export default function TreatmentScreen({ navigation }) {
       .catch(error => {
         console.error('erreur lors de la reccuperation des données:', error);
       });
-  }, [isLoaded]);
+  }, [isLoaded, isTook]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -50,7 +50,8 @@ export default function TreatmentScreen({ navigation }) {
           {medicaments.map((traitement, i) => (
             <MedicamentDansLeTabTraitement
               key={i}
-drugId={traitement._id}
+              drugId={traitement._id}
+              isTook={traitement.isTook}
               drugName={traitement.medicaments[0].product_name}
               dosage={traitement.rappel.dose}
               heure={moment(traitement.rappel.heure).format('HH:mm')}
