@@ -52,7 +52,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
             //   areTaken: data.areTaken
             // }));
             console.log('Données récupérées :', data.result);
-            navigation.navigate('TabNavigator');
+            navigation.navigate('TabNavigator',{screen: 'Home'});
             dispatch(updateIsLoaded(!isLoaded))
           }
         }).catch(error => console.error('Erreur lors de la requête fetch :', error));

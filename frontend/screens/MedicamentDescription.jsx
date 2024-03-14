@@ -81,7 +81,7 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
       .then(drug => {
         const traitement = drug.traitements.filter((el) => el._id === route.params.medicamentId)
         console.log(traitement)
-        console.log(traitement.medicaments[0])
+        console.log(traitement.frequence)
         setMedicaments(traitement.medicaments);
         setFreq(traitement.frequence)
         setDetails(traitement.rappel)
