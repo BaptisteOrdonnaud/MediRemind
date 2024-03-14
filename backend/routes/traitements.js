@@ -144,5 +144,17 @@ router.post('/markMedicationTaken', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const deletedTreatment = await Treatment.findByIdAndDelete(req.params._id);
+        if (!deletedTreatment) {
+            return res.status(404).json({ error: "Le traitement n'a pas été trouvé" });
+        }
+        res.json({ message: "Traitement supprimé avec succès" });
+    } catch (error) {
+        console.error('Erreur lors de la suppression du traitement:', error);
+        res.status(500).json({ error: "Erreur lors de la suppression du traitement" });
+    }
+});
 
 module.exports = router;

@@ -2,16 +2,15 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useDispatch } from 'react-redux';
-import { setdelete } from '../reducers/tasks';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function DeleteMedicamentBtn({ navigation, task }) {
+function DeleteMedicamentBtn({ navigation, traitements }) {
 
     const dispatch = useDispatch();
+
     const handleDelete = () => {
-        dispatch(setdelete());
     };
 
 
