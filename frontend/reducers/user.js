@@ -68,9 +68,11 @@ export const userSlice = createSlice({
         updateIsTook: (state, action) => {
             state.value.isTook = action.payload
         },
-
+        setdelete: (state, action) => {
+            state.value.traitements = state.value.traitements.filter(traitements => traitements !== action.payload);
+        },
     },
 });
 
-export const { updateIsLoaded, login, logout, enregistrerTraitements, enregistrerDuree, enregistrerFrequence, enregistrerInstruction, enregistrerMedicament, enregistrerQtDispo, enregistrerQtRappel, enregistrerRappel, enregistrerAreTaken, updateIsTook, } = userSlice.actions;
+export const { updateIsLoaded, login, logout, enregistrerTraitements, enregistrerDuree, enregistrerFrequence, enregistrerInstruction, enregistrerMedicament, enregistrerQtDispo, enregistrerQtRappel, enregistrerRappel, enregistrerAreTaken, updateIsTook, setdelete } = userSlice.actions;
 export default userSlice.reducer;

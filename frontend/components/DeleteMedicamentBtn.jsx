@@ -6,16 +6,33 @@ import { useDispatch } from 'react-redux';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function DeleteMedicamentBtn({ navigation, traitements }) {
+function DeleteMedicamentBtn({ navigation }) {
 
-    const dispatch = useDispatch();
+    function DeleteMedicamentBtn({ traitements }) {
 
-    const handleDelete = () => {
-    };
+        const dispatch = useDispatch();
+
+        const handleDelete = async () => {
+            try {
+                const response = await fetch(`http://10.9.1.92:3000/${traitements._id}`, {
+                    method: 'DELETE'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la suppression du traitement');
+                }
+
+                dispatch(setdelete(traitements._id));
+            } catch (error) {
+                console.error('Erreur lors de la suppression du traitement:', error.message);
+            }
+        };
+
+    }
 
 
     return (
-        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.14, height: windowHeight * 0.07 }]} onPress={() => handleDelete()} >
+        <TouchableOpacity activeOpacity={0.8} style={[styles.container, { width: windowWidth * 0.14, height: windowHeight * 0.07 }]} onPress={() => DeleteMedicamentBtn()} >
             <FontAwesome name='trash-o' style={styles.icon} />
         </TouchableOpacity>
 
