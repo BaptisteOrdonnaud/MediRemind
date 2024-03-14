@@ -18,7 +18,6 @@ export default function SignUpScreen({ navigation }) {
   const [dateDeNaissance, setDateDeNaissance] = useState('');
   const [dateDeNaissanceError, setDateDeNaissanceError] = useState('');
 
-
   const handleSubmit = () => {
     let hasError = false;
 
@@ -52,8 +51,8 @@ export default function SignUpScreen({ navigation }) {
 
 
   return (
-    <SafeAreaView>
- <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
         <Text style={styles.title}>Création de compte</Text>
 
@@ -86,7 +85,6 @@ export default function SignUpScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
-    </View>
     </SafeAreaView>
 
   );
