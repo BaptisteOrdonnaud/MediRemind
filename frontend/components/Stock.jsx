@@ -18,7 +18,7 @@ export default function Stock({ qtDispo, qtRappel, openModal }) {
                 <View style={styles.topContent}>
                     <View style={styles.itemContainer}>
                         <View style={[styles.disponibiliteContainer, { backgroundColor: textColor }]}>
-                            <Text style={styles.disponibilite}>{qtRappel}</Text>
+                            <Text style={styles.disponibilite}>{qtDispo}</Text>
                         </View>
                         <Text style={styles.medicament}>Comprimés restants </Text>
                         <TouchableOpacity onPress={openModal}>
