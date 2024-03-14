@@ -37,8 +37,8 @@ router.post('/signup', (req, res) => {
         });
         console.log('user', newUser)
         newUser.save().then(newDoc => {
-          console.log('test ', newDoc)
-          res.json({ result: true, newDoc });
+          // console.log('test ', newDoc)
+          res.json({ result: true, user: newDoc });
         });
       } else {
         res.json({ result: false, error: 'User already exists' });

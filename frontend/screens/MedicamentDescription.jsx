@@ -61,11 +61,11 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
     dispatch(addTask(newTask));
 
 
-    if (!isExisting) {
-      const allTasks = tasks.map((task, id) => {
-        return <Task key={id} task={task.medicamentName} isUrgent={task.isUrgent} />;
-      })
-    }
+    // if (!isExisting) {
+    //   const allTasks = tasks.map((task, id) => {
+    //     return <Task key={id} task={task.medicamentName} isUrgent={task.isUrgent} />;
+    //   })
+    // }
     navigation.navigate('Liste', { medicamentName });
   };
 
@@ -140,9 +140,9 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
           />)} 
       </View>
 
-      <View style={styles.btnContainer}>
+      {/* <View style={styles.btnContainer}>
         <DeleteMedicamentBtn treatmentId={treatmentId} userId={idUser} />
-      </View>
+      </View> */}
       <StatusBar style="auto" />
 
 

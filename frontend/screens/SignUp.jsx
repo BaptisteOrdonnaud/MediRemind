@@ -18,7 +18,6 @@ export default function SignUpScreen({ navigation }) {
   const [dateDeNaissance, setDateDeNaissance] = useState('');
   const [dateDeNaissanceError, setDateDeNaissanceError] = useState('');
 
-
   const handleSubmit = () => {
     let hasError = false;
 
@@ -52,41 +51,41 @@ export default function SignUpScreen({ navigation }) {
 
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
-          <Text style={styles.title}>Création de compte</Text>
+    <SafeAreaView style={styles.container}>
 
-          <View style={styles.inputContainer}>
-            <Text style={styles.titre}>Nom</Text>
-            <TextInput
-              placeholder="Nom"
-              onChangeText={(value) => setNom(value)}
-              value={nom}
-              style={styles.input}
-            />
-            {nomError && <Text style={styles.error}>Le nom est invalide</Text>}
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
+        <Text style={styles.title}>Création de compte</Text>
+
+        <View style={styles.inputContainer}>
+          <Text style={styles.titre}>Nom</Text>
+          <TextInput
+            placeholder="Nom"
+            onChangeText={(value) => setNom(value)}
+            value={nom}
+            style={styles.input}
+          />
+          {nomError && <Text style={styles.error}>Le nom est invalide</Text>}
 
 
-            <Text style={styles.titre}>Prenom</Text>
-            <TextInput placeholder="Prenom" onChangeText={(value) => setPrenom(value)} value={prenom} style={styles.input} />
-            {prenomError && <Text style={styles.error}>Le prenom est invalide</Text>}
+          <Text style={styles.titre}>Prenom</Text>
+          <TextInput placeholder="Prenom" onChangeText={(value) => setPrenom(value)} value={prenom} style={styles.input} />
+          {prenomError && <Text style={styles.error}>Le prenom est invalide</Text>}
 
-            <Text style={styles.titre}>Date de naissance</Text>
-            <TextInput
-              placeholder="Entrez votre date de naissance (AAAA/MM/JJ)"
-              onChangeText={(value) => setDateDeNaissance(value)} value={dateDeNaissance}
-              style={styles.input}
-              textContentType='birthdate' />
-            {dateDeNaissanceError && <Text style={styles.error}>Le format est invalide (AAAA/MM/JJ)</Text>}
+          <Text style={styles.titre}>Date de naissance</Text>
+          <TextInput
+            placeholder="Entrez votre date de naissance (AAAA/MM/JJ)"
+            onChangeText={(value) => setDateDeNaissance(value)} value={dateDeNaissance}
+            style={styles.input}
+            textContentType='birthdate' />
+          {dateDeNaissanceError && <Text style={styles.error}>Le format est invalide (AAAA/MM/JJ)</Text>}
 
-            <TouchableOpacity onPress={() => handleSubmit()} style={styles.buttonSignUp} activeOpacity={0.8}>
-              <Text style={styles.textButton}>Continuer</Text>
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
-      </View>
-    </SafeAreaView>
+          <TouchableOpacity onPress={() => handleSubmit()} style={styles.buttonSignUp} activeOpacity={0.8}>
+            <Text style={styles.textButton}>Continuer</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </View>
+    </SafeAreaView >
 
   );
 }

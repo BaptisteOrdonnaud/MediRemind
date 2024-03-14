@@ -79,7 +79,7 @@ export default function SignUpScreen({ navigation }) {
         body: JSON.stringify({ nom: nom, prenom: prenom, dateDeNaissance: dateDeNaissance, email: email, telephone: telephone, password: password }),
       }).then(response => response.json())
         .then(data => {
-          console.log(data)
+          console.log(`LES DONNES`, data)
           if (data.result) {
             dispatch(login({ prenom: data.user.prenom, nom: data.user.nom, token: data.user.token, idUser: data.user._id, traitements: data.user.traitements }));
             setNom('');
@@ -98,8 +98,8 @@ export default function SignUpScreen({ navigation }) {
 
 
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.container}>
           <Text style={styles.title}>Information complémentaire</Text>
 
@@ -134,7 +134,6 @@ export default function SignUpScreen({ navigation }) {
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>
-      </View>
     </SafeAreaView>
   );
 }

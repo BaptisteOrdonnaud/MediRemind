@@ -36,7 +36,6 @@ export default function AddDrugsRestScreen({ navigation }) {
     }
   }, [allDrugs]);
 
-
   useEffect(() => {
     if (allDrugs && Array.isArray(allDrugs)) {
       setDrugs(allDrugs.map((dataDrug, i, _id) => {

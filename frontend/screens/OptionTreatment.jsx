@@ -31,7 +31,7 @@ export default function OPtionTreatmentScreen({ navigation, openModal }) {
       qtRappel: user.qtRappel,
       isTook: false,
     };
-    console.log('FETCH:', userData)
+    // console.log('FETCH:', user)
 
     if (duree && rappel && instruction) {
       fetch('http://10.9.1.94:3000/traitements', {
