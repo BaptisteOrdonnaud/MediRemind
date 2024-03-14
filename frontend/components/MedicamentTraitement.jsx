@@ -18,7 +18,7 @@ function MedicamentTraitement(props) {
 
     const handleMedicationTaken = () => {
         
-        fetch(`http://localhost:3000/traitements/markMedicationTaken`, {
+        fetch(`http://10.9.1.94:3000/traitements/markMedicationTaken`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
