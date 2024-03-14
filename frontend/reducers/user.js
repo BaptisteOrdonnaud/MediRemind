@@ -75,9 +75,12 @@ export const userSlice = createSlice({
         updateIsLoaded: (state, action) => {
             state.value.isLoaded = action.payload
         },
+        updateIsTook: (state, action) => {
+            state.value.isTook = action.payload
+        },
 
     },
 });
 
-export const { updateIsLoaded, login, logout, enregistrerTraitements, enregistrerDuree, enregistrerFrequence, enregistrerInstruction, enregistrerMedicament, enregistrerQtDispo, enregistrerQtRappel, enregistrerRappel, enregistrerAreTaken } = userSlice.actions;
+export const { updateIsLoaded, login, logout, enregistrerTraitements, enregistrerDuree, enregistrerFrequence, enregistrerInstruction, enregistrerMedicament, enregistrerQtDispo, enregistrerQtRappel, enregistrerRappel, enregistrerAreTaken, updateIsTook } = userSlice.actions;
 export default userSlice.reducer;
