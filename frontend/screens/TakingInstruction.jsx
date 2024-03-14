@@ -35,7 +35,7 @@ export default function TakingInstructionScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>Doliprane</Text>
+      <Text style={styles.headerText}>{user.nomMedoc}</Text>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Doit-il être pris avec de la nourriture?</Text>
         <View>

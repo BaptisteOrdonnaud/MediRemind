@@ -28,7 +28,7 @@ export default function MedicamentStockScreen({ navigation }) {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>Doliprane</Text>
+      <Text style={styles.headerText}>{user.nomMedoc}</Text>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Combien de Pilule(s) vous reste-t-il?</Text>
         <TextInput

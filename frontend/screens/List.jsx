@@ -70,10 +70,7 @@ export default function ListScreen({ route }) {
     <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
 
       <SafeAreaView style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>Bonjour {prenom} 👋🏼</Text>
-          <Text style={styles.dateText}>{currentDate}</Text>
-        </View>
+    
 
         <ScrollView style={styles.listContainer}>
           <Text style={styles.mainText}>Ma liste</Text>
@@ -253,6 +250,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'stretch',
     width: '100%',
+    marginTop: '5%',
   },
 
   listContainer: {

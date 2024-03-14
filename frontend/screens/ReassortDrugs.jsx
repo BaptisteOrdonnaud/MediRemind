@@ -27,7 +27,7 @@ export default function ReassortDrugsScreen({ navigation }) {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>Doliprane</Text>
+      <Text style={styles.headerText}>{user.nomMedoc}</Text>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Combien de médicaments doivent-ils rester avant de recevoir un rappel de renouvellement?</Text>
         <Text>Rappelez-moi lorsqu'il me reste</Text>
