@@ -3,11 +3,12 @@ import { StyleSheet, Text, TouchableOpacity, View, TextInput, Pressable, Platfor
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DateTimePicker from "@react-native-community/datetimepicker"
 import moment from 'moment';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { enregistrerDuree } from '../reducers/user';
 
 export default function TreatmentTimeScreen({ navigation }) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
   moment.locale('fr');
   const [dateDebut, setDateDebut] = useState("");
   const [dateFin, setDateFin] = useState("");
@@ -114,7 +115,7 @@ export default function TreatmentTimeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.headerText}>NOM DU MEDICAMENT</Text>
+      <Text style={styles.headerText}>{user.nomMedoc}</Text>
       <Text style={styles.title}>Quelle est la durée de ce traitement?</Text>
       <View style={styles.debutContainer}>
         <Text style={styles.label}>Date début du traitement :</Text>
@@ -125,10 +126,10 @@ export default function TreatmentTimeScreen({ navigation }) {
         {showPicker && Platform.OS === "ios" && (
           <View style={{ flexDirection: "row", justifyContent: 'space-around' }}>
             <TouchableOpacity style={[styles.button, styles.pickerButton, { backgroundColor: "#11182711" }]} onPress={toggleDatePicker}>
-              <Text style={[styles.buttonText, { color: "#7368BF" }]}>Cancel</Text>
+              <Text style={[styles.buttonText, { color: "#7368BF" }]}>Annuler</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.pickerButton, { backgroundColor: "#7368BF" }]} onPress={confirmIOSDate}>
-              <Text style={[styles.buttonText,]}>Confirm</Text>
+              <Text style={[styles.buttonText,]}>Confirmer</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -158,10 +159,10 @@ export default function TreatmentTimeScreen({ navigation }) {
         {showPicker2 && Platform.OS === "ios" && (
           <View style={{ flexDirection: "row", justifyContent: 'space-around' }}>
             <TouchableOpacity style={[styles.button, styles.pickerButton, { backgroundColor: "#11182711" }]} onPress={toggleDatePicker2}>
-              <Text style={[styles.buttonText, { color: "#7368BF" }]}>Cancel</Text>
+              <Text style={[styles.buttonText, { color: "#7368BF" }]}>Annuler</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.button, styles.pickerButton, { backgroundColor: "#7368BF" }]} onPress={confirmIOSDate2}>
-              <Text style={[styles.buttonText,]}>Confirm</Text>
+              <Text style={[styles.buttonText,]}>Confirmer</Text>
             </TouchableOpacity>
           </View>
         )}

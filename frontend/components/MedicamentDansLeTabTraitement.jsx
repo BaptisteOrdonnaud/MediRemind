@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, Dimensions } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { useDispatch,useSelector } from 'react-redux';
-import { enregistrerAreTaken } from '../reducers/user';
+import { enregistrerAreTaken, updateIsTook } from '../reducers/user';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, navigation, props }) {
+function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, navigation, isTook }) {
     const [medicationTaken, setMedicationTaken] = useState(false);
-    const areTaken = useSelector(state => state.user.value.areTaken);
+    const user = useSelector((state) => state.user.value);
+    const { idUser } = user;
     const dispatch = useDispatch();
     const handlePress = () => {
         navigation.navigate('MedicamentDescription', {
@@ -17,7 +18,30 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
         });
     };
     const handleMedicationTaken = () => {
-        // setMedicationTaken(true);
+       
+        fetch(`http://10.9.1.94:3000/traitements/markMedicationTaken`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: idUser,
+                treatmentId: drugId
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erreur lors de la mise à jour du médicament pris');
+                }
+                
+              return response.json()
+                
+            })
+            .then(result => {
+                setMedicationTaken(true);
+                dispatch(updateIsTook(true))
+
+            })
         
     };
 
@@ -41,7 +65,7 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
                             <Text style={styles.medicament}>{drugName}</Text>
                             <Text style={styles.qtPrendre}>Quantité à prendre: {dosage}</Text>
                         </View>
-                        {medicationTaken ? (
+                        {isTook ? (
                             <FontAwesome name='check-circle-o' style={[styles.iconCheck]} />
                         ) : (
                             <FontAwesome name='clock-o' style={styles.iconWait} />
@@ -49,7 +73,7 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
                         <Text style={styles.heureDePrise}>{heure}</Text>
                     </View>
                 </View>
-                {!medicationTaken && (
+                {!isTook && (
                     <View style={styles.bottomContent}>
                         <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleMedicationTaken}>
                             <Text style={styles.textButton}>J'ai pris ce médicament</Text>
