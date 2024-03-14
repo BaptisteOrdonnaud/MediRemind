@@ -11,7 +11,11 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
     const [medicationTaken, setMedicationTaken] = useState(false);
     const areTaken = useSelector(state => state.user.value.areTaken);
     const dispatch = useDispatch();
-    
+    const handlePress = () => {
+        navigation.navigate('MedicamentDescription', {
+            medicamentId: drugId,
+        });
+    };
     const handleMedicationTaken = () => {
         // setMedicationTaken(true);
         
@@ -26,12 +30,8 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
         <TouchableOpacity 
             style={styles.container} 
             activeOpacity={0.8} 
-            onPress={() => navigation.navigate('MedicamentDescription', {
-                drugId: drugId,
-                drugName: drugName,
-                dosage: dosage,
-                heure: heure
-            })}
+            onPress={() => {handlePress()}}
+            
         >
             <View style={[styles.container, { width: windowWidth * 0.8, height: windowHeight * 0.15 }]}>
                 <View style={styles.content}>

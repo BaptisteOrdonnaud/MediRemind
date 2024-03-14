@@ -19,10 +19,11 @@ import { addTask } from '../reducers/tasks';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-export default function MedicamentDescriptionScreen({ navigation }) {
+export default function MedicamentDescriptionScreen({ navigation, route }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const tasks = useSelector((state) => state.tasks.value);
+ 
 
   const { prenom, nom, token } = user;
 
@@ -91,6 +92,8 @@ export default function MedicamentDescriptionScreen({ navigation }) {
         console.error('erreur lors de la reccuperation des données:', error);
       });
   }, []);
+
+  
 
   return (
     <SafeAreaView style={[styles.container, { width: windowWidth * 1, height: windowHeight * 0.17 }]}>
