@@ -134,6 +134,17 @@ router.post('/markMedicationTaken', async (req, res) => {
         // Mettre à jour la propriété isTook du traitement
         traitement.isTook = true;
 
+        // Récupérer le nombre de doses spécifié dans le schéma rappel
+        const dosesPrises = traitement.rappel.dose;
+
+        // Décrémenter qtDispo en fonction du nombre de doses prises
+        if (traitement.qtDispo >= dosesPrises) {
+            traitement.qtDispo -= dosesPrises;
+        } else {
+            // Gérer le cas où le nombre de doses prises est supérieur à la quantité disponible
+            return res.status(400).json({ message: "La quantité disponible est insuffisante." });
+        }
+
         // Sauvegarder les modifications de l'utilisateur
         await user.save();
 
