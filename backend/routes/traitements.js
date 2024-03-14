@@ -134,6 +134,17 @@ router.post('/markMedicationTaken', async (req, res) => {
         // Mettre à jour la propriété isTook du traitement
         traitement.isTook = true;
 
+        // Récupérer le nombre de doses spécifié dans le schéma rappel
+        const dosesPrises = traitement.rappel.dose;
+
+        // Décrémenter qtDispo en fonction du nombre de doses prises
+        if (traitement.qtDispo >= dosesPrises) {
+            traitement.qtDispo -= dosesPrises;
+        } else {
+            // Gérer le cas où le nombre de doses prises est supérieur à la quantité disponible
+            return res.status(400).json({ message: "La quantité disponible est insuffisante." });
+        }
+
         // Sauvegarder les modifications de l'utilisateur
         await user.save();
 
@@ -144,5 +155,30 @@ router.post('/markMedicationTaken', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const treatmentId = req.body.treatmentId;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "L'utilisateur n'a pas été trouvé" });
+        }
+
+        const treatmentIndex = user.traitements.findIndex(treatment => treatment._id == treatmentId);
+        if (treatmentIndex === -1) {
+            return res.status(404).json({ error: "Le traitement n'a pas été trouvé" });
+        }
+
+        user.traitements.splice(treatmentIndex, 1);
+
+        await user.save();
+
+        res.json({ message: "Traitement supprimé avec succès" });
+    } catch (error) {
+        console.error('Erreur lors de la suppression du traitement:', error);
+        res.status(500).json({ error: "Erreur lors de la suppression du traitement" });
+    }
+});
 
 module.exports = router;

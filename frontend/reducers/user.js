@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    value: { token: null, prenom: null, nom: null, idUser: null, traitements: null, dateDeNaissance: null, isLoaded: false },
+    value: { token: null, prenom: null, nom: null, idUser: null, traitements: null, dateDeNaissance: null, isLoaded: false, isTook: false },
     // traitement: { medicaments: null, frequence: null, duree: null, rappel: null, instruction: null, qtDispo: null, qtRappel: null, areTaken: null }
 };
 
@@ -54,16 +54,6 @@ export const userSlice = createSlice({
             state.value.areTaken = action.payload;
         },
 
-        // enregistrerTraitements: (state, action) => {
-        //     action.payload.idMedoc && (state.traitement.medicaments = action.payload.idMedoc);
-        //     state.value.frequence && (state.value.frequence = action.payload.frequence);
-        //     state.value.duree && (state.value.duree = action.payload.duree);
-        //     state.value.rappel && (state.value.rappel = action.payload.rappel);
-        //     state.value.instruction && (state.value.instruction= action.payload.instruction);
-        //     state.value.qtDispo && (state.value.qtDispo= action.payload.qtDispo);
-        //     state.value.qtRappel &&  (state.value.qtRappel= action.payload.qtRappel);
-        //     state.value.areTaken && (state.value.areTaken= action.payload.areTaken);
-        // },
 
         logout: (state) => {
             state.value.token = null;
@@ -78,9 +68,11 @@ export const userSlice = createSlice({
         updateIsTook: (state, action) => {
             state.value.isTook = action.payload
         },
-
+        setdelete: (state, action) => {
+            state.value.traitements = state.value.traitements.filter(traitements => traitements !== action.payload);
+        },
     },
 });
 
-export const { updateIsLoaded, login, logout, enregistrerTraitements, enregistrerDuree, enregistrerFrequence, enregistrerInstruction, enregistrerMedicament, enregistrerQtDispo, enregistrerQtRappel, enregistrerRappel, enregistrerAreTaken, updateIsTook } = userSlice.actions;
+export const { updateIsLoaded, login, logout, enregistrerTraitements, enregistrerDuree, enregistrerFrequence, enregistrerInstruction, enregistrerMedicament, enregistrerQtDispo, enregistrerQtRappel, enregistrerRappel, enregistrerAreTaken, updateIsTook, setdelete } = userSlice.actions;
 export default userSlice.reducer;
