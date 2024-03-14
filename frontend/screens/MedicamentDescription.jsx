@@ -80,16 +80,16 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
       .then(response => response.json())
       .then(drug => {
         const traitement = drug.traitements.filter((el) => el._id === route.params.medicamentId)
-        console.log(traitement)
-        console.log(traitement.frequence)
-        setMedicaments(traitement.medicaments);
-        setFreq(traitement.frequence)
-        setDetails(traitement.rappel)
-        setDuree(traitement.duree)
-        setStock([traitement.qtDispo, traitement.qtRappel])
-        setMedicamentName(traitement.medicaments[0].product_name);
-        setQtDispo(traitement.qtDispo);
-        setQtRappel(traitement.qtRappel);
+        
+        console.log(traitement[0].frequence)
+        setMedicaments(traitement[0].medicaments[0]);
+        setFreq(traitement[0].frequence)
+        setDetails(traitement[0].rappel)
+        setDuree(traitement[0].duree)
+        setStock([traitement[0].qtDispo, traitement[0].qtRappel])
+        setMedicamentName(traitement[0].medicaments[0].product_name);
+        setQtDispo(traitement[0].qtDispo);
+        setQtRappel(traitement[0].qtRappel);
 
       })
       .catch(error => {
@@ -97,24 +97,14 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
       });
   }, []);
 
-  // const takingDrug = details.map((detail, index) => {
-  //   // Extraire les jours sélectionnés de la propriété "frequence"
-  //   const selectedDays = [];
-  //   for (const day of detail.frequence) {
-  //     if (day !== '_id' && detail.frequence[day]) {
-  //       selectedDays.push(day);
-  //     }
-  //   }
+  const selectedDays = [];
+            for (const day in freq) {
+              if (day !== '_id' && freq[day]) {
+                selectedDays.push(day);
+              }
+            }
 
-  //   return (
-  //     <DetailsTakingDrugs
-  //       key={index}
-  //       frequence={selectedDays.join(', ')} // Passer les jours sélectionnés ici
-  //       nbre={detail.rappel.dose}
-  //       heure={moment(detail.dose.heure).format('HH:mm')}
-  //     />
-  //   );
-  // })
+           
 
   return (
     <SafeAreaView style={[styles.container, { width: windowWidth * 1, height: windowHeight * 0.17 }]}>
@@ -124,46 +114,30 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
       </View>
 
       <View style={styles.contentContainer}>
-        {medicaments && medicaments.map((traitement, index) => (
-          <MedicamentInformation
-            key={index}
-            drugName={traitement.product_name}
-            completName={traitement.form}
-          />
-        ))}
-        {/* {details && takingDrug} */}
-        {/* {details && details.map((detail, index) => {
-          // Extraire les jours sélectionnés de la propriété "frequence"
-          const selectedDays = [];
-          for (const day of detail[0]) {
-            if (day !== '_id' && detail[0][day]) {
-              selectedDays.push(day);
-            }
-          }
-
-          return (
-            <DetailsTakingDrugs
-              key={index}
-              frequence={selectedDays.join(', ')} // Passer les jours sélectionnés ici
-              nbre={detail[1].dose}
-              heure={moment(detail[1].heure).format('HH:mm')}
-            />
-          );
-        })} */}
-        {/* {duree && duree.map((time, index) => (
+        {medicaments && (
+  <MedicamentInformation
+    drugName={medicaments.product_name}
+    completName={medicaments.form}
+  />)}
+{details && freq && (
+  <DetailsTakingDrugs
+   frequence={selectedDays.join(', ')}
+    nbre={details.dose}
+    heure={moment(details.heure).format('HH:mm')}
+  />
+)}
+        {duree && (
           <DrugTime
-            key={index}
-            debut={moment(time.duree.dateDebut).format('Do MMMM YYYY')}
-            fin={moment(time.duree.dateFin).format('Do MMMM YYYY')}
-          />))}
-        {stock && stock.map((stockItem, index) => (
+            debut={moment(duree.dateDebut).format('Do MMMM YYYY')}
+            fin={moment(duree.dateFin).format('Do MMMM YYYY')}
+          />)}
+        {stock && (
           <Stock
-            key={index}
-            qtDispo={stockItem.qtDispo}
-            qtRappel={stockItem.qtRappel}
+            qtDispo={stock[0]}
+            qtRappel={stock[1]}
             openModal={openModal}
             onPress={() => setModalVisible(true)}
-          />))} */}
+          />)} 
       </View>
 
       <View style={styles.btnContainer}>
