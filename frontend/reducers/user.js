@@ -69,7 +69,7 @@ export const userSlice = createSlice({
             state.value.isTook = action.payload
         },
         deleteTraitement: (state, action) => {
-            console.log(state.value.traitements)
+            console.log('REDUCER', state.value.traitements)
             state.value.traitements = state.value.traitements.filter(traitement => traitement[0]._id !== action.payload);
         },
     },

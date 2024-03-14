@@ -27,7 +27,7 @@ function DeleteMedicamentBtn({ userId, treatmentId }) {
                 throw new Error('Erreur lors de la suppression du traitement');
             }
 
-            dispatch(deleteTraitement(treatmentId));
+            // dispatch(deleteTraitement(treatmentId));
 
         } catch (error) {
             console.error('Erreur lors de la suppression du traitement:', error.message);

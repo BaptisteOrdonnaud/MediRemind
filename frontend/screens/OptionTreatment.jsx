@@ -7,10 +7,10 @@ import { useState, useEffect } from 'react';
 import FlecheRetour from '../components/FlecheRetour';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-export default function OPtionTreatmentScreen({ navigation }) {
+export default function OPtionTreatmentScreen({ navigation, openModal }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const {isLoaded} = user
+  const { isLoaded } = user
   const [duree, setDuree] = useState(false);
   const [rappel, setRappel] = useState(false);
   const [instruction, setInstruction] = useState(false);
@@ -33,7 +33,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
     };
     console.log('FETCH:', userData)
 
-    if(duree && rappel && instruction){
+    if (duree && rappel && instruction) {
       fetch('http://10.9.1.94:3000/traitements', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -52,7 +52,7 @@ export default function OPtionTreatmentScreen({ navigation }) {
             //   areTaken: data.areTaken
             // }));
             console.log('Données récupérées :', data.result);
-            navigation.navigate('TabNavigator',{screen: 'Home'});
+            navigation.navigate('TabNavigator', { screen: 'Home', params: { needModal: true } });
             dispatch(updateIsLoaded(!isLoaded))
           }
         }).catch(error => console.error('Erreur lors de la requête fetch :', error));
@@ -74,13 +74,13 @@ export default function OPtionTreatmentScreen({ navigation }) {
       <Text style={styles.title}>Option de traitement</Text>
       <View style={styles.titleContainer}>
 
-        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => { 
+        <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => {
           setDuree(true)
           navigation.navigate('TreatmentTime')
-          }}>
+        }}>
           <View style={styles.optionLeft}>
-        <FontAwesome name='calendar' style={styles.iconLeft} />
-          <Text style={styles.textButtonOption}>Durée du traitement</Text>
+            <FontAwesome name='calendar' style={styles.iconLeft} />
+            <Text style={styles.textButtonOption}>Durée du traitement</Text>
           </View>
           <FontAwesome name='check-circle' style={[styles.iconRight, { color: duree ? '#6DBEA1' : '#DBE4EA' }]} />
         </TouchableOpacity>
@@ -91,20 +91,20 @@ export default function OPtionTreatmentScreen({ navigation }) {
         <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => {
           setRappel(true)
           navigation.navigate('MedicamentStock')
-          }}>
+        }}>
           <View style={styles.optionLeft}>
-          <FontAwesome name='clock-o' style={styles.iconLeft} />
-          <Text style={styles.textButtonOption}>Rappel de renouvellement</Text>
+            <FontAwesome name='clock-o' style={styles.iconLeft} />
+            <Text style={styles.textButtonOption}>Rappel de renouvellement</Text>
           </View>
           <FontAwesome name='check-circle' style={[styles.iconRight, { color: rappel ? '#6DBEA1' : '#DBE4EA' }]} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonOption} activeOpacity={0.8} onPress={() => {
           setInstruction(true)
           navigation.navigate('TakingInstruction')
-          }}>
+        }}>
           <View style={styles.optionLeft}>
-        <FontAwesome name='edit' style={styles.iconLeft} />
-          <Text style={styles.textButtonOption}>Ajouter des instructions ?</Text>
+            <FontAwesome name='edit' style={styles.iconLeft} />
+            <Text style={styles.textButtonOption}>Ajouter des instructions ?</Text>
           </View>
           <FontAwesome name='check-circle' style={[styles.iconRight, { color: instruction ? '#6DBEA1' : '#DBE4EA' }]} />
         </TouchableOpacity>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   textButtonOption: {
-    
+
   },
   goBack: {
     width: '100%',
@@ -143,13 +143,13 @@ const styles = StyleSheet.create({
     marginBottom: '4%',
     paddingLeft: '7%',
   },
-  iconRight:{
-    fontSize:20,
+  iconRight: {
+    fontSize: 20,
     marginRight: '6 %',
   },
-  iconLeft:{
+  iconLeft: {
     color: '#36373E',
-    fontSize:17,
+    fontSize: 17,
     marginLeft: '10%',
     marginRight: '7%'
   },
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     margin: 20,
     alignSelf: 'center',
     textAlign: 'center',
-  
+
   },
   titleContainer: {
     width: '90%',
