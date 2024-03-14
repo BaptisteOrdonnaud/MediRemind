@@ -38,7 +38,6 @@ export default function HomeScreen({ route, navigation }) {
   const nbrMedocsAujourdhui = medicamentsToTakeToday.filter(traitement => !traitement.isTook).length;
 
   console.log(route)
-  const isAlert = user.traitements[0].rappel.isAlert;
 
   useEffect(() => {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)
@@ -80,7 +79,7 @@ export default function HomeScreen({ route, navigation }) {
         <Text style={styles.mainText}>Vos traitements du jour</Text>
       </View>
       <ScrollView horizontal={true} contentContainerStyle={styles.containerMedicament}>
-        {medicaments.map((traitement, index) => (
+        {medicaments && medicaments.map((traitement, index) => (
           <MedicamentTraitement
             key={index}
             idUser={idUser}
@@ -97,7 +96,7 @@ export default function HomeScreen({ route, navigation }) {
         <Text style={styles.mainText}>Votre inventaire</Text>
       </View>
       <ScrollView horizontal={true} contentContainerStyle={styles.containerStock}>
-        {quantite.map((data, index) => (
+        {quantite && quantite.map((data, index) => (
           <StockMedicamentHome
             key={index}
             drugName={data.medicaments[0].product_name}
