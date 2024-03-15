@@ -84,7 +84,6 @@ export default function SignUpScreen({ navigation }) {
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
-    </View>
     </SafeAreaView >
 
   );
