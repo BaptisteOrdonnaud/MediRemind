@@ -164,7 +164,7 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
             </View>
             <View style={styles.contenue}>
               <Text style={styles.modalText}>{medicamentName}</Text>
-              <Text>Il reste {qtRappel} comprimés</Text>
+              <Text>Il reste {qtDispo} comprimés</Text>
               <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8} onPress={() => addToList()}>
                 <Text style={styles.textButton}>Ajouter a ma liste</Text>
                 <View style={styles.btn}>
