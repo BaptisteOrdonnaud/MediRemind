@@ -117,7 +117,7 @@ router.get('/:token', (req, res) => {
 router.post('/markMedicationTaken', async (req, res) => {
     try {
         const { userId, treatmentId } = req.body;
-
+        console.log(req.body)
         // Trouver l'utilisateur par son ID
         const user = await User.findById(userId);
 
@@ -130,7 +130,7 @@ router.post('/markMedicationTaken', async (req, res) => {
         if (!traitement) {
             return res.status(404).json({ message: "Traitement non trouvé" });
         }
-
+        console.log(traitement)
         // Mettre à jour la propriété isTook du traitement
         traitement.isTook = true;
 

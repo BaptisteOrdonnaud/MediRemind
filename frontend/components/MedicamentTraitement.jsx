@@ -32,20 +32,16 @@ function MedicamentTraitement(props) {
                 if (!response.ok) {
                     throw new Error('Erreur lors de la mise à jour du médicament pris');
                 }
-                
+            console.log(response)
               return response.json()
                 
             })
-            .then(result => {
+            .then(() => {
                 setMedicationTaken(true);
                 dispatch(updateIsTook(true))
 
             })
             
-    };
-
-    const handleMedicationNotTaken = () => {
-        setMedicationTaken(false);
     };
     
     return (
@@ -62,7 +58,7 @@ function MedicamentTraitement(props) {
             <View style={styles.bottomContent}>
                 <Text style={styles.heureDePrise}>{props.heure}</Text>
                 {!props.isTook && (
-                <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleMedicationTaken}>
+                <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={() => handleMedicationTaken()}>
                     <Text style={styles.textButton}>J'ai pris ce médicament</Text>
                     <FontAwesome name='check-circle-o' style={styles.icon} />
                 </TouchableOpacity>)}
