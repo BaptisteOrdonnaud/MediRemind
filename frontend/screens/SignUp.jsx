@@ -73,7 +73,7 @@ export default function SignUpScreen({ navigation }) {
 
           <Text style={styles.titre}>Date de naissance</Text>
           <TextInput
-            placeholder="Entrez votre date de naissance (AAAA/MM/JJ)"
+            placeholder="(AAAA/MM/JJ)"
             onChangeText={(value) => setDateDeNaissance(value)} value={dateDeNaissance}
             style={styles.input}
             textContentType='birthdate' />
