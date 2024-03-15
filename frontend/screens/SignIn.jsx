@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import KeyboardAwareScrollView from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch } from 'react-redux';
 import { login } from '../reducers/user';
+import SvgUri from 'react-native-svg-uri';
 
 
 export default function SignInScreen({ navigation }) {
@@ -38,6 +39,7 @@ export default function SignInScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <Text style={styles.title}>Connexion</Text>
         {/* <Image style={styles.image} source={require('../assets/TemplateImage.png')}/> */}
         <View>
           <Text style={styles.titre}>Email</Text>
@@ -79,6 +81,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#E1DFFF',
     alignItems: 'center',
     width: '100%'
+  },
+  title: {
+    fontWeight: '800',
+    fontSize: 30,
+    color: '#36373E',
+    marginBottom: '13%',
+    textAlign: 'center',
+    marginTop: '20%',
   },
   image: {
     marginTop: '9%',
