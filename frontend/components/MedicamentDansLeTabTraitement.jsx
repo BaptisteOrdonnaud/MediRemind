@@ -9,6 +9,7 @@ const windowHeight = Dimensions.get('window').height;
 
 function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, navigation, isTook }) {
     const [medicationTaken, setMedicationTaken] = useState(false);
+   
     const user = useSelector((state) => state.user.value);
     const { idUser } = user;
     const dispatch = useDispatch();
@@ -40,7 +41,7 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
             .then(result => {
                 setMedicationTaken(true);
                 dispatch(updateIsTook(true))
-
+               
             })
         
     };
@@ -53,11 +54,11 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
     return (
         <TouchableOpacity 
             style={styles.container} 
-            activeOpacity={0.8} 
+             activeOpacity={0.8} 
             onPress={() => handlePress()}
             
         >
-            <View style={[styles.container, { width: windowWidth * 0.8, height: windowHeight * 0.15 }]}>
+            <View style={[styles.container, { width: windowWidth * 0.8, height: windowHeight * 0.19 }]}>
                 <View style={styles.content}>
                     <View style={styles.leftContent}>
                         <Image style={styles.image} source={require('../assets/TemplateImage.png')} />
@@ -78,9 +79,9 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
                         <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={handleMedicationTaken}>
                             <Text style={styles.textButton}>J'ai pris ce médicament</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonPrendPas} activeOpacity={0.8} onPress={handleMedicationNotTaken}>
+                        {/* <TouchableOpacity style={styles.buttonPrendPas} activeOpacity={0.8} onPress={handleMedicationNotTaken}>
                             <Text style={styles.textButtonPas}>Je ne le prendrai pas</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
                 )}
             </View>
@@ -97,6 +98,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         marginLeft: windowWidth * 0.045,
         marginRight: windowWidth * 0.07,
+        overflow: 'hidden'
     },
     content: {
         paddingVertical: windowHeight * 0.011,
@@ -142,7 +144,7 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: '#fff',
-        paddingVertical: windowHeight * 0.002,
+        paddingVertical: windowHeight * 0.009,
         paddingHorizontal: windowWidth * 0.02,
         borderRadius: 10,
         borderWidth: 1,

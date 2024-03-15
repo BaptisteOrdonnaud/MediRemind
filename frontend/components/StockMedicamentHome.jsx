@@ -29,12 +29,12 @@ export default StockMedicamentHome;
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#FFF',
+        backgroundColor: '#fff',
         borderRadius: 15,
         marginHorizontal: windowWidth * 0.07,
         padding: windowWidth * 0.03,
         marginTop: windowHeight * 0.01,
-        height:windowHeight * 0.15,
+        height:windowHeight * 0.19,
         width: windowWidth *0.6
     },
     disponibilite: {

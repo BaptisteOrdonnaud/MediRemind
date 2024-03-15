@@ -20,7 +20,7 @@ export default function Stock({ qtDispo, qtRappel, openModal }) {
                         <View style={[styles.disponibiliteContainer, { backgroundColor: textColor }]}>
                             <Text style={styles.disponibilite}>{qtDispo}</Text>
                         </View>
-                        <TouchableOpacity onPress={openModal}>
+                        <TouchableOpacity style={styles.bouton} onPress={openModal}>
                             <Text style={styles.medicament}>Comprimés restants </Text>
                             <FontAwesome name='chevron-right' style={styles.icon} />
                         </TouchableOpacity>
@@ -72,10 +72,13 @@ const styles = StyleSheet.create({
     medicament: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginLeft: windowWidth * 0.09
+        marginLeft: windowWidth * 0.05
     },
     icon: {
         fontSize: 20,
         marginLeft: windowWidth * 0.04,
+    },
+    bouton:{
+        flexDirection:'row'
     }
 });

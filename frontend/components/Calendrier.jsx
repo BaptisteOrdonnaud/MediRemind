@@ -43,7 +43,7 @@ function Calendrier() {
 
 
     return (
-        <View style={[styles.picker, { width: windowWidth * 0.95, height: windowHeight * 0.9}]}>
+        <View style={[styles.picker, { width: windowWidth * 0.95, height: windowHeight * 0.07}]}>
         <Swiper
           index={initialIndex}
           ref={swiper}
@@ -110,16 +110,16 @@ export default Calendrier;
 const styles = StyleSheet.create({
 
     picker: {
-        flex: 1,
-        maxHeight: windowHeight *0.08,
+        // flex: ,
+        // maxHeight: windowHeight *0.08,
         paddingVertical: windowHeight *0.009,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor:'white',
         borderRadius:30,
         marginHorizontal:windowWidth *0.02,
-        marginVertical: windowHeight * 0.001
-        
+        // marginVertical: windowHeight * 0.001
+        // marginBottom:windowHeight * 0.03
       },
       item: {
         flex: 1,

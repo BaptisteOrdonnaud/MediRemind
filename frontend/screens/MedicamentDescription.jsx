@@ -26,10 +26,10 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
 
 
   const { prenom, nom, token, idUser } = user;
-  const treatmentId = user.traitements[0]._id
-  console.log('TEST:', idUser, user.traitements[0]._id)
+  // const treatmentId = user.traitements[0]._id
+  // console.log('TEST:', idUser, user.traitements[0]._id)
 
-  const currentDate = moment().format('dddd D MMMM ');
+
   moment.locale('fr');
 
   const [medicaments, setMedicaments] = useState([]);

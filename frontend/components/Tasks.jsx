@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
     },
     taskText: {
         fontSize: 16,
-        margin: 5,
+        margin: '0.2%',
+        width:'60%'
 
     },
     urgentContent: {

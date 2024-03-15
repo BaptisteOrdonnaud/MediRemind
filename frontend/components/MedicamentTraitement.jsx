@@ -49,7 +49,7 @@ function MedicamentTraitement(props) {
     };
     
     return (
-        <View style={[styles.container, { width: windowWidth * 0.72,height:windowHeight * 0.145 }]}>
+        <View style={[styles.container, { width: windowWidth * 0.75,height:windowHeight * 0.167 }]}>
             <View style={styles.content}>
                 <View style={styles.leftContent}>
                     <Image style={styles.image} source={require('../assets/TemplateImage.png')}/>

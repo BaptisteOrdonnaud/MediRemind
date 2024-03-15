@@ -44,9 +44,10 @@ export default function TreatmentScreen({ navigation }) {
       <View style={styles.headerContainer}>
         <Text style={styles.headerText}>Traitement du {currentDate}</Text>
       </View>
-      <Calendrier />
-      <ScrollView>
-        <View style={styles.contentContainer}>
+      <Calendrier style={styles.calendar}  />
+      <ScrollView style={styles.contentContainer} 
+showsVerticalScrollIndicator={false}>
+        <View >
           {medicaments.map((traitement, i) => (
             <MedicamentDansLeTabTraitement
               key={i}
@@ -60,7 +61,7 @@ export default function TreatmentScreen({ navigation }) {
           ))}
         </View>
       </ScrollView>
-      <AddMedicamentBtn navigation={navigation} />
+      <AddMedicamentBtn style={styles.addMedoc} navigation={navigation} />
 
       <StatusBar style="auto" />
     </SafeAreaView>
@@ -74,9 +75,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    height: windowHeight * 1,
-    width:windowWidth *1
+    // height: windowHeight * 1,
+    // width:windowWidth *1,
   },
+
   headerContainer: {
     backgroundColor: '#E1DFFF',
     flexDirection: 'row',
@@ -84,7 +86,6 @@ const styles = StyleSheet.create({
     height: 90,
     justifyContent: 'center',
     alignItems: 'center',
-
   },
   headerText: {
     fontSize: 20,
@@ -92,6 +93,9 @@ const styles = StyleSheet.create({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-
-
+  contentContainer:{
+    marginTop: '2%',    width: '100%',
+    overflow:'hidden',
+    marginLeft: '3.7%',
+  }
 });

@@ -37,7 +37,7 @@ export default function HomeScreen({ route, navigation }) {
 
   const nbrMedocsAujourdhui = medicamentsToTakeToday.filter(traitement => !traitement.isTook).length;
 
-  console.log(route)
+  // console.log(route)
 
   useEffect(() => {
     fetch(`http://10.9.1.94:3000/traitements/${token}`)
@@ -52,13 +52,14 @@ export default function HomeScreen({ route, navigation }) {
       .catch(error => {
         console.error('erreur lors de la reccuperation des données:', error);
       });
+    
+  }, [isLoaded, isTook]);
+
+  useEffect(() => {
     if (route.params && route.params.needModal) {
       setModalVisible(true);
     }
-  }, [isLoaded, isTook]);
-
-
-
+  }, []);
 
   return (
     <SafeAreaView style={[styles.container, { width: windowWidth * 1, height: windowHeight * 1 }]}>
@@ -78,7 +79,7 @@ export default function HomeScreen({ route, navigation }) {
       <View>
         <Text style={styles.mainText}>Vos traitements du jour</Text>
       </View>
-      <ScrollView horizontal={true} contentContainerStyle={styles.containerMedicament}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={styles.containerMedicament}>
         {medicaments && medicaments.map((traitement, index) => (
           <MedicamentTraitement
             key={index}
@@ -95,7 +96,7 @@ export default function HomeScreen({ route, navigation }) {
       <View>
         <Text style={styles.mainText}>Votre inventaire</Text>
       </View>
-      <ScrollView horizontal={true} contentContainerStyle={styles.containerStock}>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} contentContainerStyle={styles.containerStock}>
         {quantite && quantite.map((data, index) => (
           <StockMedicamentHome
             key={index}
@@ -123,7 +124,7 @@ export default function HomeScreen({ route, navigation }) {
               <FontAwesome name='remove' style={styles.iconRemove} onPress={() => setModalVisible(false)} />
             </View>
             <View style={styles.contenue}>
-              <Text style={styles.modalText}>{user.nomMedoc} ajouté avec succès!</Text>
+              <Text style={styles.modalText}><Text style={styles.nomMedoc}>{user.nomMedoc}</Text> ajouté avec succès!</Text>
               <TouchableOpacity style={styles.buttonSignIn} activeOpacity={0.8} onPress={() => { navigation.navigate('AddDrugs-part2'); setModalVisible(false); }}>
                 <Text style={styles.textButton}>Nouveau médicament</Text>
                 <FontAwesome name='plus-circle' style={styles.icon} />
@@ -171,6 +172,9 @@ const styles = StyleSheet.create({
     color: '#737373',
     alignSelf: 'flex-start'
   },
+  nomMedoc: {
+    color: '#7368BF'
+  },
   date: {
     width: windowWidth * 1,
     height: windowHeight * 1
@@ -182,7 +186,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#A69AFC',
     marginTop: windowHeight * 0.02,
     borderRadius: 15,
-    marginLeft: windowWidth * 0.07
+    marginLeft: windowWidth * 0.07,
+    marginBottom: '2%',
   },
   textPriseMedoc: {
     fontSize: 14,
@@ -211,23 +216,22 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginLeft: windowWidth * 0.09,
-    marginTop: windowHeight * 0.003,
-    // backgroundColor:'green'
-
+    marginTop: windowHeight * 0.006,
+    
   },
   containerMedicament: {
     height: windowHeight * 0.19,
     flexDirection: 'row',
     // backgroundColor:'yellow',
     paddingVertical: windowWidth * 0.001,
-    paddingHorizontal: windowHeight * 0.008
+    paddingHorizontal: windowHeight * 0.008,
   },
   containerStock: {
-    height: windowHeight * 0.125,
+    // height: windowHeight * 0.3,
     flexDirection: 'row',
-    // backgroundColor:'blue',
-    paddingVertical: windowHeight * 0.01,
-    paddingHorizontal: windowWidth * 0.008
+    // backgroundColor:'red',
+    // paddingVertical: windowHeight * 0.01,
+    // paddingHorizontal: windowWidth * 0.008
   },
   modalContainer: {
     flex: 1,
@@ -238,7 +242,7 @@ const styles = StyleSheet.create({
   modalContent: {
     backgroundColor: 'white',
     width: '85%',
-    height: '40%',
+    height: '30%',
     borderRadius: 20,
     padding: 20,
     alignItems: 'center',
@@ -262,15 +266,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   buttonSignIn: {
-    alignItems: 'center',
-    height: '30%',
-    width: '100%',
+    justifyContent: 'center',
+    height: '25%',
     marginTop: '10%',
     backgroundColor: '#7368BF',
     borderRadius: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
     padding: 10,
   },
   textButton: {

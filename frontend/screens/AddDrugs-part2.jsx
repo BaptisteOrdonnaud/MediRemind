@@ -52,7 +52,7 @@ export default function AddDrugsRestScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FontAwesome name='remove' style={styles.icon} onPress={() => navigation.navigate('Home')} />
+      <FontAwesome name='remove' style={styles.icon} onPress={() => navigation.goBack()} />
       <View style={styles.titleContainer}>
         <Text style={[styles.title, { display: isFocused ? 'none' : 'flex' }]}> Quel médicament souhaitez-vous ajouter?</Text>
       </View>
