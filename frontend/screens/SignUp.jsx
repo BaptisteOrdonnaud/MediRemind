@@ -79,13 +79,13 @@ export default function SignUpScreen({ navigation }) {
             textContentType='birthdate' />
           {dateDeNaissanceError && <Text style={styles.error}>Le format est invalide (AAAA/MM/JJ)</Text>}
 
-
           <TouchableOpacity onPress={() => handleSubmit()} style={styles.buttonSignUp} activeOpacity={0.8}>
             <Text style={styles.textButton}>Continuer</Text>
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
+    </SafeAreaView >
 
   );
 }
