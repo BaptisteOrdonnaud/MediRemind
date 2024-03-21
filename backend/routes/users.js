@@ -72,6 +72,4 @@ router.get('/:token', (req, res) => {
 });
 
 
-
-
 module.exports = router;
