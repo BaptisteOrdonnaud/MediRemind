@@ -73,7 +73,7 @@ export default function SignUpScreen({ navigation }) {
     }
 
     if (!hasError) {
-      fetch('http://10.9.1.94:3000/users/signup', {
+      fetch('https://mediremind.ddns.net/users/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nom: nom, prenom: prenom, dateDeNaissance: dateDeNaissance, email: email, telephone: telephone, password: password }),

@@ -13,7 +13,7 @@ function DeleteMedicamentBtn({ userId, treatmentId }) {
 
     const handleDelete = async () => {
         try {
-            const response = await fetch(`http://10.9.1.92:3000/traitements`, {
+            const response = await fetch(`https://mediremind.ddns.net/traitements`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

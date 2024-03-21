@@ -40,7 +40,7 @@ export default function HomeScreen({ route, navigation }) {
   // console.log(route)
 
   useEffect(() => {
-    fetch(`http://10.9.1.94:3000/traitements/${token}`)
+    fetch(`https://mediremind.ddns.net/traitements/${token}`)
       .then(response => response.json())
       .then(drug => {
         setMedicaments(drug.traitements);

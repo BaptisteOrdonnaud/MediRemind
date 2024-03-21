@@ -76,7 +76,7 @@ export default function MedicamentDescriptionScreen({ navigation, route }) {
 
 
   useEffect(() => {
-    fetch(`http://10.9.1.94:3000/traitements/${token}`)
+    fetch(`https://mediremind.ddns.net/traitements/${token}`)
       .then(response => response.json())
       .then(drug => {
         const traitement = drug.traitements.filter((el) => el._id === route.params.medicamentId)

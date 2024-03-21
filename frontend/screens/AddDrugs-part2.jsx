@@ -17,7 +17,7 @@ export default function AddDrugsRestScreen({ navigation }) {
   const [drugs, setDrugs] = useState([]);
 
   const handleSearch = (value) => {
-    fetch(`http://10.9.1.94:3000/medicaments/${value}`, {
+    fetch(`https://mediremind.ddns.net/medicaments/${value}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     }).then(response => response.json())

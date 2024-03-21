@@ -34,7 +34,7 @@ export default function OPtionTreatmentScreen({ navigation, openModal }) {
     // console.log('FETCH:', user)
 
     if (duree && rappel && instruction) {
-      fetch('http://10.9.1.94:3000/traitements', {
+      fetch('https://mediremind.ddns.net/traitements', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),

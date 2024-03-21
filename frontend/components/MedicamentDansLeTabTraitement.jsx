@@ -20,7 +20,7 @@ function MedicamentDansLeTabTraitement({ drugId, drugName, dosage, heure, naviga
     };
     const handleMedicationTaken = () => {
        
-        fetch(`http://10.9.1.94:3000/traitements/markMedicationTaken`, {
+        fetch(`https://mediremind.ddns.net/traitements/markMedicationTaken`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
